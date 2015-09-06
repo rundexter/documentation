@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Dexter module creation</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="modules">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+			 viewBox="-89.5 344.1 200.3 39.5" style="enable-background:new -89.5 344.1 200.3 39.5; padding: 25px 15px 10px 15px; width: 60%; text-align: center" xml:space="preserve">
+		<style type="text/css">
+			.st0{fill:#3ab7d6;}
+		</style>
+		<g>
+			<path class="st0" d="M-75.9,354.5V345c0-0.5-0.4-0.9-0.9-0.9h-11.8c-0.5,0-0.9,0.4-0.9,0.9v9.5c0,0.5,0.4,0.9,0.9,0.9h11.8
+				C-76.3,355.4-75.9,355-75.9,354.5z"/>
+			<path class="st0" d="M-68,347.8h-4.3c-0.5,0-0.9,0.4-0.9,0.9l0,7.8c0,0.5,0.4,0.9,0.9,0.9h3.4c4.3,0,7.5,3.1,7.5,9
+				c0,5.9-5.7,7.7-7.8,7.7H-73c-0.5,0-0.9-0.4-0.9-0.9V359c0-0.5-0.4-0.9-0.9-0.9l-8.5,0c-0.5,0-0.9,0.4-0.9,0.9v23.7
+				c0,0.5,0.4,0.9,0.9,0.9h15.9c3.2,0,16.8-1.9,16.8-18.4C-50.6,348.6-66.5,347.8-68,347.8z"/>
+			<path class="st0" d="M44.4,347.9h-24c-0.3,0-0.7,0.2-0.8,0.5l-4.7,7.7c-0.2,0.3-0.1,0.7,0.2,0.9c0.1,0.1,0.3,0.1,0.5,0.1h8.1
+				c0.5,0,1,0.4,1,1v24.5c0,0.5,0.4,1,1,1h8.6c0.5,0,1-0.4,1-1v-24.5c0-0.5,0.4-1,1-1h8.2c0.5,0,1-0.4,1-1v-7.3
+				C45.4,348.4,45,347.9,44.4,347.9z"/>
+			<path class="st0" d="M-20.7,347.8h-26.8c-0.5,0-0.9,0.4-0.9,0.9v33.9c0,0.5,0.4,0.9,0.9,0.9h26.8c0.5,0,0.9-0.4,0.9-0.9v-7.2
+				c0-0.5-0.4-0.9-0.9-0.9h-16.6c-0.5,0-0.9-0.4-0.9-0.9v-2.5c0-0.5,0.4-0.9,0.9-0.9h9.3c0.5,0,0.9-0.4,0.9-0.9v-7.6
+				c0-0.5-0.4-0.9-0.9-0.9h-9.3c-0.5,0-0.9-0.4-0.9-0.9v-2.6c0-0.5,0.4-0.9,0.9-0.9h16.6c0.5,0,0.9-0.4,0.9-0.9v-6.9
+				C-19.8,348.2-20.2,347.8-20.7,347.8z"/>
+			<path class="st0" d="M76.1,347.8H49.4c-0.5,0-0.9,0.4-0.9,0.9v33.9c0,0.5,0.4,0.9,0.9,0.9h26.8c0.5,0,0.9-0.4,0.9-0.9v-7.2
+				c0-0.5-0.4-0.9-0.9-0.9H59.6c-0.5,0-0.9-0.4-0.9-0.9v-2.5c0-0.5,0.4-0.9,0.9-0.9h9.3c0.5,0,0.9-0.4,0.9-0.9v-7.6
+				c0-0.5-0.4-0.9-0.9-0.9h-9.3c-0.5,0-0.9-0.4-0.9-0.9v-2.6c0-0.5,0.4-0.9,0.9-0.9h16.6c0.5,0,0.9-0.4,0.9-0.9v-6.9
+				C77,348.2,76.6,347.8,76.1,347.8z"/>
+			<path class="st0" d="M110.7,382.2l-6.6-11.1c-0.3-0.5-0.1-1,0.4-1.2c1.8-0.9,5.8-3.6,5.8-9.7c0-10.3-10.4-12.2-12.5-12.2H81
+				c-0.5,0-0.9,0.4-0.9,0.9v33.8c0,0.5,0.4,0.9,0.9,0.9h8.5c0.5,0,0.9-0.4,0.9-0.9v-10c0-0.5,0.4-0.9,0.9-0.9h1.9
+				c0.3,0,0.6,0.2,0.8,0.5l5.7,10.8c0.1,0.3,0.5,0.5,0.8,0.5h9.4C110.6,383.5,111,382.8,110.7,382.2z M95.8,363.1h-4.6
+				c-0.5,0-0.9-0.4-0.9-0.9v-4.4c0-0.5,0.4-0.9,0.9-0.9h4.3c3.2,0,4.2,1,4.2,3.4C99.7,362.5,97.3,363.1,95.8,363.1z"/>
+			<path class="st0" d="M6.4,366.1c-0.2-0.3-0.2-0.6,0-0.9l9.5-16c0.3-0.6-0.1-1.4-0.8-1.4H5.4c-0.3,0-0.6,0.2-0.8,0.5l-3.9,7.3
+				c-0.3,0.6-1.2,0.6-1.6,0l-3.7-7.3c-0.1-0.3-0.5-0.5-0.8-0.5h-10c-0.7,0-1.1,0.7-0.8,1.3l9.1,15.9c0.2,0.3,0.1,0.6,0,0.9l-9.6,16.2
+				c-0.3,0.6,0.1,1.4,0.8,1.4h9.9c0.3,0,0.6-0.2,0.8-0.5l3.9-7.7c0.3-0.6,1.2-0.7,1.6,0l4.4,7.8c0.2,0.3,0.5,0.5,0.8,0.5h9.9
+				c0.7,0,1.1-0.8,0.8-1.4L6.4,366.1z"/>
+		</g>
+		</svg>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+      <ul class="toc-footer">
+    <li><a href="index.html">Getting Started</a></li>
+    <li><a href="sdk.html">The SDK</a></li>
+    <li><a href="modules.html">Dexter modules</a></li>
+</ul>
+
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="about-dexter-modules">About Dexter modules</h1>
+
+<h2 id="what-39-s-a-module">What&rsquo;s a module?</h2>
+
+<p>Modules in Dexter are the building blocks you&rsquo;ll use to assemble your Apps.  Modules are expressions of the principal of doing one thing and doing it well: each is an isolated behavior designed to operate independantly of any other behavior.  It&rsquo;s the job of the App to decide how these behaviors interact - the modules themselves don&rsquo;t care.</p>
+
+<aside class="success">
+Modules are essentially specialized NodeJS libraries with a bit of special sauce in the form of detailed metadata, baked-in tests, and an SDK to help speed development.  Most should be able to be used as a library in any other NodeJS application!
+</aside>
+
+<h2 id="anatomy-of-a-module">Anatomy of a module</h2>
+
+<blockquote>
+<p>index.js</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dexter</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">context</span><span class="p">.</span><span class="nx">succeed</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+
+<blockquote>
+<p>package.json</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_dexter_module"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A minimal example Dexter module"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>meta.json</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Dexter Module"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"max_inputs"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Page URL"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"term"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Search term"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"links"</span><span class="p">,</span><span class="w"> </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found links"</span><span class="p">,</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Only 3 files are mandatory for a Dexter module:</p>
+
+<ol>
+<li><p><strong>index.js</strong>: This is the main touchpoint for your application.  At a minimum, it needs to export a single function &ldquo;run(dexter, context)&rdquo; and call &ldquo;context.succeed()&rdquo;.  It takes 2 parameters: &ldquo;dexter&rdquo;, which is a bundle of data regarding the current workflow, and &ldquo;context&rdquo;, which is used for flow control.  &ldquo;dexter&rdquo; is a powerful data access tool which you can read about <a href="todo">here</a>, while context has 2 simple functions:</p>
+
+<ul>
+<li><strong>succeed(data)</strong>: Pass an object with your outputs to make that output available to the rest of the workflow</li>
+<li><strong>fail(error)</strong>: Pass either a string or an Error to indicate that the process failed</li>
+</ul></li>
+<li><p><strong>package.json</strong>: This is a regular nodejs package definition.  You can npm install &ndash;save to your hearts content!</p></li>
+<li><p><strong>meta.json</strong>: Special definitions used by Dexter are stored here.</p>
+
+<ul>
+<li><strong>title (string, required)</strong>: The user-friendly title of your module</li>
+<li><strong>icon (string, optional)</strong>: A <a href="http://fortawesome.github.io/Font-Awesome/cheatsheet/">FontAwesome icon</a> that will show up alongside your module in the App editor.</li>
+<li><strong>max_inputs (integer, optional, default 1)</strong>: How many inputs your module will accept.  Dexter will never give you more data than you&rsquo;re able to handle.</li>
+<li><strong>inputs (array, optional)</strong>: Definitions for any inputs your module accepts.  Each item in the array should have 3 properties:
+
+<ul>
+<li><em>id (string)</em>: The input&rsquo;s code-friendly key (ex: first_name)</li>
+<li><em>title (string)</em>: The input&rsquo;s user-friendly name (ex: First Name)</li>
+<li><em>type (string)</em>: A basic type (string, integer, array)</li>
+</ul></li>
+<li><strong>outputs (array, optional)</strong>: Definitions for any outputs your module generates.  Just like inputs, each object in the array has 3 properties:
+
+<ul>
+<li><em>id (string)</em>: The input&rsquo;s code-friendly key (ex: first_name)</li>
+<li><em>title (string)</em>: The input&rsquo;s user-friendly name (ex: First Name)</li>
+<li><em>type (string)</em>: A basic type (string, integer, array)</li>
+</ul></li>
+</ul></li>
+</ol>
+
+<h2 id="types-of-modules">Types of modules</h2>
+
+<p>There are three types of modules in Dexter:</p>
+
+<h3 id="core-modules">Core modules</h3>
+
+<p>Core modules are meta-modules that exist only to guide and modify the flow of data through an App.  They tend to have special behaviors and features that other modules lack or shouldn&rsquo;t have to care about.</p>
+
+<h3 id="dexter-modules">Dexter modules</h3>
+
+<p>These are the Dexter-blessed, built-in tools of the Dexter app ecosystem.  They&rsquo;re available to every power user and developer in Dexter, and cover a broad range of behaviors.</p>
+
+<h3 id="user-modules">User modules</h3>
+
+<p>User modules are modules you&rsquo;ve made for your own apps.  You build them with the same tools we&rsquo;ve used to build the vast library of Dexter modules, and you can use them the same in the App editor.  The only difference between User modules and Dexter modules lies in distribution: only <em>you</em> can use your user modules.</p>
+
+<h1 id="tutorial-rss-filter">Tutorial: RSS Filter</h1>
+
+<h2 id="create-the-module">Create the module</h2>
+
+<blockquote>
+<p>Creating the module
+<code class="prettyprint">shell
+dexter create &quot;`whoami`_rssfilter&quot;
+</code></p>
+</blockquote>
+
+<p>We&rsquo;ll start by creating a new module.  First, make sure you&rsquo;ve <a href="sdk.html">set up the SDK tools</a> - you should be able to run:</p>
+
+<p><code class="prettyprint">dexter list_keys</code></p>
+
+<p>and see your machine&rsquo;s public key on the list.</p>
+
+<p>After that, you can use the dexter CLI tool to create your program.  Namespacing your program using your name is a good idea - right now all Dexter user modules share a namespace, so collisions can be a problem.</p>
+
+<p>After you&rsquo;ve done that, you&rsquo;ll want to give your module a friendly name - this goes in the module&rsquo;s meta.json file</p>
+
+<h2 id="basic-programming">Basic programming</h2>
+
+<h2 id="isolate-inputs">Isolate inputs</h2>
+
+<h2 id="create-fixtures">Create fixtures</h2>
+
+<h2 id="test">Test</h2>
+
+<h2 id="deploy">Deploy</h2>
+
+<h1 id="best-practices">Best Practices</h1>
+
+<h1 id="module-api">Module API</h1>
+
+<h2 id="module-init">module.init()</h2>
+
+<h2 id="module-run-dexter-context">module.run(dexter, context)</h2>
+
+<h1 id="data-api">Data API</h1>
+
+<h2 id="dexter">dexter</h2>
+
+<h2 id="dexter-clone">dexter.clone()</h2>
+
+<h2 id="dexter-instance-key-fallback">dexter.instance(key, fallback)</h2>
+
+<h2 id="dexter-environment-key-fallback">dexter.environment(key, fallback)</h2>
+
+<h2 id="dexter-user-key-fallback">dexter.user(key, fallback)</h2>
+
+<h2 id="dexter-workflow-key-fallback">dexter.workflow(key, fallback)</h2>
+
+<h2 id="dexter-url-key-fallback">dexter.url(key, fallback)</h2>
+
+<h2 id="dexter-private-key-fallback">dexter.private(key, fallback)</h2>
+
+<h2 id="dexter-global-key-fallback">dexter.global(key, fallback)</h2>
+
+<h2 id="dexter-globals">dexter.globals()</h2>
+
+<h2 id="dexter-step-id">dexter.step(id)</h2>
+
+<h2 id="dexter-data-id">dexter.data(id)</h2>
+
+<h2 id="step">step</h2>
+
+<h2 id="step-clone">step.clone()</h2>
+
+<h2 id="step-config-key-fallback">step.config(key, fallback)</h2>
+
+<h2 id="step-prev">step.prev()</h2>
+
+<h2 id="step-trigger">step.trigger()</h2>
+
+<h2 id="step-module">step.module()</h2>
+
+<h2 id="step-input-key-fallback">step.input(key, fallback)</h2>
+
+<h2 id="step-inputs">step.inputs()</h2>
+
+<h2 id="step-inputmap-fn">step.inputMap(fn)</h2>
+
+<h2 id="step-output-key-fallback">step.output(key, fallback)</h2>
+
+<h2 id="step-outputs">step.outputs()</h2>
+
+<h2 id="step-outputmap-fn">step.outputMap(fn)</h2>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

@@ -376,8 +376,8 @@ html, body {
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
     border: none;
-    background-color: #1c1f24;
-	color: #fff;
+    background-color: $header-primary-bg;
+	color: $header-primary-text;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -444,11 +444,11 @@ html, body {
     }
 
     tr:nth-child(odd)>td {
-      background-color: lighten($main-bg,4.2%);
+      background-color: darken($main-bg,4.2%);
     }
 
     tr:nth-child(even)>td {
-      background-color: lighten($main-bg,2.4%);
+      background-color: darken($main-bg,2.4%);
     }
   }
 

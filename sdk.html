@@ -24,7 +24,7 @@
 		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			 viewBox="-89.5 344.1 200.3 39.5" style="enable-background:new -89.5 344.1 200.3 39.5; padding: 25px 15px 10px 15px; width: 60%; text-align: center" xml:space="preserve">
 		<style type="text/css">
-			.st0{fill:#3ab7d6;}
+			.st0{fill:#ffffff;}
 		</style>
 		<g>
 			<path class="st0" d="M-75.9,354.5V345c0-0.5-0.4-0.9-0.9-0.9h-11.8c-0.5,0-0.9,0.4-0.9,0.9v9.5c0,0.5,0.4,0.9,0.9,0.9h11.8
@@ -108,21 +108,10 @@ git clone https://github.com/rundexter/rundexter.git
 <p>Before you do anything, you&rsquo;ll need to log in with your rundexter.com credentials.  That lets us know who you are, so we can make the next steps happen.</p>
 
 <h2 id="make-a-key">Make a key</h2>
-<pre class="highlight shell"><code><span class="k">if</span> <span class="o">[[</span> ! -f ~/.ssh/id_rsa <span class="o">&amp;&amp;</span> ! -f ~/.ssh/id_dsa <span class="o">]]</span>; <span class="k">then</span>
-    <span class="c"># Make sure you have the keygen script</span>
-    <span class="k">if</span> <span class="o">[[</span> ! <span class="sb">`</span>which ssh-keygen<span class="sb">`</span> <span class="o">]]</span>; <span class="k">then
-        if</span> <span class="o">[[</span> <span class="sb">`</span>which apt-get<span class="sb">`</span> <span class="o">]]</span>; <span class="k">then
-            </span>sudo apt-get install openssh-client
-        <span class="k">elif</span> <span class="o">[[</span> <span class="sb">`</span>which yum<span class="sb">`</span> <span class="o">]]</span>; <span class="k">then
-            </span>sudo yum install openssh-clients
-        <span class="k">fi
-    fi</span>
-    <span class="c"># Create a default SSH key</span>
-    ssh-keygen -f ~/.ssh/id_rsa -N <span class="s2">""</span>
-<span class="k">fi</span>
+<pre class="highlight shell"><code>ssh-keygen -f ~/.ssh/id_rsa -N <span class="s2">""</span>
 </code></pre>
 
-<p>You’ll need to have an SSH key of some flavor (RSA or DSA). You might already have one - they’re useful things, and you’ve probably needed one before. They’re probably in ~/.ssh/ and called id_rsa and id_rsa.pub. If you don’t have one, make one now.</p>
+<p>You’ll need to have an SSH key of some flavor (RSA or DSA). You might already have one - they’re useful things, and you’ve probably needed one before. They’re probably in ~/.ssh/ and called id_rsa and id_rsa.pub. If you don’t have one, make one now.  You can run the given sample code to create a key, and <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">read more on the subject</a> if you&rsquo;re interested.</p>
 
 <h2 id="send-your-key">Send your key</h2>
 <pre class="highlight shell"><code><span class="c"># You can pass a path to a specific key here if you'd like</span>

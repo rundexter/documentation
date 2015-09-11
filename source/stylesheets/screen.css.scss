@@ -548,6 +548,12 @@ html, body {
     @include text-shadow(1px 1px 0 #666);
     background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
   }
+  
+  .image-shadow {
+  	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+	 -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+	 -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

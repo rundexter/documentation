@@ -15,12 +15,12 @@ Only 3 files are mandatory for a Dexter module:
 ```javascript
 module.exports = {
     run: function(step, dexter) {
-        this.succeed();
+        this.complete();
     }
 };
 ```
 
-- **index.js**: This is the main touchpoint for your application. At a minimum, it needs to export a single function "run(step, dexter)" and call "this.succeed()". We'll go into more detail about this later on.
+- **index.js**: This is the main touchpoint for your application. At a minimum, it needs to export a single function `run(step, dexter)` and call `this.complete()`. We'll go into more detail about this later on.
 
 <div></div><!--clear code-->
 
@@ -92,7 +92,7 @@ module.exports = {
         thisFoo ++;
         //Are we done yet?
         if(thisFoo === foos.length) {
-            return this.succeed();
+            return this.complete();
         }
         //If not, let's go again!
         dexter.setGlobal('lastFoo', thisFoo);
@@ -109,12 +109,12 @@ That means if you write a class that exports something like:
 
 ...once it gets inside the Dexter App, it ends up looking like:
 
-`{ getData: fn, run: fn, log: fn, succeed: fn, fail: fn, log: fn }`
+`{ getData: fn, run: fn, log: fn, complete: fn, fail: fn, log: fn }`
 
 This implicit wrapping process lets you focus on the details of your module, and even run your module outside of Dexter without worrying about managing Dexter's dependencies!
 
 <aside class="warning">
-If your module exports properties named succeed, fail, log, or run, your module will not work!
+If your module exports properties named complete, fail, log, or run, your module will not work!
 </aside>
 
 ## Inputs
@@ -177,7 +177,7 @@ Dexter provides some tools to help you execute your decisions.  Inputs can eithe
 ```javascript
 module.exports = {
     run: function() {
-        this.succeed({ email: 'joe@example.com', name: 'Joe' });
+        this.complete({ email: 'joe@example.com', name: 'Joe' });
     }
 };
 ```
@@ -187,7 +187,7 @@ module.exports = {
 ```javascript
 module.exports = {
     run: function() {
-        this.succeed([
+        this.complete([
             { url: 'http://rundexter.com', title: 'Dexter' },
             { url: 'http://reddit.com', title: 'Why my project is late' }
         ]);
@@ -206,7 +206,7 @@ module.exports = {
         var to = step.input('to'),
             urls = step.input('url');
         console.log(to.toArray(), urls.toArray());
-        return this.succeed();
+        return this.complete();
     }
 };
 //In the log:
@@ -221,7 +221,7 @@ What you *don't* want to do is to define and return complex object properties. D
 
 That doesn't mean you *can't* output complex objects. For instance, if you're building a suite modules that perform image manipulations, you *should* have a standard base64-encoded image binary type and support it throughout the suite. Or, if you're doing an AWS automation App, you should have IAM objects as a basic type that your modules understand.
 
-You can read more about outputs under [BaseModule::succeed](#basemodule-succeed-data).
+You can read more about outputs under [BaseModule::complete](#basemodule-complete-data).
 
 
 ## Data collections
@@ -256,23 +256,23 @@ This is the main entry point to your module. By the time this has been run, Dext
 Dexter calls this function automatically when it's your module's turn to run in the App.  It should *not* be called again - you'll create a difficult-to-debug recursion.
 </aside>
 
-### BaseModule.succeed(data)
+### BaseModule.c(data)
 > No output
 
 ```javascript
-return this.succeed();
+return this.complete();
 ```
 
 > Single output
 
 ```javascript
-return this.succeed({ foo: 'Foo', bar: 'Bar' });
+return this.complete({ foo: 'Foo', bar: 'Bar' });
 ```
 
 > Multiple outputs
 
 ```javascript
-return this.succeed([
+return this.complete([
     { foo: 'Foo', bar: 'Bar' },
     { foo: 'Baz', bar: null }
 ]);
@@ -282,12 +282,12 @@ Parameter|Type|Description
 ---------|--------|-----------
 data | array,object | An object containing your outputs, or an array of objects containing your outputs if necessary
 
-When your module has successfully finished its job, it needs to call `succeed()` to let Dexter know it's safe to continue the current App.
+When your module has successfully finished its job, it needs to call `complete()` to let Dexter know it's safe to continue the current App.
 
 If you have any useful information you want to make available to other modules, you'll want to return it here. Dexter assumes that you're returning an object of some kind, and that the object only has properties that match those you've defined in your `[meta.json:output](#anatomy-of-a-module)`. Your app can also generate multiple outputs by returning an array of such objects - as long as each object's properties are correctly configured, Dexter will still know how get and share the data with other modules.
 
 <aside class="warning">
-Note that you should only call succeed once, and after you do, the wrapper running the function will quickly shut down, making any code your run afterwards a bit of a gamble. Calling `return this.succeed()` as shown in the code samples is one way to guarantee that you only make one call and don't cause a race condition afterwards, though you can use careful code flow to do the same if you'd prefer.
+Note that you should only call `complete` once, and after you do, the wrapper running the function will quickly shut down, making any code your run afterwards a bit of a gamble. Calling `return this.complete()` as shown in the code samples is one way to guarantee that you only make one call and don't cause a race condition afterwards, though you can use careful code flow to do the same if you'd prefer.
 </aside>
 
 <aside class="success">
@@ -372,7 +372,7 @@ for(i = lastIndex; i < loopTo; i ++) {
     this.processData(data[i]);
 }
 if(loopTo === data.length) {
-    this.succeed();
+    this.complete();
 } else {
     dexter.setGlobal('lastIndex', loopTo);
     this.replay();
@@ -482,7 +482,7 @@ if(!cache) {
     cache = this.calculate();
     dexter.setGlobal(cacheKey, cache);
 }
-this.succeed({ data: cache });
+this.complete({ data: cache });
 ```
 
 Fetch globally stored information assigned during the use of this app. We're not placing any restrictions on how you use this, so you should do so both carefully and sparingly.
@@ -509,7 +509,7 @@ if(!cache) {
     cache = this.calculate();
     dexter.setGlobal(cacheKey, cache);
 }
-this.succeed({ data: cache });
+this.complete({ data: cache });
 ```
 
 An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. We're not placing any restrictions on how you use this, so you should do so both carefully and sparingly.
@@ -611,7 +611,7 @@ var email = step.input('email', 'default@example.com').first(),
     messages = step.input('message'),
     message = messages.toArray().join('<br>');
 this.queueEmail(email, 'You have messages', message);
-return this.succeed();
+return this.complete();
 ```
 
 Fetch an input bound to this step in the App editor.

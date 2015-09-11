@@ -5,6 +5,7 @@ search: false
 
 includes:
   - getting_started
+  - tutorial
   - sdk 
   - modules
   - misc 

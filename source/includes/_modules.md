@@ -22,7 +22,7 @@ module.exports = {
 
 - **index.js**: This is the main touchpoint for your application. At a minimum, it needs to export a single function `run(step, dexter)` and call `this.complete()`. We'll go into more detail about this later on.
 
-<div></div><!--clear code-->
+<div></div>
 
 > The Node.js Module Descriptor (package.json)
 
@@ -36,7 +36,7 @@ module.exports = {
 
 - **package.json**: This is a regular [Node.js package definition](https://docs.npmjs.com/files/package.json). This lets you use a Dexter module just like you would any other Node.js package - you can npm install --save to your hearts content, add your module to a public or private NPM server, and otherwise distribute it outside of Dexter.
 
-<div></div><!--clear code-->
+<div></div>
 
 > The Dexter Descriptor (meta.json)
 

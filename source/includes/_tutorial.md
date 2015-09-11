@@ -115,7 +115,8 @@ module.exports = {
             self = this;
         if(!url) {
             this.log('No url provided, returing to App');
-            //It's not really a critical failure to not have an url to work with, so we'll roll on.
+            //It's not really a critical failure to not have an 
+            //  url to work with, so we'll roll on.
             return this.complete();
         }
 

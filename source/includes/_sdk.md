@@ -280,13 +280,13 @@ To git@git.beta.rundexter.com:/foobar
  * [new branch]      master -> master
 ```
 
-Push your module to Dexter. This will update your code on our servers and deploy it for use by all Things and future Things in the system.
+Push your module to Dexter. This will update your code on our servers and deploy it for use by your Dexter App Editor.
 
 Note that deployment is largely tied to your module's version #. For example, let's say you do the following:
 
 1. Create a module foobar at version 0.1
-1. Add foobar to a Thing called Hello World.
+1. Add foobar to an App called Hello World.
 1. Update foobar by with a new "baz" function and bump the version to 0.2
-1. Add foobar to a Thing called Welcome Universe.
+1. Add foobar to an App called Welcome Universe.
 
 When this process is complete, "Hello World" will still be using foobar 0.1, and "Welcome Universe" will be using 0.2. You would have to explicitly update "Hello World" in order for it to start using foobar 0.2.

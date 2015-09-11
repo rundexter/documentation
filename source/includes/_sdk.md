@@ -1,18 +1,20 @@
 # SDK Overview
 
-Dexter is a completely open system. The Dexter SMS module you dragged onto the canvas in the tutorial is open source and you can view it in our <a href="http://github.com/rundexter/dexter-sms" target="_blank">Github repository</a>. Anyone can contribute new modules via our client tools. We are working hard to expand our library with more and more third party integrations to minimize the amount of code every app developer needs to write. 
+Dexter is a completely open system. Our modules are constructed from open tools, and all our module code is open source - even that [Dexter SMS](http://github.com/rundexter/dexter-sms) module you used in our tutorial!
 
-Want to help? Dexter apps are composed of an interconnected series of modules, each of which has a specific job to do. Together with the Dexter community, our goal is to build modules that cover the range of tasks that you might do with a third party provider -- like send a Slack message, add a song to a Spotify playlist, archive an item in Gmail, and more! 
+Even the Dexter runtime is open to you.  Anyone can build and contribute new modules via our client tools.  Are we missing some functionality you need?  Create a completely new module and upload it to Dexter for your use.  Is one of our modules *almost*, but not exactly what you're looking for?  Fork the module, change the name, update its functionality, and upload it as your own.
+
+Together with the Dexter community, our goal is to build modules that cover a broad range of integrations with third party services, like sending a Slack message, adding a song to a Spotify playlist, archiving an item in Gmail, and more!  If you've created a module that covers such a service, let us know, and we'll work with you to make it available to the community at large.
 
 ## How it works
 
-The Dexter SDK lets you create your own module, which is just a slightly enhanced Node.js library. You declare what kind of serializable input and output your module receives and sends, respectively.
+The Dexter SDK lets you create your own module, which is just a slightly enhanced Node.js library: it only requires a dedicated Dexter entry point and explicit documentation of inputs and outputs.  Otherwise you can follow your normal Node.js development process.
 
-When you're done, you push your code  into Dexter, using a custom git server. You can use either the sdk `dexter push` or a regular git program `git push dexter master` to send the code along.
+When you're done, you push your code into Dexter using our custom git server. You can use either the sdk via `dexter push` or a regular `git push dexter master` to send the code along.
 
 Once it's in our system, it'll show up in the App editor as another module for you to use. You'll be able to wire it up however you want and run it alongside the built-in modules.
 
-You can make and use as many custom modules as you like - the sky's the limit!
+There's no limit on how many Dexter modules you can create and use.
 
 ## Setting Up Your Environment
 
@@ -45,7 +47,7 @@ $ dexter add_key
 $ dexter list keys
 ```
 
-In order to be able to push your code to us, you’ll have to register your SSH key with us. We’ll use the default key if you have one, or you can give us a specific key you’d like you use. You can also register more than one key (on this machine or multiple machines) if you’d like.
+In order to be able to push your code to us, you’ll have to register your SSH key with us. We’ll use your default key if you have one, or you can give us a specific key instead. You can also register more than one key (on this machine or multiple machines) if you’d like.
 
 # SDK Reference
 
@@ -54,13 +56,13 @@ In order to be able to push your code to us, you’ll have to register your SSH 
 > Example
 
 ```shell
-~/rundexter$ dexter login code@rundexter.com
+$ dexter login code@rundexter.com
 Password: ****
 Add your public key for GIT access? (yes) no
 If you change your mind, you can always add it later
 dexter add_key <keyname>(optional) Add an SSH key to the system
-
 ```
+
 Parameter|Required|Description
 ---------|--------|-----------
 email_required | true | Your email
@@ -77,13 +79,14 @@ This will always prompt for a password, which MUST be entered interactively.
 > Example: Default key
 
 ```shell
-~/rundexter$ dexter add_key
+$ dexter add_key
 Your key is now available on dexter!
 ```
+
 > Example: Custom key
 
 ```shell
-~/rundexter$ dexter add_key ~/dexter.rsa.pub
+$ dexter add_key ~/dexter.rsa.pub
 Your key is now available on dexter!
 Make sure your .ssh/config is set to use this key for rundexter.com
 ```
@@ -102,14 +105,14 @@ Adding keys is useful if you want to have multiple people work on a single modul
 > Example: Single match
 
 ```shell
-~/rundexter$ dexter remove_key 3792y+
+$ dexter remove_key 3792y+
 Matching keys removed: 1
 ```
 
 > Example: Multiple matches (error)
 
 ```shell
-~/rundexter$ dexter remove_key AAA
+$ dexter remove_key AAA
 Request failed: More than one key was found that matches this query - please be more specific
 ```
 
@@ -119,15 +122,17 @@ pattern | true |  A string pattern found in the key you want to delete
 
 Remove a key from rundexter.com that you no longer want to have access to the Dexter deployment servers. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the list_keys command if you need to figure out a good pattern to use, or pass in your machine name if you think it's unique.
 
-We'll look for the pattern you provide in all of your registered keys, but we'll only delete a key if it's the only match we find. In case the pattern you give us matches more than one key, we'll ask you to be more specific instead of wiping them all out!
+We'll look for the pattern you provide in all of your registered keys, but we'll only delete a key if it's the only match. In case the pattern matches more than one key, we'll ask you to be more specific instead of deleting them all.
 
-Removing a key doesn't prevent you from re-adding that key in the future.
+<aside class="notice">
+Removing a key does *not* prevent you from re-adding that key in the future.
+</aside>
 
 ### dexter list_keys
 > Example
 
 ```shell
-~/rundexter$ dexter list_keys
+$ dexter list_keys
 ssh-rsa AAA.........82Fregr= dexter@rundexter.com
 
 ssh-dsa AAA.........38eeer2= dexter@rundexter.com
@@ -141,14 +146,14 @@ Show all the keys you've registered with rundexter.com
 > Example (available)
 
 ```shell
-~/rundexter$ dexter check_name foobar
+$ dexter check_name foobar
 Package name is available
 ```
 
 > Example (unavailable)
 
 ```shell
-~/rundexter$ dexter check_name dexter-sms
+$ dexter check_name dexter-sms
 Someone else owns this package already
 ```
 
@@ -158,14 +163,16 @@ name | true |  The module name you're checking
 
 Check to see if a given module name is taken. Dexter modules live in a global namespace, so if someone else has used a name, you can't also use it.
 
+It's a good idea to prefix all your modules with a unique key to avoid collisions.
+
 ### dexter init
 > Example (this folder)
 
 ```shell
-~/rundexter$ dexter init
+$ dexter init
 Initializing Dexter remote in /home/dexter/projects/my-dexter-module
 Your dexter remote is ready
-~/rundexter$ git remote -v
+$ git remote -v
 dexter  git@git.rundexter.com:/my-dexter-module (fetch)
 dexter  git@git.rundexter.com:/my-dexter-module (push)
 ```
@@ -173,10 +180,10 @@ dexter  git@git.rundexter.com:/my-dexter-module (push)
 > Example (another folder)
 
 ```shell
-~/rundexter$ dexter init /srv/app/dexter/module
+$ dexter init /srv/app/dexter/module
 Initializing Dexter remote in /srv/app/dexter/module
 Your dexter remote is ready
-~/rundexter$ git remote -v
+$ git remote -v
 dexter  git@git.rundexter.com:/server-dexter-module (fetch)
 dexter  git@git.rundexter.com:/server-dexter-module (push)
 ```
@@ -188,11 +195,13 @@ path | false |  The path to the git instance
 
 Set up an existing git repository for use with the dexter command-line tool. So long as the target directory *looks* like a dexter module (i.e. it has valid package and meta json files), init will create a remote named "dexter" for you.
 
+This gets called automatically when you `dexter create` a module, but is useful if you want to enable an existing module to work with dexter.  In that case, you'll need to add a `meta.json` file by hand before you can `dexter init`.
+
 ### dexter create
 > Example
 
 ```shell
-~/rundexter$ dexter create foobar
+$ dexter create foobar
 Initializing project as Dexter DocGuy (code@rundexter.com)
 Created repo in /home/dexter/foobar
 lodash@3.10.1 node_modules/lodash
@@ -223,12 +232,14 @@ Create a skeleton for a new Dexter module. The following things happen:
 1. A local git repository is created for the module and its skeleton contents added as a first commit
 1. The dexter remote is configured
 
+Note that your code won't show up in the Dexter App Editor until you `dexter push`.
+
 ### dexter run
 > Example (default)
 
 ```shell
 # runs fixtures/default.js
-~/rundexter$ dexter run
+$ dexter run
 {
     "foo": "bar"
 }
@@ -238,7 +249,7 @@ Create a skeleton for a new Dexter module. The following things happen:
 
 ```shell
 # runs fixtures/barWithBaz.js
-~/rundexter$ dexter barWithBaz
+$ dexter run barWithBaz
 {
     "bar": "baz"
 }
@@ -254,7 +265,7 @@ Execute the function using a built-in fixture. Every Dexter module is created wi
 > Example
 
 ```shell
-~/rundexter$ dexter push
+$ dexter push
 Adding your module to Dexter...
 Counting objects: 13, done.
 Delta compression using up to 4 threads.

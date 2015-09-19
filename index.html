@@ -218,11 +218,14 @@ User modules are modules you&rsquo;ve made for your own apps. You build them wit
 <p>At this point we have a module skeleton, our package name (<code class="prettyprint">package.json:name</code>) and module title (<code class="prettyprint">meta.json:title</code>) already set, git initialized and ready to push to Dexter, and the foundation for our tests ready to go.  Pretty good for a single command!</p>
 
 <div></div>
-<pre class="highlight shell"><code><span class="gp">$ </span>npm install --save request
+<pre class="highlight shell"><code><span class="gp">$ </span>npm install --save lodash
+<span class="gp">$ </span>npm install --save request
 <span class="gp">$ </span>npm install --save feedparser
 </code></pre>
 
 <p>The main thrust of this module is to deal with RSS feeds, so we&rsquo;ll want to add a <a href="https://github.com/danmactough/node-feedparser">lovely package</a> that elegantly handles a variety of feed types.  Feedparser doesn&rsquo;t actually fetch the feed XML, however, so we&rsquo;ll also need a package to deal with <a href="https://github.com/request/request">remote requests</a>.</p>
+
+<p>We&rsquo;ll also use <a href="https://lodash.com/">lodash</a> to make our code a bit more readable.</p>
 
 <p>Since the module is just a Node library on steroids, we can use <code class="prettyprint">npm install --save</code> to add our dependencies directly to our <code class="prettyprint">package.json</code>.  Handy!</p>
 
@@ -236,7 +239,8 @@ User modules are modules you&rsquo;ve made for your own apps. You build them wit
 <p>The last bit of preparation is to get rid of the sample code in <code class="prettyprint">run()</code> that comes with the skeleton.  We&rsquo;ll replace it with something better soon!</p>
 
 <h2 id="phase-2-remote-requests">Phase 2: Remote requests</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'lodash'</span><span class="p">),</span>
+    <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">//...run</span>
     <span class="na">fetchUrl</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>

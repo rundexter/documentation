@@ -25,11 +25,14 @@ At this point we have a module skeleton, our package name (`package.json:name`) 
 
 <div></div>
 ```shell
+$ npm install --save lodash
 $ npm install --save request
 $ npm install --save feedparser
 ```
 
 The main thrust of this module is to deal with RSS feeds, so we'll want to add a [lovely package](https://github.com/danmactough/node-feedparser) that elegantly handles a variety of feed types.  Feedparser doesn't actually fetch the feed XML, however, so we'll also need a package to deal with [remote requests](https://github.com/request/request).
+
+We'll also use [lodash](https://lodash.com/) to make our code a bit more readable.
 
 Since the module is just a Node library on steroids, we can use `npm install --save` to add our dependencies directly to our `package.json`.  Handy!
 
@@ -47,7 +50,8 @@ The last bit of preparation is to get rid of the sample code in `run()` that com
 
 ## Phase 2: Remote requests
 ```javascript
-var request = require('request');
+var _ = require('lodash'),
+    request = require('request');
 module.exports = {
     //...run
     fetchUrl: function(url, callback) {

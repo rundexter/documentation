@@ -103,9 +103,9 @@ module.exports = {
 }
 ```
 
-Now that we know how we're getting our http data, we now need to push it through FeedParser.  FeedParser deals entirely in streams - you take any stream data (specifically any stream data that's supposed to contain an RSS file) and pass it into your FeedParser instance.  The actual processing of content happens via events.
+Now that we know how we're getting our http data, we now need to push it through FeedParser.  FeedParser deals entirely in streams - you take any stream data (specifically any stream data that's supposed to contain an RSS file) and pass it into your FeedParser instance.  The actual processing of content happens in events it emits.
 
-Our events are pretty straightforward.  Did we see an error? Pass it up through the callback.  Have we streamed enough data to act on?  Stash the data we found in an `items[]` array.  Are we at the end of the stream?  We're done, call back with the stuff we found.
+Our use of these events is pretty straightforward.  Did we see an error? Pass it up through the callback.  Have we streamed enough readable data to act on?  Stash the data we found in an `items[]` array.  Are we at the end of the stream?  We're done, call back with the stuff we found.
 
 Again, we've done nothing special or Dexter-y yet.  We've added a few 3rd party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Let's get to the more interesting parts!
 
@@ -115,7 +115,6 @@ Again, we've done nothing special or Dexter-y yet.  We've added a few 3rd party 
 module.exports = {
     run: function(step) {
         var url = step.input('url').first(),
-            filter = step.input('filter').first(),
             self = this;
         if(!url) {
             this.log('No url provided, returing to App');
@@ -130,9 +129,9 @@ module.exports = {
 };
 ```
 
-First things first - let's deal with our inputs.  For now we're just going to focus on a single input: the feed URL.  To keep things simple, we'll just deal with the first one we're given.  We'll take a look how to deal with loops later on.
+First things first - let's deal with our inputs.  For now we're just going to focus on a single input: the feed URL.  To keep things simple, our module is just going to deal with a *single* RSS feed - dealing with loops will be a topic for another day. (hint: it means calling toArray() instead of first().  Spoiler alert!)
 
-So what are the possibilities for our input?  Ideally we just have one input - that's the only real use case we're set up for.  However, we could have multiple inputs - but we're not going to worry about that for now.  We'll just use the `first()` function of our collection to shift off the first URL on the list.
+So what are the possibilities for our input?  Ideally we just have one input - that's the only real use case we're set up for.  However, we could have multiple inputs, but since we're using the first() function, we're throwing everything but the first input away.
 
 Now the only concern we have is weather or not we have *any* URLs to process.   What should we do if we have none?  Is it worth stopping the *whole* App just because we don't have anything to do?  Probably not.  In this case it makes the most sense to log the fact that we didn't get any data (just in case it makes things confusing elsewhere in the App) and move on as if the feed had no articles at all.
 
@@ -197,7 +196,7 @@ data: {
 //...
 ```
 
-Let's get ready to test.  For this module, our requirements are pretty simple - we just need to add some sample data to the step's inputs.  Our default test step is called `local_test_step`, and the input we're targeting is `url`, and we like [Ars Technica](https://arstechnica.com) here at Dexter, so the code is pretty straightforward.
+Let's get ready to test.  For this module, our requirements are pretty simple - we just need to add some sample data to the step's inputs.  Our default test step is called `local_test_step`, the input we're targeting is `url`, and we like [Ars Technica](https://arstechnica.com) here at Dexter.  The code resulting from this logic is pretty straightforward and simple.
 
 <aside class="success">
 What you're looking at here in the fixture is the raw serialization data that drives a Dexter App.  When you're using the `step` and `dexter` objects inside your module, you're actually interacting with some friendly wrappers around this raw information.  While you should never work with this data directly in your modules, as the wrappers will hide any changes we might make to the underlying data structure, it can be useful to see what it looks like here.
@@ -246,16 +245,17 @@ If everything worked, you should see a list of the most recent stories on Ars Te
 }
 ```
 
-The only special requirement a Dexter module has outside of run/complete/fail is the explicit input and output definitions in `meta.json`.  We need to identify each input we're expecting and define each output property we'll return.  This metadata is used to allow the Dexter App editor to wire up our module with other modules based on the user's requriements.
+The only special requirement a Dexter module has outside of run/complete/fail is the explicit input and output definitions in `meta.json`.  We need to identify each input we're expecting and define each output property we'll return.  This metadata is used to allow the Dexter App editor to wire up our module with other modules based on the user's requirements.
 
-Our inputs and outputs are pretty straightforward.  We're just accepting a single input - an URL string - and outputs 4 different strings that we extract from the feed.
+Our inputs and outputs are pretty straightforward.  We're just accepting a single input - an URL string - and outputting 4 different strings that we extract from the feed.
 
 ## Phase 7: Push version 0.0.1!
 ```shell
+$ git commit -am 'First working version'
 $ dexter push
 ```
 
-That's it, you've got a working RSS parser module!  Justin `dexter push`, and once the process completes, you should see your module in your App editor.  Congrats, you're now a Dexter developer!
+That's it, you've got a working RSS parser module!  Just `dexter push`, and, once the process completes, you should be able to open the App editor and see your module.  Congrats, you're now a Dexter developer!
 
 ## Phase 8: Add an optional filter
 ```javascript
@@ -263,26 +263,39 @@ That's it, you've got a working RSS parser module!  Justin `dexter push`, and on
 module.exports = {
     run: function(step) {
         var url = step.input('url').first(),
-            filter = step.input('filter').first(),
+            filters = step.input('filter'),
             self = this;
         //...
-                if(filter) {
-                    response = self.filterItems(response, filter);
+                if(filters.length) {
+                    response = self.filterItems(response, filters);
                 }
                 return self.complete(response);
         //...
     },
     //..fetchUrl
     //..fetchItems
-    filterItems: function(items, term) {
-        var response = []
-            , lcTerm = term.toLowerCase();
+    filterItems: function(items, terms) {
+        var response = [],
+            lcTerms = []
+        ;
+        //We don't care about case sensitivity
+        terms.each(function(term) {
+            lcTerms.push(term.toLowerCase());
+        });
         _.each(items, function(item) {
+            //Check against ANY of the item's properties.
             _.forIn(item, function(val) {
-                if(val.toLowerCase().indexOf(lcTerm) >= 0) {
-                    response.push(item);
-                    return false;
-                }
+                var match = false;
+                //See if any of our terms hit
+                _.each(lcTerms, function(term) {
+                    if(val.toLowerCase().indexOf(lcTerm) >= 0) {
+                        response.push(item);
+                        match = true;
+                        return false;
+                    }
+                });
+                //Don't continue if we managed to match on a property
+                if(match) return false;
             });
         });
         return response;
@@ -290,9 +303,11 @@ module.exports = {
 }
 ```
 
-Let's see what it takes to update a Dexter module.  We'll add a useful feature to our RSS parser that lets you optionally apply a text filter to  the feed items and only return those that match.
+Let's see what it takes to update a Dexter module.  We'll add a useful feature to our RSS parser that lets you optionally filter out articles that don't match at least one of a list of given terms.
 
-The code process is pretty straighforward.  We'll add a new input - filter - and get the first item again.  Then we'll add a new function that looks for the filter in a list of our response objects and only returns the ones that match.  Finally, if we even *have* a filter, we'll apply that function to our discovered items to narrow down our results.
+The code is pretty straighforward.  We'll add a new input - filter - and get them all.  Then we'll add a new function that looks for the filters in a list of our response objects and only returns the ones that match.  Finally, if we even *have* a filter, we'll apply our filter function to our discovered items and only return matches.
+
+Note that we're taking advantage of the Dexter collection object that carries our filter values.  It's got a built-in lodash _.each function that lets you easily iterate through its contents.  You also could call filters.toArray() to work with a native array if you'd prefer.
 
 <div></div>
 > fixture/default.js
@@ -303,13 +318,13 @@ data: {
     local_test_step: {
         input: {
             url: 'http://feeds.arstechnica.com/arstechnica/index/',
-            filter: 'apple'
+            filter: ['apple', 'samsung', 'htc']
         }
     }
 }
 ```
 
-Then we update our fixture with a filter variable (go ahead and `dexter run` to make sure it works!  You might get empty data this time if no items have the word "apple" in it)
+Then we update our fixture with a filter variable, providing an array of data to make sure our list functionality works.  Go ahead and `dexter run` to make sure it works!  You might get empty data this time if no items have the word "apple" in it.
 
 <div></div>
 > meta.json
@@ -326,7 +341,7 @@ Then we update our fixture with a filter variable (go ahead and `dexter run` to 
 }
 ```
 
-Then add the new input to the `meta.json` definition...
+We'll also want to add our new input to the meta.json so it shows up in the App editor.
 
 <div></div>
 > package.json
@@ -341,4 +356,4 @@ Then add the new input to the `meta.json` definition...
 
 Finally, in the only really new step for the update, we'll bump the version by a minor step since we added functionality.
 
-That's it, we now have a filterable RSS feed parser!
+That's it!  Just `git commit -am 'Added a filter'`, `dexter push`, and we now have a filterable RSS feed parser!

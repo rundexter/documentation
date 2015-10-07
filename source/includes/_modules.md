@@ -64,14 +64,13 @@ module.exports = {
 - **meta.json**: Special definitions used by Dexter are stored here.
     * **title (string, required)**: The user-friendly title of your module
     * **icon (string, optional)**: A [FontAwesome icon](http://fortawesome.github.io/Font-Awesome/cheatsheet/) that will show up alongside your module in the App editor.
-    * **inputs (array, optional)**: Definitions for any inputs your module accepts. Each item in the array should have 3 properties:
+    * **inputs (array, optional)**: Definitions for any inputs your module accepts. Each item in the array should have 2 or 3 properties:
         * *id (string)*: The input's code-friendly key (ex: first_name)
         * *title (string)*: The input's user-friendly name (ex: First Name)
-        * *type (string)*: A basic type (string, integer, array)
-    * **outputs (array, optional)**: Definitions for any outputs your module generates. Just like inputs, each object in the array has 3 properties:
+        * *selector_type (string, optional)*: The default configuration setting for the input: either **literal** (a plain-text string should be used), **map** (it should be wired up to the output of another module), or **user** (it should be entered by the user of the app).  The default is **map**.
+    * **outputs (array, optional)**: Definitions for any outputs your module generates.
         * *id (string)*: The input's code-friendly key (ex: first_name)
         * *title (string)*: The input's user-friendly name (ex: First Name)
-        * *type (string)*: A basic type (string, integer, array)
 
 ## The runtime wrapper
 ```javascript

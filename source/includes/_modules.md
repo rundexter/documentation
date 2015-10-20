@@ -3,7 +3,7 @@
 Modules in Dexter are the building blocks you'll use to assemble your Apps. They're expressions of the principal of doing one thing and doing it well: each is designed to have a single, clear task that works independently of the rest of your code. It's the job of the App to decide how these behaviors interact - the modules themselves only care about what kind of input they get and emitting consistent output.
 
 <aside class="success">
-Modules are just specialized Node.js libraries with a bit of special sauce in the form of extra metadata, baked-in tests, and an SDK to help speed development. Most can be used independently of Dexter, and can be incorporated into any other Node.js or [Browserified](http://browserify.org/) application.
+Modules are just specialized Node.js libraries with a bit of special sauce in the form of extra metadata, baked-in tests, and an SDK to help speed development.
 </aside>
 
 ## Anatomy of a module
@@ -34,7 +34,7 @@ module.exports = {
 }
 ```
 
-- **package.json**: This is a regular [Node.js package definition](https://docs.npmjs.com/files/package.json). This lets you use a Dexter module just like you would any other Node.js package - you can npm install --save to your hearts content, add your module to a public or private NPM server, and otherwise distribute it outside of Dexter.
+- **package.json**: This is a regular [Node.js package definition](https://docs.npmjs.com/files/package.json). This lets you use a Dexter module just like you would any other Node.js package.
 
 <div></div>
 
@@ -46,17 +46,14 @@ module.exports = {
     "icon": "heart",
     "inputs": [{ 
         "id": "url",
-        "title": "Page URL", 
-        "type": "string" 
+        "title": "Page URL"
     }, { 
         "id": "term",
-        "title": "Search term",
-        "type": "string" 
+        "title": "Search term"
     }],
     "outputs": [{ 
         "id": "links",
-        "title": "Found links",
-        "type": "string" 
+        "title": "Found links"
     }]
 }
 ```
@@ -106,11 +103,11 @@ That means if you write a class that exports something like:
 
 `{ getData: fn, run: fn }`
 
-...once it gets inside the Dexter App, it ends up looking like:
+Once it gets inside the Dexter App, it ends up looking like:
 
 `{ getData: fn, run: fn, log: fn, complete: fn, fail: fn, log: fn }`
 
-This implicit wrapping process lets you focus on the details of your module, and even run your module outside of Dexter without worrying about managing Dexter's dependencies!
+This wrapping process lets you focus on the details of your module — and even run your module outside of Dexter — without worrying about managing Dexter’s dependencies.
 
 <aside class="warning">
 If your module exports properties named complete, fail, log, or run, your module will not work!
@@ -255,7 +252,7 @@ This is the main entry point to your module. By the time this has been run, Dext
 Dexter calls this function automatically when it's your module's turn to run in the App.  It should *not* be called again - you'll create a difficult-to-debug recursion.
 </aside>
 
-### BaseModule.c(data)
+### BaseModule.complete(data)
 > No output
 
 ```javascript
@@ -283,14 +280,14 @@ data | array,object | An object containing your outputs, or an array of objects 
 
 When your module has successfully finished its job, it needs to call `complete()` to let Dexter know it's safe to continue the current App.
 
-If you have any useful information you want to make available to other modules, you'll want to return it here. Dexter assumes that you're returning an object of some kind, and that the object only has properties that match those you've defined in your `[meta.json:output](#anatomy-of-a-module)`. Your app can also generate multiple outputs by returning an array of such objects - as long as each object's properties are correctly configured, Dexter will still know how get and share the data with other modules.
+If you have any useful information you want to make available to other modules, you'll want to return it here. Dexter assumes that you're returning an object or array, and that the object only has properties that match those you've defined in your `[meta.json:output](#anatomy-of-a-module)`. If you return a collection, each object's properties are correctly configured, Dexter will still know how get and share the data with other modules.
 
 <aside class="warning">
-Note that you should only call `complete` once, and after you do, the wrapper running the function will quickly shut down, making any code your run afterwards a bit of a gamble. Calling `return this.complete()` as shown in the code samples is one way to guarantee that you only make one call and don't cause a race condition afterwards, though you can use careful code flow to do the same if you'd prefer.
+Note that you should only call `complete` once, and after you do, the process will exit. Calling `return this.complete()` as shown in the code samples is one way to guarantee that you only make one call and don't cause a race condition afterwards, though you can use careful code flow to do the same.
 </aside>
 
 <aside class="success">
-<p>Your response object properties can technically be *anything* - strings, arrays, objects - pretty much any non-binary, non-stream, non-executable, serializable value is fair game!</p>
+<p>Your response object properties can be any serializiable value.</p>
 <p>Keep in mind, however, that a lot of Dexter's power comes from the ability of unrelated modules to be able to communicate with one another. If you output a property that's an object, array, or other complex type, other modules will need to know how to handle that *specific* type in order to work with your module. Returning only basic values like strings or numbers allows your module to be m uch more flexible and useful in the Dexter ecosystem.</p>
 </aside>
 
@@ -326,7 +323,7 @@ When something goes badly wrong, `fail()` lets Dexter know to abort the app.
 Every call to `fail()` automatically gets logged, and if you pass an error as the first argument, any available call stack will be logged as well.
 
 <aside class="warning">
-Note that you should only call `fail()` once, and after you do, the wrapper running the function will quickly shut down, making any code your run afterwards a bit of a gamble. Calling `return this.fail()` as shown in the code samples is one way to guarantee that you only make one call and don't cause a race condition afterwards, though you can use careful code flow to do the same if you'd prefer.
+Note that you should only call `fail()` once, and after you do, the process will exit. Calling `return this.fail()` as shown in the code samples is one way to guarantee that you only make one call and don't cause a race condition afterwards, though you can use careful code flow to do the same.
 </aside>
 
 ### BaseModule.log(details)
@@ -351,11 +348,11 @@ this.log({ message: 'Found foo :foo and bar :bar', foo: foo.results(), bar: 42 }
 //where the foo object is an interactive console object and 42 is a colored number
 ```
 
-A logger is a programmer's best friend, and the Dexter logger gives you a  lot of power. Every time you write a log, Dexter saves all the explicit data you provide alongside a snapshot of the App at that particular point in time. You can then recall and play back your logs for a particular run of an App and watch the App's context progress as the logs come in.
+The Dexter logger gives you a lot of flexibility. Every time you write a log, Dexter saves all the explicit data you provide alongside a snapshot of the App at that particular point in time. You can then recall and play back your logs for a particular run of an App and watch the App's context progress as the logs come in.
 
 In its most basic form, you can pass a simple `msg` string into the logger. Note that this is the exact same as calling `log({ message: msg })`.
 
-If you've got some specific information you want to keep track of, you can pass it along as well. Our log playback tools will give some special treatment to any `message` property you send along (it'll show it in front of the rest of the logged data in the Dexter console), but it's optional if you don't want it.  Remember that you can an entire copy of the data in the `dexter` object for free - there's no need to duplicate its information in your log data.
+If you've got some specific information you want to keep track of, you can pass it along as well. Our log playback tools will give some special treatment to any `message` property you send along (it'll show it in front of the rest of the logged data in the Dexter console), but it's optional if you don't want it.  Remember that a serialized copy of the App is included for free with each log message — there's no need to duplicate its information in your log data.
 
 The `message` property gets additional special treatment by allowing you to format your log message in a way that takes advantage of the modern browser console. You can actually embed specific data in your log message by referencing its key after a colon, allowing you to easily see that data in the browser console. This is useful if you want to be able to monitor specific logged variables at a glance in the console.
 
@@ -388,7 +385,7 @@ Some other scenarios where replay might be useful:
 * Waiting for scarce resources to free up
 
 <aside class="warning">
-There is currently a 50-step limit built into Dexter. That's more than enough for most Apps, *unless* you're relying heavily on replay to accomplish your goals. If you think you'll need to replay enough times to worry about that limit, you might want to consider another strategy, like queue and fetch combined with timers.
+There is currently a 50-step limit built into Dexter. That's more than enough for most Apps, *unless* you're relying heavily on replay to accomplish your goals. Please <a href="mailto:support@rundexter.com">contact us</a> if you would like to increase your limit.
 </aside>
 
 ## App data
@@ -428,8 +425,6 @@ var slack = new Slack(dexter.environment('slack_token'));
 
 Fetch any private App variables that have been registered.
 
-Right now we're in the process of giving you as a module developer a way to communicate to App developers which keys your module requires. For now, just test for the keys' presence and return an informative message indicating the requirement.
-
 ### dexter.user(key, default)
 ```javascript
 var email = step.input(email, dexter.user('email'));
@@ -459,19 +454,6 @@ id | string | Dexter system ID for the workflow
 title | string | User-friendly title 
 description | string | Longer description about what the App does
 
-### dexter.url(key, default)
-```javascript
-var dexterUrl = dexter.url('home');
-```
-
-URLs used to access internal Dexter resources. These are better used through the actual helper functions and modules rather than directly by your modules.
-
-Key|Type|Description
----------|--------|-----------
-home | string | Dexter's homepage
-logger | string | An endpoint used to track in-App logs
-reporter | string | If this workflow is being run on a timer, the App calls back to the reporter to let it know it's done.
-
 
 ### dexter.global(key, default)
 ```javascript
@@ -484,9 +466,7 @@ if(!cache) {
 this.complete({ data: cache });
 ```
 
-Fetch globally stored information assigned during the use of this app. We're not placing any restrictions on how you use this, so you should do so both carefully and sparingly.
-
-Available keys and values are determined by individual modules and will vary from App to App.
+Fetch globally stored information assigned during the use of this app.
 
 ### dexter.globals()
 ```javascript
@@ -511,18 +491,7 @@ if(!cache) {
 this.complete({ data: cache });
 ```
 
-An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. We're not placing any restrictions on how you use this, so you should do so both carefully and sparingly.
-
-Any serializable data can be assigned to a global (string, numeric, object, array, etc.). Unless you have a good reason not to, it's a good practice to namespace your global variables for your particular module. 
-
-### dexter.step(id)
-```javascript
-var linkedStep = dexter.step('linked-step', null),
-    data = step.input('data', (linkedStep) ? linkedStep.input('data') : null);
-return this.complete({ data: this.process(data) });
-```
-
-Get a specific step from the workflow. There shouldn't be any real reason to use this, but if you do, it outputs either an `[AppStep](#step)` or `null`;
+An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. Any serializable data can be assigned to a global. 
     
 
 ## Step
@@ -600,10 +569,6 @@ created_at | string | Date when the module was first made
 updated_at | string | Date when the module was last updated in Dexter
 user_id | int | User ID of the module's maintainer
 
-<aside class="warning">
-Note that for trigger steps, these values will always return the default, as triggers have no modules.
-</aside>
-
 ### step.input(key, default)
 ```javascript
 var email = step.input('email', 'default@example.com').first(),
@@ -631,16 +596,6 @@ console.log(types);
 ```
 
 Get the raw input object. This will be a single object with all the input properties defined in your `meta.json:inputs` section and the raw values as parsed by Dexter.
-
-### step.output(key, default)
-```javascript
-var output = step.trigger().output('url');
-console.log(output.length, output.toArray())
-//outputs: [{ url: 'http://google.com' }, { url: 'http://yahoo.com' }]
-//log: 2 ['http://google.com', 'http://yahoo.com']
-```
-
-Extract a single property's worth of output data from a step. This isn't often used inside of a module, but *is* often used inside a switch statement to compare information. Like inputs, this returns a [Dexter collection](#data-collections)
 
 ### step.outputs()
 ```javascript

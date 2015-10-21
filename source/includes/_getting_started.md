@@ -26,7 +26,7 @@ The walkthrough gives you the basic instructions as you click through, but here'
 
   1. The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you'll get to toggle where the source data is coming from. 
   
-    <img src="/images/screenshots/07-rounded.png" class="image-shadow">  
+    <img src="/images/screenshots/07-rounded-v2.png" class="image-shadow">  
   
 1. **Use Your App** - Click the Use App button on the main nav and you'll get taken to your share page. This page is publically accessible and anyone can use your app, but you're the only one with the rights to edit it. Let's test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! 
   
@@ -36,16 +36,23 @@ Congratulations on building your first app! You’ve just scratched the surface 
 
 # What Is A Dexter App?
 
+<img src="/images/illustrations/illustrated-editor.png" class="image-shadow">
+
 A Dexter app is a collection of JavaScript modules arranged and connected in a meaningful way within the Dexter Editor. When we drag a module onto the canvas, we say that we are instantiating that module, or forming a *Step* in our application.
+
+<img src="/images/illustrations/module-v-step.png">
 
 
 ## Steps
 
 Steps are arranged by connecting one step to the next in the sequential order that data should be processed. In Dexter terms, we call this sequence a *Stream*, which we cover in greater detail in the next section.
 
+<img src="/images/illustrations/stream-illustration.png" class="image-shadow">
+
 One step stands out from the rest. This step is called the **Trigger step**. Triggers allow events outside of Dexter communicate with your app, and kick off a *Stream*. In its simplest form it is a URL that any external app can access via a `POST` request with arbitrary data that initiates the request. Dexter has some common triggers built-in (and we will add more regularly). Still, for any custom needs, you can always use the webhook trigger to pass in any type of data that you like. 
 
 ## Streams
+
 A stream begins with a trigger step and is followed by one or more process steps. A stream does not have any formal termination point, but an execution of any given stream will complete when there are no more steps left. An app can have multiple streams, where each Stream is started by its own Trigger.
 
 ## Module Types

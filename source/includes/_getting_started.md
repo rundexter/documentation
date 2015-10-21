@@ -74,3 +74,11 @@ There are three types of modules in Dexter:
 
 1. **User modules** <br/>
    User modules are modules you've made for your own apps. You build them with the same tools we've used to build the vast library of Dexter modules, and you can use them the same in the App editor. The only difference between User modules and Dexter modules lies in distribution: only *you* can use your user modules.
+   
+## Authentication & Authorization
+
+Every Dexter app execution is associated with a Dexter user account. For anonymous mode use cases (e.g. a Slack slash command), Dexter provides “Execute As” functionality. By choosing “Owner” from the dropdown, all URLs exposed by a Dexter app trigger will append a restricted api key that allows the executing user to invoke the app without having Dexter credentials. The user context, while the app is running will be that of the app owner, which is the user that configured the app.
+
+<img src="/images/screenshots/execute-as.png" class="image-shadow">
+
+The API keys can be generated/regenerated from every User’s account page. 

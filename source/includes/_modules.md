@@ -114,108 +114,40 @@ If your module exports properties named complete, fail, log, or run, your module
 </aside>
 
 ## Inputs
-> Code
 
-```javascript
-module.exports = {
-    dump: function() {
-        console.log.apply(console, arguments);
-        console.log('--------');
-    },
-    run: function(step) {
-        var inputs = step.inputs(),
-            singleExisting = step.input('singleExisting').first(),
-            singleMissing = step.input('singleMissing').first(),
-            singleMissingDefaulted = step.input('singleMissingDefaulted', 'singleDefault').first(),
-            
-            multipleExisting = step.input('multipleExisting').toArray(),
-            multipleMissing = step.input('multipleMissing').toArray(),
-            multipleMissingDefaulted = step.input('multipleMissingDefaulted', 'multipleDefault').toArray(),
-            
-            multipleExistingZero = step.input('multipleExisting')[0],
-            multipleExistingFirst = step.input('multipleExisting').first(),
-            multipleMissingZero = step.input('multipleMissing')[0],
-            multipleMissingFirst = step.input('multipleMissing').first();
-            
-        this.dump(inputs);
-        this.dump(singleExisting, singleMissing, singleMissingDefaulted);
-        this.dump(multipleExisting, multipleMissing, multipleMissingDefaulted);
-        this.dump(multipleExistingZero, multipleExistingFirst, multipleMissingZero, multipleMissingFirst);
-    }
-};
-```
-
-> Result
-
-```javascript
-{ singleExisting: 'Foo', multipleExisting: ['Bar', 'Baz'] }
-'-------'
-{ 'Foo', null, 'singleDefault' }
-'-------'
-{ ['Bar', 'Baz'], [], ['multipleDefault'] }
-'-------'
-{ 'Bar', 'Bar', undefined, null }
-```
-
-The real power of Dexter lies in its ability to mix and match outputs from a variety of sources in order to provide input data for a given module. Well designed modules must therefore be able to accommodate as broad a spectrum of inputs as possible.
-
-All module inputs are, under the hood, wrapped up in a single object `{}`. The input object's properties are explicitly defined in the module's meta.json file, and each defined property is always present in the compiled input `{ input1: null, input2: null}`. When an App is configured, its creator maps different data sources to each of your module's inputs `input1 = output1, input2 = output2, {output 1: 1}, {output 2: 2}`. When the app is executed, those mappings are evaluated, and the results bound to the input object `{input1: 1, input2: 2}`.
-
-The real fun begins when input data is mapped from sources that have multiple outputs `[{output1: 1}, {output1: 2}], {output2: 3}`.  Dexter's input system accommodates data sources with multiple outputs, so all available outputs get aggregated into our input object `{ input1: [1,2], input2: [3] }`. It's also possible that some configured mappings will produce no data at all `{ input1: null, input2: 3 }`.
-
-It's your job as a module creator to figure good rules for dealing with this variety of possible input data. Is a particular input critical enough to warrant killing an App if it's missing?  How do you deal with misaligned amounts of input?  Which inputs can you only deal with 1 of, and which are safe to handle as arrays?
-
-Dexter provides some tools to help you execute your decisions.  Inputs can either be accessed directly by extracting them via `step.inputs()`, or by wrapping individual inputs in a Dexter [data collection](#data-collections) by calling `step.input(key)`. You can then verify that you have the data you need through any combination of assertions (assertion errors will cause the app to abort), explicit failures (calling `this.fail(...)` lets you give specific reasons for the error), or by providing sane defaults (calls to `input(key, default)` with a good fallback default value).
+As mentioned above, the meta.json file defines a collection of inputs expected by a module. To retrieve an input, you can use the `step.input(<input_id>)` from the run method. Calling step.input returns data wrapped up by a DexterCollection. For inputs that are expected to have a single value, we provide a convenience method `DexterCollection.first()` that will return the first item in the collection. Conversely, `Dexter.each(callback)` allows easy iteration over the collection. DexterCollections can also be inspected via standard array accessors.
 
 ## Outputs
-> Module 1: User fetcher
 
 ```javascript
 module.exports = {
-    run: function() {
-        this.complete({ email: 'joe@example.com', name: 'Joe' });
-    }
-};
+  run: function() {
+     this.complete({
+        message: "This is the first" 
+     });
+  }
+}
 ```
 
-> Module 2: Link fetcher
+As mentioned above, the meta.json file defines a collection of outputs your module plans to expose. Your module should provide its outputs to Dexter by calling `this.complete(<object|array>)` from the scope of the run method. For example, if your module exposes an output with id `message`, your complete call could look like this: 
+
+<div></div>
 
 ```javascript
 module.exports = {
-    run: function() {
-        this.complete([
-            { url: 'http://rundexter.com', title: 'Dexter' },
-            { url: 'http://reddit.com', title: 'Why my project is late' }
-        ]);
-    }
-};
+ run: function() {
+    this.complete([{
+        message: "This is the first message"
+    },{
+        message: "This is the second message"
+    }]);
+ }
+}
 ```
 
-> Module 3: Message
+If appropriate, returning a collection of objects is also acceptable, downstream modules are expected to handle arrays of data just like your modules! Here’s how that would look: 
 
-```javascript
-//Imports are:
-// to = dexter.step('module_1').output('email');
-// urls = dexter.step('module_2').output('url');
-module.exports = {
-    run: function(step) {
-        var to = step.input('to'),
-            urls = step.input('url');
-        console.log(to.toArray(), urls.toArray());
-        return this.complete();
-    }
-};
-//In the log:
-// ['joe@example.com'] ['http://rundexter.com', 'http://reddit.com']
-```    
-
-In keeping with the theme of doing one thing and doing it well, Dexter assumes all modules will output a single kind of object that reflects its purpose. Does the module get Slack history?  Then the output should look like `{ user, text, link }`. Does it get a list of stock prices?  The output should look like `{ symbol, name, price, change }`. You describe what that object looks like in your `meta.json` file, then ensure that those properties exist in the object(s) you export via `this.complete()`.
-
-That doesn't mean you're restricted to returning a single object. If your module didn't produce any output, just return nothing. If it produced multiple data points, return a collection of your output objects. So long as each object has properties that are recognizable from your `meta.json:outputs` definitions, Dexter will be able to parse the outputs and pass them along as needed.
-
-What you *don't* want to do is to define and return complex object properties. Dexter's power lies in the ability to map the output from one module to the input of another, and to let the App developer decide how to make those associations meaningful. In order for you output to be understood by the widest variety of other modules, each object property should be both of a basic type (string/numeric good, binary/object bad) and well named (email/url good, o_fsk_n50/aws_9009939923f_useast1 bad).
-
-That doesn't mean you *can't* output complex objects. For instance, if you're building a suite modules that perform image manipulations, you *should* have a standard base64-encoded image binary type and support it throughout the suite. Or, if you're doing an AWS automation App, you should have IAM objects as a basic type that your modules understand.
+<div></div>
 
 You can read more about outputs under [BaseModule::complete](#basemodule-complete-data).
 

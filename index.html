@@ -160,7 +160,7 @@
 
 <ol>
 <li><p><strong>Create a New App</strong> - Dexter is both for builders and consumers. We start with the building. Click the new app button on the top right of your screen. <img src="/images/screenshots/01-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends a bookmarklet that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  </p></li>
+<li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  </p></li>
 <li><p><strong>Place Your First Trigger</strong> - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app&rsquo;s starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user&rsquo;s bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/03-rounded.png" class="image-shadow">  </p></li>
 <li><p><strong>Place Your First Module</strong> - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/04-rounded.png" class="image-shadow">  </p></li>
 <li><p><strong>Connect The Data</strong> - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. 
@@ -172,8 +172,8 @@ There are a few details we&rsquo;re leaving out and for the uber curious, here t
 <ol>
 <li>You’ll notice some radio buttons just below the input titles on the right sidebar. Here is where you can choose from an array of input methods: 
   <p><strong>User Defined</strong> - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.</p>
-  <p><strong>Mapping</strong> - If this is selected, the input will be whatever output you grab, drag, and drop to the step. /p&gt; 
-  <p><strong>Literal</strong> - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a &ldquo;=&rdquo; the field can take raw javascript.</p></li>
+  <p><strong>Mapping</strong> - If this is selected, the input will be whatever output you grab, drag, and drop to the step. </p> 
+  <p><strong>Literal</strong> - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a &ldquo;=&rdquo; the field can take raw JavaScript.</p></li>
 <li>The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you&rsquo;ll get to toggle where the source data is coming from. </li>
 </ol></li>
 <li><p><strong>Use Your App</strong> - Click the Use App button on the main nav and you&rsquo;ll get taken to your share page. This page is publically accessible and anyone can use your app, but you&rsquo;re the only one with the rights to edit it. Let&rsquo;s test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! </p>
@@ -224,7 +224,7 @@ User modules are modules you&rsquo;ve made for your own apps. You build them wit
 
 <h2 id="authentication-amp-authorization">Authentication &amp; Authorization</h2>
 
-<p>Every Dexter app execution is associated with a Dexter user account. For anonymous mode use cases (e.g. a Slack slash command), Dexter provides “Execute As” functionality. By choosing “Owner” from the dropdown, all URLs exposed by a Dexter app trigger will append a restricted api key that allows the executing user to invoke the app without having Dexter credentials. The user context, while the app is running will be that of the app owner, which is the user that configured the app.</p>
+<p>Every Dexter app execution is associated with a Dexter user account. For anonymous-mode use cases (e.g., a Slack slash command), Dexter provides “Execute As” functionality. By choosing “Owner” from the dropdown, all URLs exposed by a Dexter app trigger will append a restricted api key that allows the executing user to invoke the app without having Dexter credentials. The user context, while the app is running, will be that of the app owner — the user who configured the app.</p>
 
 <p><img src="/images/screenshots/execute-as.png" class="image-shadow"></p>
 
@@ -480,7 +480,7 @@ Your dexter remote is ready
 
 <p>Create a skeleton for a new Dexter module. The following things happen:</p>
 
-<p>1. A local git repository is created for the module with some  scaffolding  code  added as a first commit</p>
+<p>1. A local git repository is created for the module with some scaffolding code added as a first commit</p>
 
 <p>2. The dexter remote is configured</p>
 
@@ -564,7 +564,7 @@ To git@git.beta.rundexter.com:/foobar
 
 <h2 id="goal">Goal</h2>
 
-<p>Let&rsquo;s look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we&rsquo;ll take advantage of some 3rd party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let&rsquo;s get started!</p>
+<p>Let&rsquo;s look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we&rsquo;ll take advantage of some third-party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let&rsquo;s get started!</p>
 
 <h2 id="phase-0-preparation">Phase 0: Preparation</h2>
 
@@ -662,7 +662,7 @@ To git@git.beta.rundexter.com:/foobar
 
 <p>Our use of these events is pretty straightforward.  Did we see an error? Pass it up through the callback.  Have we streamed enough readable data to act on?  Stash the data we found in an <code class="prettyprint">items[]</code> array.  Are we at the end of the stream?  We&rsquo;re done, call back with the stuff we found.</p>
 
-<p>Again, we&rsquo;ve done nothing special or Dexter-specific yet.  We&rsquo;ve added a few 3rd party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Now, onto getting our module ready for use in Dexter.</p>
+<p>Again, we&rsquo;ve done nothing special or Dexter-specific yet.  We&rsquo;ve added a few third-party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Now, onto getting our module ready for use in Dexter.</p>
 
 <h2 id="phase-4-wiring-it-up">Phase 4: Wiring it up</h2>
 <pre class="highlight javascript"><code><span class="c1">//...requires</span>

@@ -47,7 +47,7 @@ If you don’t have one, make one now. You can run the given sample code to crea
 # You can pass a path to a specific key here if you'd like
 $ dexter add_key
 # Make sure we got it!
-$ dexter list keys
+$ dexter list_keys
 ```
 
 In order to be able to push your code to us, you’ll have to register your SSH key with us. We’ll use your default key if you have one, or you can give us a specific key instead. You can also register more than one key (on this machine or multiple machines) if you’d like.

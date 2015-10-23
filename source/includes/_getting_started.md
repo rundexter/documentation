@@ -24,7 +24,7 @@ The walkthrough gives you the basic instructions as you click through, but here'
   1. You’ll notice some radio buttons just below the input titles on the right sidebar. Here is where you can choose from an array of input methods: 
     	  <p>**User Defined** - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.</p>
     	  <p>**Mapping** - If this is selected, the input will be whatever output you grab, drag, and drop to the step. </p> 
-          <p>**Literal** - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a "=" the field can take raw javascript.</p>
+          <p>**Literal** - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a "=" the field can take raw JavaScript.</p>
   1. The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you'll get to toggle where the source data is coming from. 
   
 1. **Use Your App** - Click the Use App button on the main nav and you'll get taken to your share page. This page is publically accessible and anyone can use your app, but you're the only one with the rights to edit it. Let's test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! 
@@ -76,7 +76,7 @@ There are three types of modules in Dexter:
    
 ## Authentication & Authorization
 
-Every Dexter app execution is associated with a Dexter user account. For anonymous mode use cases (e.g. a Slack slash command), Dexter provides “Execute As” functionality. By choosing “Owner” from the dropdown, all URLs exposed by a Dexter app trigger will append a restricted api key that allows the executing user to invoke the app without having Dexter credentials. The user context, while the app is running will be that of the app owner, which is the user that configured the app.
+Every Dexter app execution is associated with a Dexter user account. For anonymous-mode use cases (e.g., a Slack slash command), Dexter provides “Execute As” functionality. By choosing “Owner” from the dropdown, all URLs exposed by a Dexter app trigger will append a restricted api key that allows the executing user to invoke the app without having Dexter credentials. The user context, while the app is running, will be that of the app owner — the user who configured the app.
 
 <img src="/images/screenshots/execute-as.png" class="image-shadow">
 

@@ -197,7 +197,7 @@ name | true |  The name of the new Dexter module
 
 Create a skeleton for a new Dexter module. The following things happen:
 
-    1. A local git repository is created for the module with some  scaffolding  code  added as a first commit
+    1. A local git repository is created for the module with some scaffolding code added as a first commit
     
     2. The dexter remote is configured
 

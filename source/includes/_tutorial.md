@@ -1,7 +1,7 @@
 # Tutorial
 
 ## Goal
-Let's look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we'll take advantage of some 3rd party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let's get started!
+Let's look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we'll take advantage of some third-party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let's get started!
 
 ## Phase 0: Preparation
 Before we get started, you should make sure the following things are true:
@@ -99,7 +99,7 @@ Now that we know how we're getting our http data, we need to push it through Fee
 
 Our use of these events is pretty straightforward.  Did we see an error? Pass it up through the callback.  Have we streamed enough readable data to act on?  Stash the data we found in an `items[]` array.  Are we at the end of the stream?  We're done, call back with the stuff we found.
 
-Again, we've done nothing special or Dexter-specific yet.  We've added a few 3rd party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Now, onto getting our module ready for use in Dexter.
+Again, we've done nothing special or Dexter-specific yet.  We've added a few third-party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Now, onto getting our module ready for use in Dexter.
 
 ## Phase 4: Wiring it up
 ```javascript

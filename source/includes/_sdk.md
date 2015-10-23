@@ -2,13 +2,15 @@
 
 Dexter is a completely open system. Our modules are constructed from open tools, and all our module code is open source. Even the Dexter runtime is open to you.  Anyone can build and contribute new modules via our client tools.  Are we missing some functionality you need?  Create a completely new module and upload it to Dexter for your use.  Is one of our modules *almost*, but not exactly what you're looking for?  Fork the module, update its functionality, and upload it as your own.
 
-Together with the Dexter community, our goal is to build modules that cover a broad range of integrations with third party services, like sending a Slack message, adding a song to a Spotify playlist, archiving an item in Gmail, and more!  If you've created a module that covers such a service, <a href-"mailto:support@rundexter.com" target="_blank">let us know</a>, and we'll work with you to make it available to the community at large.
+Together with the Dexter community, our goal is to build modules that cover a broad range of integrations with third party services, like sending a Slack message, adding a song to a Spotify playlist, archiving an item in Gmail, and more!  If you've created a module that covers such a service, <a href="mailto:support@rundexter.com" target="_blank">let us know</a>, and we'll work with you to make it available to the community at large.
 
 ## How it works
 
 The Dexter SDK lets you create your own module, which is just a slightly enhanced Node.js library: it only requires a dedicated Dexter entry point and explicit documentation of inputs and outputs.  Otherwise you can follow your normal Node.js development process.
 
-When you're done, you push your code into Dexter using our custom git server. You can use either the sdk via `dexter push` or a regular `git push dexter master` to send the code along.
+When you're done, you push your code into Dexter using our git server. You can send the code to Dexter via
+
+`dexter push` or `git push dexter master` 
 
 Once it's in our system, it'll show up in the App editor as another module for you to use in your “User Modules” panel. You'll be able to wire it up however you want and run it alongside the built-in modules, and there's no limit on how many Dexter modules you can create and use.
 
@@ -19,14 +21,14 @@ Once it's in our system, it'll show up in the App editor as another module for y
 $ npm install rundexter -g
 ```
 
-To get started you need to have a working installation of <a href="https://nodejs.org" target="_blank">Node.js</a>. We have certified the Dexter client tools for use in recent versions up to `4.1.2`, however, the modules need to be executable in AWS Lambda’s current NodeJS infrastructure.
+To get started you need to have a working installation of <a href="https://nodejs.org" target="_blank">Node.js</a>. We have certified the Dexter client tools for use in recent versions up to `4.1.2`, however, the modules need to be executable in AWS Lambda’s <a href="http://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html" target="_blank">current Node.js infrastructure</a>.
 
 ## Log in
 ```shell
 $ dexter login { your email }
 # Enter your password when prompted
 ```
-Before you do anything, you'll need to log in with your rundexter.com credentials. That lets us know who you are, so we can make the next steps happen.
+Before you do anything, you'll need to log in with your Dexter credentials. That lets us know who you are, so we can make the next steps happen.
 
 ## Make a key
 ```shell
@@ -68,7 +70,7 @@ Parameter|Required|Description
 ---------|--------|-----------
 email_required | true | Your email
 
-Log into your rundexter.com account using your email and password.
+Log into your Dexter account using your email and password.
 
 ### dexter add_key
 > Example: Default key
@@ -86,7 +88,7 @@ $ dexter list_keys
 ```shell
 $ dexter add_key ~/dexter.rsa.pub
 Your key is now available on dexter!
-Make sure your .ssh/config is set to use this key for rundexter.com
+Make sure your .ssh/config is set to use this key for git.rundexter.com
 ```
 
 Parameter|Required|Description
@@ -116,7 +118,7 @@ Parameter|Required|Description
 ---------|--------|-----------
 pattern | true |  A string pattern found in the key you want to delete
 
-Remove a key from rundexter.com that you no longer want to have access to the Dexter deployment servers. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the list_keys command if you need to figure out a good pattern to use, or pass in your machine name if you think it's unique.
+Remove a key from Dexter. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the `dexter list_keys` to view your keys.
 
 
 ### dexter list_keys
@@ -163,7 +165,7 @@ path | false |  The path to the git instance
 
 Set up an existing git repository for use with the dexter command-line tool. So long as the target directory *looks* like a dexter module (i.e. it has valid package and meta json files), init will create a remote named "dexter" for you.
 
-This gets called automatically when you `dexter create` a module, but is useful if you want to enable an existing module to work with dexter.  In that case, you'll need to add a `meta.json` file by hand before you can `dexter init`.
+This gets called automatically when you `dexter create` a module, but is useful if you want to enable an existing module to work with Dexter.  In that case, you need to add a `meta.json` file before you can run `dexter init`.
 
 ### dexter create
 > Example

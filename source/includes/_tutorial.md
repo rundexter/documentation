@@ -6,13 +6,13 @@ Let's look at how to create a non-trivial module for Dexter.  The goal of this m
 ## Phase 0: Preparation
 Before we get started, you should make sure the following things are true:
 
-1. You've signed up at http://rundexter.com
+1. You've signed up at <a href="https://rundexter.com" target="_blank">https://rundexter.com</a>
 1. You've installed the [sdk](#sdk-overview)
 1. You've successfully added a key to your environment
 1. You've got a *basic* understanding of [Node.js](http://nodeguide.com/beginner.html)
 1. You're ready to build cool things!
 
-If any of the above steps were troublesome, check out our <a href="http://community.rundexter.com" target="_blank">community forums</a>. There are answers to many frequently asked questions there! If you're still having trouble, you can join our active <a href="https://rundexter.slack.com" target="_blank">Slack channel</a> for help in real time.
+If any of the above steps were troublesome, check out our <a href="http://community.rundexter.com" target="_blank">community forums</a>. There are answers to many frequently asked questions there! If you're still having trouble, you can chat with members of the community in real time by clicking the "Join us on Slack" button in the footer of our website. 
 
 ## Phase 1: Setup
 ```shell
@@ -34,17 +34,9 @@ We'll also use [lodash](https://lodash.com/) to make our code a bit more readabl
 
 We can use `npm install --save` to add our dependencies directly to our `package.json`.
 
+The last bit of preparation is to get rid of the sample code in `index.js` that comes with the skeleton.  We'll replace it with something better soon!
+
 <div></div>
-
-```javascript
-module.exports = {
-    run: function(step) {
-    }
-}
-```
-
-The last bit of preparation is to get rid of the sample code in `run()` that comes with the skeleton.  We'll replace it with something better soon!
-
 
 ## Phase 2: Remote requests
 ```javascript
@@ -58,7 +50,9 @@ module.exports = {
         req.on('response', function(resp) {
             if(resp.statusCode != 200) {
                 return callback(new Error(
-                    'Bad status code ' + resp.statusCode + ' for ' + url
+                    'Bad status code ' 
+                        + resp.statusCode 
+                        + ' for ' + url
                 ));
             }
             return callback(null, this);
@@ -111,18 +105,18 @@ Again, we've done nothing special or Dexter-specific yet.  We've added a few 3rd
 ```javascript
 //...requires
 module.exports = {
-    run: function(step) {
-        var url = step.input('url').first()
-          , self = this
-        ;
-                
-        if(!url) {
-           return this.fail('No url provided, returing to App');  
-        }
+  run: function(step) {
+    var url = step.input('url').first()
+      , self = this
+    ;
             
-        //...fetchUrl
-        //...fetchItems								
-    },
+    if(!url) {
+       return this.fail('No url provided');  
+    }
+        
+    //...fetchUrl
+    //...fetchItems								
+  },
 };
 ```
 
@@ -134,34 +128,33 @@ So what are the possibilities for our input? All inputs are treated as collectio
 ```javascript
 //...requires
 module.exports = {
-    run: function(step) {
-        //...inputs
-        this.fetchUrl(url, function(err, stream) {
-            if(err) {
-                return self.fail(err);
-            }
-            //Let the parser grab the data
-            self.fetchItems(stream, function(err, items) {
-                var response = [];
-                if(err) {
-                    return self.fail(err);
-                }
-                //Extract dexter-friendly data from the items
-                _.each(items, function(item) {
-                    response.push({
-                        url: item.link,
-                        title: item.title,
-                        summary: item.summary,
-                        author: item.author
-                    });
-                });
-                return self.complete(response);
-            });
+  run: function(step) {
+     //...inputs
+     this.fetchUrl(url, function(err, stream) {
+        if(err) {
+           return self.fail(err);
+        }
+        //Let the parser grab the data
+        self.fetchItems(stream, function(err, items) {
+           var response = [];
+           if(err) {
+               return self.fail(err);
+           }
+           //Extract dexter-friendly data from the items
+           _.each(items, function(item) {
+               response.push({
+                   url: item.link,
+                   title: item.title,
+                   summary: item.summary,
+                   author: item.author
+               });
+           });
+           return self.complete(response);
         });
-
-    },
-    //...fetchUrl
-    //...fetchItems
+     });
+  },
+  //...fetchUrl
+  //...fetchItems
 };
 ```
 
@@ -228,7 +221,7 @@ If everything worked, you should see a list of the most recent stories on Ars Te
 }
 ```
 
-The only special requirement a Dexter module has outside of run/complete/fail is the explicit input and output definitions in `meta.json`.  We need to identify each input we're expecting and define each output property we'll return.  This metadata is used to allow the Dexter App editor to wire up our module with other modules based on the user's requirements.
+The only special requirement a Dexter module has outside of run/complete/fail is the explicit input and output definitions in `meta.json`.  We need to identify each input we're expecting and define each output property we'll return.  This metadata is used to allow the Dexter App Editor to wire up our module with other modules based on the user's requirements.
 
 Our inputs and outputs are pretty straightforward.  We're just accepting a single input - an URL string - and outputting 4 different strings that we extract from the feed (URL / Title / Summary / Author).
 
@@ -238,7 +231,7 @@ $ git commit -am 'First working version'
 $ dexter push
 ```
 
-That's it, you've got a working RSS parser module!  Execute `dexter push`, and, once the process completes, you should be able to open the App editor and see your module.  Congrats, you're now a Dexter developer!
+That's it, you've got a working RSS parser module!  Execute `dexter push`, and, once the process completes, you should be able to open the App Editor and see your module.  Congrats, you're now a Dexter developer!
 
 ## Phase 8: Your First Update — Add an optional filter
 ```javascript
@@ -312,7 +305,7 @@ Then we update our fixture with a filter variable, providing an array of data to
 <div></div>
 > meta.json
 
-```json
+```javascript
 {
     "inputs": [
         {
@@ -324,7 +317,7 @@ Then we update our fixture with a filter variable, providing an array of data to
 }
 ```
 
-We'll also want to add our new input to the meta.json so it shows up in the App editor.
+We'll also want to add our new input to the meta.json so it shows up in the App Editor.
 
 <div></div>
 > package.json
@@ -337,6 +330,6 @@ We'll also want to add our new input to the meta.json so it shows up in the App 
 }
 ```
 
-Finally, in the only really new step for the update, we'll bump the version by a minor step since we added functionality.
+Finally, we'll bump the version by a minor step since we added functionality.
 
 That's it!  Just `git commit -am 'Added a filter'`, `dexter push`, and we now have a filterable RSS feed parser!

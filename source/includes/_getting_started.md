@@ -2,6 +2,8 @@
 
 Dexter is a platform that makes it easy for developers to connect third-party APIs and build apps that automate your digital life. Everyday we use a handful of tools that do one thing and do it well, whether that’s ordering lunch or messaging the office a meme. However, more complex tasks require a combination of different solutions. Dexter is here to simplify connecting these services. With Dexter, you can connect the web the way you want.
 
+To get started, take the walkthrough that is presented automatically on your first login, or by clicking your name on the right side of the navigation bar and choosing walkthrough from the subsequent drop down. 
+
 ## Detailed Walkthrough
 
 The walkthrough gives you the basic instructions as you click through, but here's some more info in case you get stuck, confused, or just want to know more: 
@@ -14,19 +16,16 @@ The walkthrough gives you the basic instructions as you click through, but here'
 
 1. **Place Your First Module** - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/04-rounded.png" class="image-shadow">  
 
-
-1. **Connect The Data** - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. Each module has outputs and inputs. In this case the bookmarklet module outputs the URL of the page you're on. The Dexter SMS module accepts a phone number and a message. In order to tell the Dexter app that we want to send the URL from the bookmarklet step to the dexter sms step, we connect them. And that's it you're done! There are a few details we're leaving out and for the uber curious, here they are: <img src="/images/screenshots/05-rounded.png" class="image-shadow">  
-
-
+1. **Connect The Data** - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. 
+  <img src="/images/screenshots/05-rounded.png" class="image-shadow">  
+  Each module has outputs and inputs. In this case the bookmarklet module outputs the URL of the page you're on. The Dexter SMS module accepts a phone number and a message as input. In order to tell the Dexter app that we want to send the URL from the bookmarklet step to the dexter sms step, we connect them. And that's it you're done! 
+  <img src="/images/screenshots/07-rounded-v2.png" class="image-shadow">  
+  There are a few details we're leaving out and for the uber curious, here they are: 
   1. You’ll notice some radio buttons just below the input titles on the right sidebar. Here is where you can choose from an array of input methods: 
-		  * **User Defined** - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.
-		  * **Mapping** - If this is selected, the input will be whatever output you grab, drag, and drop to the step. In this instance, the URL will be the message.
-		  * **Literal** - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a "=" the field can take raw javascript.
-
-
+    	  <p>**User Defined** - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.</p>
+    	  <p>**Mapping** - If this is selected, the input will be whatever output you grab, drag, and drop to the step. /p> 
+          <p>**Literal** - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a "=" the field can take raw javascript.</p>
   1. The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you'll get to toggle where the source data is coming from. 
-  
-    <img src="/images/screenshots/07-rounded-v2.png" class="image-shadow">  
   
 1. **Use Your App** - Click the Use App button on the main nav and you'll get taken to your share page. This page is publically accessible and anyone can use your app, but you're the only one with the rights to edit it. Let's test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! 
   
@@ -61,7 +60,7 @@ There are three types of modules in Dexter:
 
 
 1. **Core modules** <br/>
-   There are some cases where the simplistic behavior of modules present a challenge to building a fully featured app. Core modules provide some extra abilities that help you enhance basic modules . Dexter will continually expand its Core Module offering, but for now here is what is available (updated 10/20):  
+   There are some cases where the simplistic behavior of modules present a challenge to building a fully featured app. Core modules provide some special abilities that help you enhance basic modules . Dexter will continually expand its Core Module offering, but for now here is what is available (updated 10/20):  
    
 			**_Queue_** - Sometimes while building a Dexter app you want to collect information that you’re not ready to act on yet. For example — Let’s say you want to store a bunch of URLs from the Bookmarklet Trigger, but you don’t want to do anything with them until a Timer Trigger is activated later. The Queue step lets you stash that data for later use. The Queue step takes a single parameter, `class_name`, which is the name that you’ll reference in your Fetch step when you are ready to use it.  
 			

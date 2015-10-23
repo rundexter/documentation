@@ -1,10 +1,10 @@
 # Quickstart
 
-Before getting started, you’ll need Node and git installed.<br/>
+Before getting started, you’ll need Node.js and git installed.<br/>
 
-    **For OSX:** <a href="https://nodejs.org/dist/v4.2.1/node-v4.2.1.pkg">Node JS</a> | <a href="https://git-scm.com/download/mac">git</a> 
+    **For OSX:** <a href="https://nodejs.org/dist/v4.2.1/node-v4.2.1.pkg">Node.js</a> | <a href="https://git-scm.com/download/mac">Git</a> 
     
-    **For Linux:** <a href="https://nodejs.org/en/download/">Node JS</a> | <a href="https://git-scm.com/download/linux">git</a> 
+    **For Linux:** <a href="https://nodejs.org/en/download/">Node.js</a> | <a href="https://git-scm.com/download/linux">Git</a> 
     
     **For Windows:** You’ll need to use a Linux virtual machine and follow the links above. <a href="https://www.virtualbox.org/manual/ch01.html#intro-installing" target="_blank">Here’s a guide</a> on how to go about that.
 

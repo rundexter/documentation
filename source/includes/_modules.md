@@ -115,7 +115,7 @@ If your module exports properties named complete, fail, log, or run, your module
 
 ## Inputs
 
-As mentioned above, the meta.json file defines a collection of inputs expected by a module. To retrieve an input, you can use the `step.input(<input_id>)` from the run method. Calling step.input returns data wrapped up by a DexterCollection. For inputs that are expected to have a single value, we provide a convenience method `DexterCollection.first()` that will return the first item in the collection. Conversely, `Dexter.each(callback)` allows easy iteration over the collection. DexterCollections can also be inspected via standard array accessors.
+As mentioned above, the meta.json file defines a collection of inputs expected by a module. To retrieve an input, you can use the `step.input(<input_id>)` from the run method. Calling step.input returns data wrapped up by a DexterCollection. For inputs that are expected to have a single value, we provide a convenience method `DexterCollection.first()` that will return the first item in the collection. Conversely, `DexterCollection.each(callback)` allows easy iteration over the collection. DexterCollections can also be inspected via standard array accessors.
 
 ## Outputs
 
@@ -129,7 +129,7 @@ module.exports = {
 }
 ```
 
-As mentioned above, the meta.json file defines a collection of outputs your module plans to expose. Your module should provide its outputs to Dexter by calling `this.complete(<object|array>)` from the scope of the run method. For example, if your module exposes an output with id `message`, your complete call could look like this: 
+As mentioned above, the meta.json file defines a collection of outputs your module plans to expose. Your module should provide its outputs to Dexter by calling `this.complete(<object|array>)` from the scope of the run method. 
 
 <div></div>
 
@@ -145,7 +145,7 @@ module.exports = {
 }
 ```
 
-If appropriate, returning a collection of objects is also acceptable, downstream modules are expected to handle arrays of data just like your modules! Here’s how that would look: 
+If appropriate, returning a collection of objects is also acceptable, downstream modules are expected to handle arrays of data just like your modules!
 
 <div></div>
 
@@ -154,7 +154,7 @@ You can read more about outputs under [BaseModule::complete](#basemodule-complet
 
 ## Data collections
 
-Calls to `step.input` and `step.output` return data wrapped up by a Dexter collection, which makes managing an uncertain amount of data easier.
+Calls to `step.input` and `step.output` return data wrapped up by a DexterCollection, which makes managing an uncertain amount of data easier.
 
 Function|Description
 ---------|--------
@@ -310,11 +310,6 @@ if(loopTo === data.length) {
 One of the downsides of working with APIs is that many of them are rate limited. This poses a problem if you're trying to handle an arbitrary amount of data in the 60s time window allotted to a Dexter module.  If you're in a situation where you're not sure if you can handle all the data you've been given, `replay()` can help you out.
 
 Calling replay will rerun the current module with the exact same inputs it was originally given. By using the App's global state management tools, your module can keep running until it finishes what it set out to do.
-
-Some other scenarios where replay might be useful:
-* Waiting for an API endpoint to become available
-* Waiting for slowly updated data to change
-* Waiting for scarce resources to free up
 
 <aside class="warning">
 There is currently a 50-step limit built into Dexter. That's more than enough for most Apps, *unless* you're relying heavily on replay to accomplish your goals. Please <a href="mailto:support@rundexter.com">contact us</a> if you would like to increase your limit.

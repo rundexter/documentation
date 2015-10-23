@@ -91,13 +91,68 @@
       <div class="dark-box"></div>
       <div class="content">
         
+          <h1 id="quickstart">Quickstart</h1>
+
+<p>Before getting started, you’ll need Node.js and git installed.<br/></p>
+
+<p><strong>For OSX:</strong> <a href="https://nodejs.org/dist/v4.2.1/node-v4.2.1.pkg">Node.js</a> | <a href="https://git-scm.com/download/mac">Git</a> </p>
+
+<p><strong>For Linux:</strong> <a href="https://nodejs.org/en/download/">Node.js</a> | <a href="https://git-scm.com/download/linux">Git</a> </p>
+
+<p><strong>For Windows:</strong> You’ll need to use a Linux virtual machine and follow the links above. <a href="https://www.virtualbox.org/manual/ch01.html#intro-installing" target="_blank">Here’s a guide</a> on how to go about that.</p>
+
+<p><strong>Step 1</strong><br>
+<block class="highlight shell">
+ <code>
+  <span class="gp">$ </span>npm install -g rundexter
+ </code>
+</block></p>
+
+<p><strong>Step 2a</strong> <br/>
+<block class="highlight shell">
+ <code>
+  #If you don’t have a key, or are unsure, run this<br>
+  #warning: if prompted to overwrite, choose “no.”<br/>
+  <span class="gp">$ </span>ssh-keygen -f ~/.ssh/id_rsa -N &quot;&quot;
+ </code>
+</block></p>
+
+<p><strong>Step 2b</strong> <br/>
+<block class="highlight shell">
+ <code>
+  <span class="gp">$ </span>dexter login [username or email]
+ </code>
+</block></p>
+
+<p><strong>Step 3</strong><br/>
+<block class="highlight shell">
+ <code>
+  <span class="gp">$ </span>dexter create “my first module”
+ </code>
+</block></p>
+
+<p><strong>Step 4</strong><br/>
+<block class="highlight shell">
+ <code>
+  <span class="gp">$ </span>git commit -am “my first edit”
+ </code>
+</block></p>
+
+<p><strong>Step 5</strong><br/>
+<block class="highlight shell">
+ <code>
+  <span class="gp">$ </span>dexter push
+ </code>
+</block></p>
+
+<p><strong>Step 6</strong><br/>
+    Congrats! You’ve created your first module. It’s in <code class="prettyprint">./my-first-module</code> Check out <code class="prettyprint">meta.json</code> and <code class="prettyprint">index.js</code> to get started. For anything else, let&rsquo;s get started, shall we?</p>
+
           <h1 id="getting-started">Getting Started</h1>
 
 <p>Dexter is a platform that makes it easy for developers to connect third-party APIs and build apps that automate your digital life. Everyday we use a handful of tools that do one thing and do it well, whether that’s ordering lunch or messaging the office a meme. However, more complex tasks require a combination of different solutions. Dexter is here to simplify connecting these services. With Dexter, you can connect the web the way you want.</p>
 
-<h2 id="hello-world">Hello World</h2>
-
-<p>To get started you need a Dexter account. Dexter is currently in private beta so you&rsquo;ll need an invite code. If you don&rsquo;t have one you can request one at <a href="https://rundexter.com/#section-6">rundexter.com</a>. Once you have an account, sign up and take the walkthrough to build your first app. </p>
+<p>To get started, take the walkthrough that is presented automatically on your first login, or by clicking your name on the right side of the navigation bar and choosing walkthrough from the subsequent drop down. </p>
 
 <h2 id="detailed-walkthrough">Detailed Walkthrough</h2>
 
@@ -105,470 +160,116 @@
 
 <ol>
 <li><p><strong>Create a New App</strong> - Dexter is both for builders and consumers. We start with the building. Click the new app button on the top right of your screen. <img src="/images/screenshots/01-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the url of the website on your desktop screen to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Place Your First Trigger</strong> - A trigger step is simply a way for the outside world to communicate with a Dexter app and kickoff some data processing. In this tutorial the trigger is the bookmarklet since it&rsquo;s going to let us know when you want your text message. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That&rsquo;s our trigger bar! <img src="/images/screenshots/03-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Place Your First Module</strong> - A module does the heavy lifting. It takes the data from the previous step(s) &ndash; in this case the bookmarklet &ndash; and acts on it. For our first app we want to send ourselves a text message. How is that done? Well by dragging the Dexter SMS module onto the canvas and dragging the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/04-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Connect The Data</strong> - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. Does this panel remind you of the back of your VCR? Good, that&rsquo;s what we meant to do. Each module has outputs and inputs. In this case the bookmarklet module outputs the URL of the page you&rsquo;re on. The Dexter SMS module accepts a phone number and a message. In order to tell the Dexter app that we want to send the URL from the bookmarklet step to the dexter sms step, we connect them. And that&rsquo;s it you&rsquo;re done! There are a few details we&rsquo;re leaving out and for the uber curious, here they are: <img src="/images/screenshots/05-rounded.png" class="image-shadow">  </p>
+<li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends a bookmarklet that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  </p></li>
+<li><p><strong>Place Your First Trigger</strong> - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app&rsquo;s starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user&rsquo;s bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/03-rounded.png" class="image-shadow">  </p></li>
+<li><p><strong>Place Your First Module</strong> - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/04-rounded.png" class="image-shadow">  </p></li>
+<li><p><strong>Connect The Data</strong> - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. 
+<img src="/images/screenshots/05-rounded.png" class="image-shadow"><br>
+Each module has outputs and inputs. In this case the bookmarklet module outputs the URL of the page you&rsquo;re on. The Dexter SMS module accepts a phone number and a message as input. In order to tell the Dexter app that we want to send the URL from the bookmarklet step to the dexter sms step, we connect them. And that&rsquo;s it you&rsquo;re done! 
+<img src="/images/screenshots/07-rounded-v2.png" class="image-shadow"><br>
+There are a few details we&rsquo;re leaving out and for the uber curious, here they are: </p>
 
 <ol>
-<li>You&rsquo;ll notice that the phone number input on the Dexter SMS module is filled in. That&rsquo;s because it&rsquo;s in <em>user</em> mode, denoted by the radio buttons on the right panel. That means that the user will have to enter it when they subscribe to your app. If you always wanted to receive the message yourself, regardless of who clicked the button, you could put the input into text mode by clicking on the <code class="prettyprint">A</code> radio button. Then you can type in your phone number. User mode will get a little clearer when we get to the use page. The little hand denotes &lsquo;map&rsquo; mode which is how we mapped the URL to the Message field. </li>
+<li>You’ll notice some radio buttons just below the input titles on the right sidebar. Here is where you can choose from an array of input methods: 
+  <p><strong>User Defined</strong> - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.</p>
+  <p><strong>Mapping</strong> - If this is selected, the input will be whatever output you grab, drag, and drop to the step. /p&gt; 
+  <p><strong>Literal</strong> - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a &ldquo;=&rdquo; the field can take raw javascript.</p></li>
 <li>The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you&rsquo;ll get to toggle where the source data is coming from. </li>
-</ol>
-
-<p><img src="/images/screenshots/07-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Use Your App</strong> - Click the Use App button on the main nav and you&rsquo;ll get taken to your share page. This page is publically accessible and anyone can use your app, but you&rsquo;re the only one with the rights to edit it. Let&rsquo;s test it out. Click the Use This App button. Remember how we put the Phone Number into &ldquo;user&rdquo; mode, well, as a result, the wizard prompts us for our phone number. Go ahead and enter your phone number and hit finish. Once that&rsquo;s done, you&rsquo;ll see some new usage instructions for your app. Remember that bookmarklet that you dragged onto the canvas? Well, Dexter knows to generate a unique bookmarklet for every user and give them instructions to drag it onto their bookmarklet bar. Once you&rsquo;ve dragged the button to your bookmarklet bar, give it a click - you should get a text message with a link to the page that you&rsquo;re on! </p>
+</ol></li>
+<li><p><strong>Use Your App</strong> - Click the Use App button on the main nav and you&rsquo;ll get taken to your share page. This page is publically accessible and anyone can use your app, but you&rsquo;re the only one with the rights to edit it. Let&rsquo;s test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! </p>
 
 <p><img src="/images/screenshots/11-rounded.png" class="image-shadow">  </p></li>
 </ol>
 
-<p>Congratulations on building your first app! You&rsquo;ve just scratched the surface, want more? Read On! </p>
+<p>Congratulations on building your first app! You’ve just scratched the surface of what can be built on Dexter. Keep reading for information to help you build a more robust product. </p>
 
 <h1 id="what-is-a-dexter-app">What Is A Dexter App?</h1>
 
-<p>An app is simply a collection of JavaScript modules arranged in a meaningful way on the editor canvas. When we drag a module onto the canvas, we say that we are instantiating that module or forming a step in the application. </p>
+<p><img src="/images/illustrations/illustrated-editor.png" class="image-shadow"></p>
+
+<p>A Dexter app is a collection of JavaScript modules arranged and connected in a meaningful way within the Dexter Editor. When we drag a module onto the canvas, we say that we are instantiating that module, or forming a <em>Step</em> in our application.</p>
+
+<p><img src="/images/illustrations/module-v-step.png"></p>
 
 <h2 id="steps">Steps</h2>
 
-<p>Steps are arranged by connecting one step to the next in the sequential order that data should be processed. In Dexter terms, we call This sequence a stream, which we cover in greater detail in the next section. </p>
+<p>Steps are arranged by connecting one step to the next in the sequential order that data should be processed. In Dexter terms, we call this sequence a <em>Stream</em>, which we cover in greater detail in the next section.</p>
 
-<p>There is one special step, called a <strong>trigger step</strong>. A trigger step is simply a way for the outside world to communicate with a Dexter app and kickoff some data processing. In its simplest form it is a URL that any external app can access via a <code class="prettyprint">POST</code> request with arbitrary data that initiates the request. Dexter has some common triggers built-in (and we will add more regularly). Still, for any custom needs, you can always use the webhook trigger to pass in any type of data that you like. </p>
+<p><img src="/images/illustrations/stream-illustration.png" class="image-shadow"></p>
+
+<p>One step stands out from the rest. This step is called the <strong>Trigger step</strong>. Triggers allow events outside of Dexter communicate with your app, and kick off a <em>Stream</em>. In its simplest form it is a URL that any external app can access via a <code class="prettyprint">POST</code> request with arbitrary data that initiates the request. Dexter has some common triggers built-in (and we will add more regularly). Still, for any custom needs, you can always use the webhook trigger to pass in any type of data that you like. </p>
 
 <h2 id="streams">Streams</h2>
 
-<p>A stream begins with a trigger step and is followed by one or more process steps. A stream does not have any formal termination point, but an execution of any given stream will complete when there are no more steps left. An app can have multiple streams.</p>
+<p>A stream begins with a trigger step and is followed by one or more process steps. A stream does not have any formal termination point, but an execution of any given stream will complete when there are no more steps left. An app can have multiple streams, where each Stream is started by its own Trigger.</p>
 
 <h2 id="module-types">Module Types</h2>
 
 <p>There are three types of modules in Dexter:</p>
 
 <ol>
-    <li>
+<li><p><strong>Core modules</strong> <br/>
+There are some cases where the simplistic behavior of modules present a challenge to building a fully featured app. Core modules provide some special abilities that help you enhance basic modules . Dexter will continually expand its Core Module offering, but for now here is what is available (updated 10/20):  </p>
 
-<strong>Core modules</strong>
+<p><strong><em>Queue</em></strong> - Sometimes while building a Dexter app you want to collect information that you’re not ready to act on yet. For example — Let’s say you want to store a bunch of URLs from the Bookmarklet Trigger, but you don’t want to do anything with them until a Timer Trigger is activated later. The Queue step lets you stash that data for later use. The Queue step takes a single parameter, <code class="prettyprint">class_name</code>, which is the name that you’ll reference in your Fetch step when you are ready to use it.  </p>
 
-<br/>
+<p><strong><em>Fetch</em></strong> - The fetch module is queues partner, it takes one parameter, <code class="prettyprint">class_name</code>, which tells Dexter which queued up data you want to retrieve. After a fetch step is executed all downstream steps will have access to the steps upstream of a queue with matching names. </p>
 
-Core modules are special. There are some cases where the simplistic behavior of modules presents a challenge to building a fully featured app. So we have carved out a space to deliver some magical methods to you. These will continue to expand, but here is what is available now: 
-
-<br/>
-<br/>
-
-Queue - Sometimes while building a Dexter app you want to collect information that you&rsquo;re not ready to act on yet. Let&rsquo;s say you want to store a bunch of URLs from the bookmarklet trigger, but you don&rsquo;t want to do anything with them until a timer trigger is activated later. The queue step lets you stash that data for later use via the fetch step. The queue step takes a single parameter, &ldquo;class_name&rdquo;, which is the name that you&rsquo;ll reference in your fetch step.  
-
-<br/>
-<br/>
-
-Fetch - The fetch module is queues partner, it takes one parameter, &ldquo;class_name&rdquo;, which tells Dexter which queued up data you want to retrieve. After a fetch step is executed all downstream steps will have access to the steps upstream of a queue with matching names. 
-
-<br />
-<br />
-
-Switch - Sometimes in the course of assembling a stream you want to execute a different step depending on the evaluation of a condition. The switch step enables this by allowing you to specify up to 5 different conditions and branching a stream at a given point. 
-
-    </li>
-
-    <li>
-
-<strong>Dexter modules</strong>
-
-<br/>
-
-These are the Dexter-blessed, built-in tools of the Dexter app ecosystem. They&rsquo;re available to every power user and developer in Dexter, and cover a broad range of behaviors.
-    </li>
-
-    <li>
-
-<strong>User modules</strong>
-
-<br/>
-
-User modules are modules you&rsquo;ve made for your own apps. You build them with the same tools we&rsquo;ve used to build the vast library of Dexter modules, and you can use them the same in the App editor. The only difference between User modules and Dexter modules lies in distribution: only *you* can use your user modules.
-
-    </li>
-
+<p><strong><em>Switch</em></strong> - Sometimes in the course of building an app you want to execute steps conditionally. The switch step enables this by allowing you to specify up to 5 different conditions and branching a stream at a given point. </p></li>
+<li><p><strong>Dexter modules</strong> <br/>
+These are the Dexter-blessed, built-in tools of the Dexter app ecosystem. They&rsquo;re available to every power user and developer in Dexter, and cover a broad range of behaviors.</p></li>
+<li><p><strong>User modules</strong> <br/>
+User modules are modules you&rsquo;ve made for your own apps. You build them with the same tools we&rsquo;ve used to build the vast library of Dexter modules, and you can use them the same in the App editor. The only difference between User modules and Dexter modules lies in distribution: only <em>you</em> can use your user modules.</p></li>
 </ol>
 
-          <h1 id="tutorial">Tutorial</h1>
+<h2 id="authentication-amp-authorization">Authentication &amp; Authorization</h2>
 
-<h2 id="goal">Goal</h2>
+<p>Every Dexter app execution is associated with a Dexter user account. For anonymous mode use cases (e.g. a Slack slash command), Dexter provides “Execute As” functionality. By choosing “Owner” from the dropdown, all URLs exposed by a Dexter app trigger will append a restricted api key that allows the executing user to invoke the app without having Dexter credentials. The user context, while the app is running will be that of the app owner, which is the user that configured the app.</p>
 
-<p>Let&rsquo;s look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we&rsquo;ll take advantage of some 3rd party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let&rsquo;s get started!</p>
+<p><img src="/images/screenshots/execute-as.png" class="image-shadow"></p>
 
-<h2 id="phase-0-preparation">Phase 0: Preparation</h2>
-
-<p>Before we get started, you should make sure the following things are true:</p>
-
-<ol>
-<li>You&rsquo;ve signed up at http://rundexter.com</li>
-<li>You&rsquo;ve installed the <a href="#sdk-overview">sdk</a></li>
-<li>You&rsquo;ve successfully added a key to your environment</li>
-<li>You&rsquo;ve got a <em>basic</em> understanding of <a href="http://nodeguide.com/beginner.html">Node.js</a></li>
-<li>You&rsquo;re ready to build cool things!</li>
-</ol>
-
-<h2 id="phase-1-setup">Phase 1: Setup</h2>
-<pre class="highlight shell"><code>dexter create <span class="s2">"</span><span class="sb">`</span>whoami<span class="sb">`</span><span class="s2">: RSS Filter"</span> <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="sb">`</span>whoami<span class="sb">`</span>_rss_filter
-</code></pre>
-
-<p>To begin, we&rsquo;ll use the Dexter SDK to create a module, giving its title a namespace (prefix) to distinguish it from other people who are also following this tutorial.  The sample command will use your computer&rsquo;s username as the namespace, but feel free to replace <code class="prettyprint">whois</code> with another name.</p>
-
-<p>If someone else has used that module name before, you&rsquo;ll get a warning.  Just change the title and try again until you find a unique name!</p>
-
-<p>At this point we have a module skeleton, our package name (<code class="prettyprint">package.json:name</code>) and module title (<code class="prettyprint">meta.json:title</code>) already set, git initialized and ready to push to Dexter, and the foundation for our tests ready to go.  Pretty good for a single command!</p>
-
-<div></div>
-<pre class="highlight shell"><code><span class="gp">$ </span>npm install --save lodash
-<span class="gp">$ </span>npm install --save request
-<span class="gp">$ </span>npm install --save feedparser
-</code></pre>
-
-<p>The main thrust of this module is to deal with RSS feeds, so we&rsquo;ll want to add a <a href="https://github.com/danmactough/node-feedparser">lovely package</a> that elegantly handles a variety of feed types.  Feedparser doesn&rsquo;t actually fetch the feed XML, however, so we&rsquo;ll also need a package to deal with <a href="https://github.com/request/request">remote requests</a>.</p>
-
-<p>We&rsquo;ll also use <a href="https://lodash.com/">lodash</a> to make our code a bit more readable.</p>
-
-<p>Since the module is just a Node library on steroids, we can use <code class="prettyprint">npm install --save</code> to add our dependencies directly to our <code class="prettyprint">package.json</code>.  Handy!</p>
-
-<div></div>
-<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>The last bit of preparation is to get rid of the sample code in <code class="prettyprint">run()</code> that comes with the skeleton.  We&rsquo;ll replace it with something better soon!</p>
-
-<h2 id="phase-2-remote-requests">Phase 2: Remote requests</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'lodash'</span><span class="p">),</span>
-    <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">//...run</span>
-    <span class="na">fetchUrl</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">request</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
-        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'response'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span>
-                    <span class="s1">'Bad status code '</span> <span class="o">+</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">+</span> <span class="s1">' for '</span> <span class="o">+</span> <span class="nx">url</span>
-                <span class="p">));</span>
-            <span class="p">}</span>
-            <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Before we can start processing feed data, we&rsquo;ve got to go get the feed itself.  To do that, we&rsquo;re going to throw together a quick implementation of the Request library.</p>
-
-<p>The process is simple&hellip;if we see an error, we fire it straight back through our callback.  If we get a response, we make sure it&rsquo;s <code class="prettyprint">200 OK</code> (again erroring out if it&rsquo;s not), then pass the raw response along to our callback.</p>
-
-<p>Note that nothing we&rsquo;ve done so far is Dexter-specific - this is just plain, standard Node.js code so far.</p>
-
-<h2 id="phase-3-feed-parsing">Phase 3: Feed parsing</h2>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">),</span>
-    <span class="nx">FeedParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'feedparser'</span><span class="p">);</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">//...run</span>
-    <span class="c1">//...fetchUrl</span>
-    <span class="na">fetchItems</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stream</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FeedParser</span><span class="p">()</span>
-            <span class="p">,</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-        <span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">items</span><span class="p">);</span>
-        <span class="p">});</span>
-        <span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'readable'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">item</span><span class="p">;</span>
-            <span class="k">while</span><span class="p">((</span><span class="nx">item</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">read</span><span class="p">()))</span> <span class="p">{</span>
-                <span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">});</span>
-        <span class="nx">stream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">parser</span><span class="p">);</span>
-    <span class="p">},</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Now that we know how we&rsquo;re getting our http data, we now need to push it through FeedParser.  FeedParser deals entirely in streams - you take any stream data (specifically any stream data that&rsquo;s supposed to contain an RSS file) and pass it into your FeedParser instance.  The actual processing of content happens via events.</p>
-
-<p>Our events are pretty straightforward.  Did we see an error? Pass it up through the callback.  Have we streamed enough data to act on?  Stash the data we found in an <code class="prettyprint">items[]</code> array.  Are we at the end of the stream?  We&rsquo;re done, call back with the stuff we found.</p>
-
-<p>Again, we&rsquo;ve done nothing special or Dexter-y yet.  We&rsquo;ve added a few 3rd party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Let&rsquo;s get to the more interesting parts!</p>
-
-<h2 id="phase-4-wiring-it-up">Phase 4: Wiring it up</h2>
-<pre class="highlight javascript"><code><span class="c1">//...requires</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'url'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">filter</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'filter'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-        <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'No url provided, returing to App'</span><span class="p">);</span>
-            <span class="c1">//It's not really a critical failure to not have an </span>
-            <span class="c1">//  url to work with, so we'll roll on.</span>
-            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">();</span>
-        <span class="p">}</span>
-
-    <span class="p">},</span>
-    <span class="c1">//...fetchUrl</span>
-    <span class="c1">//...fetchItems</span>
-<span class="p">};</span>
-</code></pre>
-
-<p>First things first - let&rsquo;s deal with our inputs.  For now we&rsquo;re just going to focus on a single input: the feed URL.  To keep things simple, we&rsquo;ll just deal with the first one we&rsquo;re given.  We&rsquo;ll take a look how to deal with loops later on.</p>
-
-<p>So what are the possibilities for our input?  Ideally we just have one input - that&rsquo;s the only real use case we&rsquo;re set up for.  However, we could have multiple inputs - but we&rsquo;re not going to worry about that for now.  We&rsquo;ll just use the <code class="prettyprint">first()</code> function of our collection to shift off the first URL on the list.</p>
-
-<p>Now the only concern we have is weather or not we have <em>any</em> URLs to process.   What should we do if we have none?  Is it worth stopping the <em>whole</em> App just because we don&rsquo;t have anything to do?  Probably not.  In this case it makes the most sense to log the fact that we didn&rsquo;t get any data (just in case it makes things confusing elsewhere in the App) and move on as if the feed had no articles at all.</p>
-
-<p>If you wanted to be <em>really</em> thorough, you could also:</p>
-
-<ul>
-<li>Validate the urls (it&rsquo;s probably worth throwing an error if the urls don&rsquo;t validate, since it means the App might be wired up wrong)</li>
-<li>Log a warning if we&rsquo;re throwing away URLs by using first()</li>
-</ul>
-
-<div></div>
-<pre class="highlight javascript"><code><span class="c1">//...requires</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//...inputs</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">fetchUrl</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="c1">//Let the parser grab the data</span>
-            <span class="nx">self</span><span class="p">.</span><span class="nx">fetchItems</span><span class="p">(</span><span class="nx">stream</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">[];</span>
-                <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
-                <span class="p">}</span>
-                <span class="c1">//Extract dexter-friendly data from the items</span>
-                <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">response</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
-                        <span class="na">url</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">link</span><span class="p">,</span>
-                        <span class="na">title</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
-                        <span class="na">summary</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">summary</span><span class="p">,</span>
-                        <span class="na">author</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">author</span>
-                    <span class="p">});</span>
-                <span class="p">});</span>
-                <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
-            <span class="p">});</span>
-        <span class="p">});</span>
-
-    <span class="p">},</span>
-    <span class="c1">//...fetchUrl</span>
-    <span class="c1">//...fetchItems</span>
-<span class="p">};</span>
-</code></pre>
-
-<p>Finally, let&rsquo;s wire up our remote request and feed parsing functions to our Module tools.  We&rsquo;ll start with fetchUrl.  Right off the bat we <em>do</em> want to fail if an error occurred when connecting to the page - something broken usually isn&rsquo;t a good thing.  If we managed to extract a stream, we&rsquo;ll pass it along to fetchItems.</p>
-
-<p>We&rsquo;ll follow the same rules for the result of fetchItem - if we hit an error when processing the page, we&rsquo;ll fail.  Otherwise, all that&rsquo;s left to do is to extract the basic properties we want our module to return and
-send them along to <code class="prettyprint">complete()</code>.  Mission accomplished!</p>
-
-<h2 id="phase-5-testing">Phase 5: Testing</h2>
-
-<blockquote>
-<p>fixtures/default.js</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="c1">//...</span>
-<span class="nl">data</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">local_test_step</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">input</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nl">url</span><span class="p">:</span> <span class="s1">'http://feeds.arstechnica.com/arstechnica/index/'</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="c1">//...</span>
-</code></pre>
-
-<p>Let&rsquo;s get ready to test.  For this module, our requirements are pretty simple - we just need to add some sample data to the step&rsquo;s inputs.  Our default test step is called <code class="prettyprint">local_test_step</code>, and the input we&rsquo;re targeting is <code class="prettyprint">url</code>, and we like <a href="https://arstechnica.com">Ars Technica</a> here at Dexter, so the code is pretty straightforward.</p>
-
-<aside class="success">
-What you&rsquo;re looking at here in the fixture is the raw serialization data that drives a Dexter App.  When you&rsquo;re using the `step` and `dexter` objects inside your module, you&rsquo;re actually interacting with some friendly wrappers around this raw information.  While you should never work with this data directly in your modules, as the wrappers will hide any changes we might make to the underlying data structure, it can be useful to see what it looks like here.
-</aside>
-
-<div></div>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter run
-...
-</code></pre>
-
-<p>If everything worked, you should see a list of the most recent stories on Ars Technica in your console!</p>
-
-<h2 id="phase-6-preparing-for-deployment">Phase 6: Preparing for deployment</h2>
-
-<blockquote>
-<p>meta.json</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Feed URL"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">  
-    </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Article URL"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"title"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Article title"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"summary"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Article summary"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"author"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Author"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">  
-    </span><span class="err">//...</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
-
-<p>The only special requirement a Dexter module has outside of run/complete/fail is the explicit input and output definitions in <code class="prettyprint">meta.json</code>.  We need to identify each input we&rsquo;re expecting and define each output property we&rsquo;ll return.  This metadata is used to allow the Dexter App editor to wire up our module with other modules based on the user&rsquo;s requriements.</p>
-
-<p>Our inputs and outputs are pretty straightforward.  We&rsquo;re just accepting a single input - an URL string - and outputs 4 different strings that we extract from the feed.</p>
-
-<h2 id="phase-7-push-version-0-0-1">Phase 7: Push version 0.0.1!</h2>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter push
-</code></pre>
-
-<p>That&rsquo;s it, you&rsquo;ve got a working RSS parser module!  Justin <code class="prettyprint">dexter push</code>, and once the process completes, you should see your module in your App editor.  Congrats, you&rsquo;re now a Dexter developer!</p>
-
-<h2 id="phase-8-add-an-optional-filter">Phase 8: Add an optional filter</h2>
-<pre class="highlight javascript"><code><span class="c1">//..includes</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'url'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">filter</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'filter'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-        <span class="c1">//...</span>
-                <span class="k">if</span><span class="p">(</span><span class="nx">filter</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">response</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">filterItems</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">filter</span><span class="p">);</span>
-                <span class="p">}</span>
-                <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
-        <span class="c1">//...</span>
-    <span class="p">},</span>
-    <span class="c1">//..fetchUrl</span>
-    <span class="c1">//..fetchItems</span>
-    <span class="na">filterItems</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="nx">term</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="p">,</span> <span class="nx">lcTerm</span> <span class="o">=</span> <span class="nx">term</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
-        <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nx">_</span><span class="p">.</span><span class="nx">forIn</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">lcTerm</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">response</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
-                    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">});</span>
-        <span class="p">});</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Let&rsquo;s see what it takes to update a Dexter module.  We&rsquo;ll add a useful feature to our RSS parser that lets you optionally apply a text filter to  the feed items and only return those that match.</p>
-
-<p>The code process is pretty straighforward.  We&rsquo;ll add a new input - filter - and get the first item again.  Then we&rsquo;ll add a new function that looks for the filter in a list of our response objects and only returns the ones that match.  Finally, if we even <em>have</em> a filter, we&rsquo;ll apply that function to our discovered items to narrow down our results.</p>
-
-<div></div>
-
-<blockquote>
-<p>fixture/default.js</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="c1">//...</span>
-<span class="nl">data</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nl">local_test_step</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nl">input</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nl">url</span><span class="p">:</span> <span class="s1">'http://feeds.arstechnica.com/arstechnica/index/'</span><span class="p">,</span>
-            <span class="nx">filter</span><span class="err">:</span> <span class="s1">'apple'</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre>
-
-<p>Then we update our fixture with a filter variable (go ahead and <code class="prettyprint">dexter run</code> to make sure it works!  You might get empty data this time if no items have the word &ldquo;apple&rdquo; in it)</p>
-
-<div></div>
-
-<blockquote>
-<p>meta.json</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filter"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Text filter"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-        </span><span class="err">//...</span><span class="w">
-</span><span class="err">}</span><span class="w">
-</span></code></pre>
-
-<p>Then add the new input to the <code class="prettyprint">meta.json</code> definition&hellip;</p>
-
-<div></div>
-
-<blockquote>
-<p>package.json</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="err">//...</span><span class="w">
-    </span><span class="err">version:</span><span class="w"> </span><span class="err">'0.1.0',</span><span class="w">
-    </span><span class="err">//...</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>Finally, in the only really new step for the update, we&rsquo;ll bump the version by a minor step since we added functionality.</p>
-
-<p>That&rsquo;s it, we now have a filterable RSS feed parser!</p>
+<p>The API keys can be generated/regenerated from every User’s account page. </p>
 
           <h1 id="sdk-overview">SDK Overview</h1>
 
-<p>Dexter is a completely open system. Our modules are constructed from open tools, and all our module code is open source - even that <a href="http://github.com/rundexter/dexter-sms">Dexter SMS</a> module you used in our tutorial!</p>
+<p>Dexter is a completely open system. Our modules are constructed from open tools, and all our module code is open source. Even the Dexter runtime is open to you.  Anyone can build and contribute new modules via our client tools.  Are we missing some functionality you need?  Create a completely new module and upload it to Dexter for your use.  Is one of our modules <em>almost</em>, but not exactly what you&rsquo;re looking for?  Fork the module, update its functionality, and upload it as your own.</p>
 
-<p>Even the Dexter runtime is open to you.  Anyone can build and contribute new modules via our client tools.  Are we missing some functionality you need?  Create a completely new module and upload it to Dexter for your use.  Is one of our modules <em>almost</em>, but not exactly what you&rsquo;re looking for?  Fork the module, change the name, update its functionality, and upload it as your own.</p>
-
-<p>Together with the Dexter community, our goal is to build modules that cover a broad range of integrations with third party services, like sending a Slack message, adding a song to a Spotify playlist, archiving an item in Gmail, and more!  If you&rsquo;ve created a module that covers such a service, let us know, and we&rsquo;ll work with you to make it available to the community at large.</p>
+<p>Together with the Dexter community, our goal is to build modules that cover a broad range of integrations with third party services, like sending a Slack message, adding a song to a Spotify playlist, archiving an item in Gmail, and more!  If you&rsquo;ve created a module that covers such a service, <a href="mailto:support@rundexter.com" target="_blank">let us know</a>, and we&rsquo;ll work with you to make it available to the community at large.</p>
 
 <h2 id="how-it-works">How it works</h2>
 
 <p>The Dexter SDK lets you create your own module, which is just a slightly enhanced Node.js library: it only requires a dedicated Dexter entry point and explicit documentation of inputs and outputs.  Otherwise you can follow your normal Node.js development process.</p>
 
-<p>When you&rsquo;re done, you push your code into Dexter using our custom git server. You can use either the sdk via <code class="prettyprint">dexter push</code> or a regular <code class="prettyprint">git push dexter master</code> to send the code along.</p>
+<p>When you&rsquo;re done, you push your code into Dexter using our git server. You can send the code to Dexter via</p>
 
-<p>Once it&rsquo;s in our system, it&rsquo;ll show up in the App editor as another module for you to use. You&rsquo;ll be able to wire it up however you want and run it alongside the built-in modules.</p>
+<p><code class="prettyprint">dexter push</code> or <code class="prettyprint">git push dexter master</code> </p>
 
-<p>There&rsquo;s no limit on how many Dexter modules you can create and use.</p>
+<p>Once it&rsquo;s in our system, it&rsquo;ll show up in the App editor as another module for you to use in your “User Modules” panel. You&rsquo;ll be able to wire it up however you want and run it alongside the built-in modules, and there&rsquo;s no limit on how many Dexter modules you can create and use.</p>
 
 <h2 id="setting-up-your-environment">Setting Up Your Environment</h2>
 <pre class="highlight shell"><code><span class="c"># install the Dexter client</span>
 <span class="gp">$ </span>npm install rundexter -g
 </code></pre>
 
-<p>To get started you need to have a working installation of <a href="https://nodejs.org" target="_blank">Node.js</a>. Dexter has been tested with <code class="prettyprint">Node.js v0.12.5</code>, but it will likely work with other versions as well. </p>
+<p>To get started you need to have a working installation of <a href="https://nodejs.org" target="_blank">Node.js</a>. We have certified the Dexter client tools for use in recent versions up to <code class="prettyprint">4.1.2</code>, however, the modules need to be executable in AWS Lambda’s <a href="http://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html" target="_blank">current Node.js infrastructure</a>.</p>
 
 <h2 id="log-in">Log in</h2>
 <pre class="highlight shell"><code><span class="gp">$ </span>dexter login <span class="o">{</span> your email <span class="o">}</span>
 <span class="c"># Enter your password when prompted</span>
 </code></pre>
 
-<p>Before you do anything, you&rsquo;ll need to log in with your rundexter.com credentials. That lets us know who you are, so we can make the next steps happen.</p>
+<p>Before you do anything, you&rsquo;ll need to log in with your Dexter credentials. That lets us know who you are, so we can make the next steps happen.</p>
 
 <h2 id="make-a-key">Make a key</h2>
 <pre class="highlight shell"><code><span class="gp">$ </span>ssh-keygen -f ~/.ssh/id_rsa -N <span class="s2">""</span>
 </code></pre>
 
-<p>You’ll need to have an SSH key of some flavor (RSA or DSA). You might already have one - they’re useful things, and you’ve probably needed one before. They’re probably in ~/.ssh/ and called id_rsa and id_rsa.pub. If you don’t have one, make one now. You can run the given sample code to create a key, and <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">read more on the subject</a> if you&rsquo;re interested.</p>
+<p>You’ll need to have an SSH key — either RSA or DSA. 
+<aside class="notice">
+You might already have one. They’re probably in ~/.ssh/ and called id_rsa and id_rsa.pub.
+</aside></p>
+
+<p>If you don’t have one, make one now. You can run the given sample code to create a key, and <a href="https://help.ubuntu.com/community/SSH/OpenSSH/Keys">read more on the subject</a> if you&rsquo;re interested.</p>
 
 <h2 id="send-your-key">Send your key</h2>
 <pre class="highlight shell"><code><span class="c"># You can pass a path to a specific key here if you'd like</span>
@@ -609,21 +310,18 @@ dexter add_key &lt;keyname&gt;<span class="o">(</span>optional<span class="o">)<
 </tr>
 </tbody></table>
 
-<p>Log into your rundexter.com account using the website&rsquo;s email and password.</p>
-
-<p>Dexter remembers your credentials by adding a record to ~/.netrc, a fairly standard credential storage file used by FTP, Heroku, and a variety of other tools. Even though it&rsquo;s a plain-text file, don&rsquo;t worry!  We don&rsquo;t put your password in there, just an API key that only means something to the Dexter tools.</p>
-
-<aside class="notice">
-This will always prompt for a password, which MUST be entered interactively.
-</aside>
+<p>Log into your Dexter account using your email and password.</p>
 
 <h3 id="dexter-add_key">dexter add_key</h3>
 
 <blockquote>
 <p>Example: Default key</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter add_key
+<pre class="highlight shell"><code><span class="c">#You can pass a path to a specific key here if you'd like</span>
+<span class="gp">$ </span>dexter add_key
 Your key is now available on dexter!
+<span class="c">#Make sure we got it</span>
+<span class="gp">$ </span>dexter list_keys
 </code></pre>
 
 <blockquote>
@@ -631,7 +329,7 @@ Your key is now available on dexter!
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>dexter add_key ~/dexter.rsa.pub
 Your key is now available on dexter!
-Make sure your .ssh/config is <span class="nb">set </span>to use this key <span class="k">for </span>rundexter.com
+Make sure your .ssh/config is <span class="nb">set </span>to use this key <span class="k">for </span>git.rundexter.com
 </code></pre>
 
 <table><thead>
@@ -648,11 +346,9 @@ Make sure your .ssh/config is <span class="nb">set </span>to use this key <span 
 </tr>
 </tbody></table>
 
-<p>Add a public key file to the system. This file will be used to authenticate your access to the Dexter deployment servers when you publish code.</p>
+<p>Add a public ssh key file to the system. This file will be used to authenticate your access to the Dexter deployment servers when you publish code.</p>
 
-<p>If left out, Dexter will first look for a file in ~/.ssh/id_rsa.pub, then in ~/.ssh/id_dsa.pub</p>
-
-<p>Adding keys is useful if you want to have multiple people work on a single module, or if you work from multiple computers with varying security requirements (a work and a personal computer, for instance).</p>
+<p>If left out, Dexter will first look for a file in <code class="prettyprint">~/.ssh/id_rsa.pub</code>, then in <code class="prettyprint">~/.ssh/id_dsa.pub</code>.</p>
 
 <h3 id="dexter-remove_key">dexter remove_key</h3>
 
@@ -684,13 +380,7 @@ Request failed: More than one key was found that matches this query - please be 
 </tr>
 </tbody></table>
 
-<p>Remove a key from rundexter.com that you no longer want to have access to the Dexter deployment servers. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the list_keys command if you need to figure out a good pattern to use, or pass in your machine name if you think it&rsquo;s unique.</p>
-
-<p>We&rsquo;ll look for the pattern you provide in all of your registered keys, but we&rsquo;ll only delete a key if it&rsquo;s the only match. In case the pattern matches more than one key, we&rsquo;ll ask you to be more specific instead of deleting them all.</p>
-
-<aside class="notice">
-Removing a key does *not* prevent you from re-adding that key in the future.
-</aside>
+<p>Remove a key from Dexter. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the <code class="prettyprint">dexter list_keys</code> to view your keys.</p>
 
 <h3 id="dexter-list_keys">dexter list_keys</h3>
 
@@ -706,40 +396,6 @@ ssh-dsa AAA.........38eeer2<span class="o">=</span> dexter@rundexter.com
 <p>Show all the keys you&rsquo;ve registered with rundexter.com</p>
 
 <h2 id="module-operations">Module Operations</h2>
-
-<h3 id="dexter-check_name">dexter check_name</h3>
-
-<blockquote>
-<p>Example (available)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter check_name foobar
-Package name is available
-</code></pre>
-
-<blockquote>
-<p>Example (unavailable)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter check_name dexter-sms
-Someone <span class="k">else </span>owns this package already
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The module name you&rsquo;re checking</td>
-</tr>
-</tbody></table>
-
-<p>Check to see if a given module name is taken. Dexter modules live in a global namespace, so if someone else has used a name, you can&rsquo;t also use it.</p>
-
-<p>It&rsquo;s a good idea to prefix all your modules with a unique key to avoid collisions.</p>
 
 <h3 id="dexter-init">dexter init</h3>
 
@@ -781,7 +437,7 @@ dexter  git@git.rundexter.com:/server-dexter-module <span class="o">(</span>push
 
 <p>Set up an existing git repository for use with the dexter command-line tool. So long as the target directory <em>looks</em> like a dexter module (i.e. it has valid package and meta json files), init will create a remote named &ldquo;dexter&rdquo; for you.</p>
 
-<p>This gets called automatically when you <code class="prettyprint">dexter create</code> a module, but is useful if you want to enable an existing module to work with dexter.  In that case, you&rsquo;ll need to add a <code class="prettyprint">meta.json</code> file by hand before you can <code class="prettyprint">dexter init</code>.</p>
+<p>This gets called automatically when you <code class="prettyprint">dexter create</code> a module, but is useful if you want to enable an existing module to work with Dexter.  In that case, you need to add a <code class="prettyprint">meta.json</code> file before you can run <code class="prettyprint">dexter init</code>.</p>
 
 <h3 id="dexter-create">dexter create</h3>
 
@@ -824,12 +480,9 @@ Your dexter remote is ready
 
 <p>Create a skeleton for a new Dexter module. The following things happen:</p>
 
-<ol>
-<li>The given name is first checked to make sure it&rsquo;s available</li>
-<li>A module skeleton is copied and modified to match the given name</li>
-<li>A local git repository is created for the module and its skeleton contents added as a first commit</li>
-<li>The dexter remote is configured</li>
-</ol>
+<p>1. A local git repository is created for the module with some  scaffolding  code  added as a first commit</p>
+
+<p>2. The dexter remote is configured</p>
 
 <p>Note that your code won&rsquo;t show up in the Dexter App Editor until you <code class="prettyprint">dexter push</code>.</p>
 
@@ -893,23 +546,363 @@ To git@git.beta.rundexter.com:/foobar
 
 <p>Push your module to Dexter. This will update your code on our servers and deploy it for use by your Dexter App Editor.</p>
 
-<p>Note that deployment is largely tied to your module&rsquo;s version #. For example, let&rsquo;s say you do the following:</p>
+<aside class="notice">You must first commit any changes in your working directory using “git commit” before you can push to Dexter.</aside>
 
-<ol>
-<li>Create a module foobar at version 0.1</li>
-<li>Add foobar to an App called Hello World.</li>
-<li>Update foobar by with a new &ldquo;baz&rdquo; function and bump the version to 0.2</li>
-<li>Add foobar to an App called Welcome Universe.</li>
-</ol>
+<p>Deployment is tied to your module’s version number. For example, let’s say you do the following:</p>
+
+<p>1. Create a module foobar at version 0.1</p>
+
+<p>2. Add foobar to an App called Hello World.</p>
+
+<p>3. Update foobar by with a new &ldquo;baz&rdquo; function and bump the version to 0.2</p>
+
+<p>4. Add foobar to an App called Welcome Universe.</p>
 
 <p>When this process is complete, &ldquo;Hello World&rdquo; will still be using foobar 0.1, and &ldquo;Welcome Universe&rdquo; will be using 0.2. You would have to explicitly update &ldquo;Hello World&rdquo; in order for it to start using foobar 0.2.</p>
+
+          <h1 id="tutorial">Tutorial</h1>
+
+<h2 id="goal">Goal</h2>
+
+<p>Let&rsquo;s look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we&rsquo;ll take advantage of some 3rd party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let&rsquo;s get started!</p>
+
+<h2 id="phase-0-preparation">Phase 0: Preparation</h2>
+
+<p>Before we get started, you should make sure the following things are true:</p>
+
+<ol>
+<li>You&rsquo;ve signed up at <a href="https://rundexter.com" target="_blank">https://rundexter.com</a></li>
+<li>You&rsquo;ve installed the <a href="#sdk-overview">sdk</a></li>
+<li>You&rsquo;ve successfully added a key to your environment</li>
+<li>You&rsquo;ve got a <em>basic</em> understanding of <a href="http://nodeguide.com/beginner.html">Node.js</a></li>
+<li>You&rsquo;re ready to build cool things!</li>
+</ol>
+
+<p>If any of the above steps were troublesome, check out our <a href="http://community.rundexter.com" target="_blank">community forums</a>. There are answers to many frequently asked questions there! If you&rsquo;re still having trouble, you can chat with members of the community in real time by clicking the &ldquo;Join us on Slack&rdquo; button in the footer of our website. </p>
+
+<h2 id="phase-1-setup">Phase 1: Setup</h2>
+<pre class="highlight shell"><code>dexter create <span class="s2">"</span><span class="sb">`</span>whoami<span class="sb">`</span><span class="s2">: RSS Filter"</span> <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="sb">`</span>whoami<span class="sb">`</span>_rss_filter
+</code></pre>
+
+<p>At this point we have a module skeleton, our package name (<code class="prettyprint">package.json:name</code>) and module title (<code class="prettyprint">meta.json:title</code>) already set, git initialized and ready to push to Dexter, and the foundation for our tests ready to go.  Pretty good for a single command!</p>
+
+<div></div>
+<pre class="highlight shell"><code><span class="gp">$ </span>npm install --save lodash
+<span class="gp">$ </span>npm install --save request
+<span class="gp">$ </span>npm install --save feedparser
+</code></pre>
+
+<p>The main purpose of this module is to deal with RSS feeds, so we&rsquo;ll want to add a <a href="https://github.com/danmactough/node-feedparser">lovely package</a> that elegantly handles a variety of feed types.  Feedparser doesn&rsquo;t actually fetch the feed XML, however, so we&rsquo;ll also need a package to deal with <a href="https://github.com/request/request">remote requests</a>.</p>
+
+<p>We&rsquo;ll also use <a href="https://lodash.com/">lodash</a> to make our code a bit more readable.</p>
+
+<p>We can use <code class="prettyprint">npm install --save</code> to add our dependencies directly to our <code class="prettyprint">package.json</code>.</p>
+
+<p>The last bit of preparation is to get rid of the sample code in <code class="prettyprint">index.js</code> that comes with the skeleton.  We&rsquo;ll replace it with something better soon!</p>
+
+<div></div>
+
+<h2 id="phase-2-remote-requests">Phase 2: Remote requests</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'lodash'</span><span class="p">),</span>
+    <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">//...run</span>
+    <span class="na">fetchUrl</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">req</span> <span class="o">=</span> <span class="nx">request</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'response'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">resp</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">resp</span><span class="p">.</span><span class="nx">statusCode</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span>
+                    <span class="s1">'Bad status code '</span> 
+                        <span class="o">+</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">statusCode</span> 
+                        <span class="o">+</span> <span class="s1">' for '</span> <span class="o">+</span> <span class="nx">url</span>
+                <span class="p">));</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Before we can start processing feed data, we&rsquo;ve got to go get the feed itself.  To do that, we&rsquo;re going to throw together a quick implementation of the Request library.</p>
+
+<p>The process is simple&hellip;if we see an error, we fire it straight back through our callback.  If we get a response, we make sure it&rsquo;s <code class="prettyprint">200 OK</code> (again erroring out if it&rsquo;s not), then pass the raw response along to our callback.</p>
+
+<p>Note that nothing we&rsquo;ve done so far is Dexter-specific — this is just standard Node.js code so far.</p>
+
+<h2 id="phase-3-feed-parsing">Phase 3: Feed parsing</h2>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">),</span>
+    <span class="nx">FeedParser</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'feedparser'</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">//...run</span>
+    <span class="c1">//...fetchUrl</span>
+    <span class="na">fetchItems</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">stream</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FeedParser</span><span class="p">()</span>
+            <span class="p">,</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+        <span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">callback</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">items</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">parser</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'readable'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">item</span><span class="p">;</span>
+            <span class="k">while</span><span class="p">((</span><span class="nx">item</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">read</span><span class="p">()))</span> <span class="p">{</span>
+                <span class="nx">items</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+        <span class="nx">stream</span><span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">parser</span><span class="p">);</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Now that we know how we&rsquo;re getting our http data, we need to push it through FeedParser.  FeedParser deals entirely in streams - you take any stream data (specifically any stream data that&rsquo;s supposed to contain an RSS file) and pass it into your FeedParser instance.  The actual processing of content happens in events it emits.</p>
+
+<p>Our use of these events is pretty straightforward.  Did we see an error? Pass it up through the callback.  Have we streamed enough readable data to act on?  Stash the data we found in an <code class="prettyprint">items[]</code> array.  Are we at the end of the stream?  We&rsquo;re done, call back with the stuff we found.</p>
+
+<p>Again, we&rsquo;ve done nothing special or Dexter-specific yet.  We&rsquo;ve added a few 3rd party libraries to a Node.js library and wrapped up their basic functionality with some callbacks.  Now, onto getting our module ready for use in Dexter.</p>
+
+<h2 id="phase-4-wiring-it-up">Phase 4: Wiring it up</h2>
+<pre class="highlight javascript"><code><span class="c1">//...requires</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'url'</span><span class="p">).</span><span class="nx">first</span><span class="p">()</span>
+      <span class="p">,</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span>
+    <span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">url</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="s1">'No url provided'</span><span class="p">);</span>  
+    <span class="p">}</span>
+
+    <span class="c1">//...fetchUrl</span>
+    <span class="c1">//...fetchItems                             </span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>Let&rsquo;s start with our inputs. For now we’re just going to focus on a single input: the feed URL. To keep things simple, we’ll just use the first one we’re given. We’ll take a look how to deal with loops later on.</p>
+
+<p>So what are the possibilities for our input? All inputs are treated as collections of data, even if only a single value is passed in.  We use the first() function of our collection to shift off the first (and only) URL on the list.</p>
+
+<div></div>
+<pre class="highlight javascript"><code><span class="c1">//...requires</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
+     <span class="c1">//...inputs</span>
+     <span class="k">this</span><span class="p">.</span><span class="nx">fetchUrl</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">stream</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="c1">//Let the parser grab the data</span>
+        <span class="nx">self</span><span class="p">.</span><span class="nx">fetchItems</span><span class="p">(</span><span class="nx">stream</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">items</span><span class="p">)</span> <span class="p">{</span>
+           <span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">[];</span>
+           <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+               <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+           <span class="p">}</span>
+           <span class="c1">//Extract dexter-friendly data from the items</span>
+           <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+               <span class="nx">response</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+                   <span class="na">url</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">link</span><span class="p">,</span>
+                   <span class="na">title</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+                   <span class="na">summary</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">summary</span><span class="p">,</span>
+                   <span class="na">author</span><span class="p">:</span> <span class="nx">item</span><span class="p">.</span><span class="nx">author</span>
+               <span class="p">});</span>
+           <span class="p">});</span>
+           <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+        <span class="p">});</span>
+     <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="c1">//...fetchUrl</span>
+  <span class="c1">//...fetchItems</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>Last, we will wire up our remote request and feed parsing functions to our Module tools. We’ll start with fetchUrl. We&rsquo;re set up to fail in the event of an error when connecting to the page. Again, we&rsquo;re in a position where we have to decide if it&rsquo;s worth it for us to throw an error. In this case, it probably is, since we&rsquo;ve been given bad data, which could indicate that the app is wired up incorrectly. If we managed to extract a stream, we’ll pass it along to <code class="prettyprint">fetchItems</code>.</p>
+
+<p>We&rsquo;ll follow the same rules for the result of fetchItem - if we hit an error when processing the page, we&rsquo;ll fail.  Otherwise, all that&rsquo;s left to do is to extract the basic properties we want our module to return and
+send them along to <code class="prettyprint">complete()</code>.  Mission accomplished!</p>
+
+<h2 id="phase-5-testing">Phase 5: Testing</h2>
+
+<blockquote>
+<p>fixtures/default.js</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">//...</span>
+<span class="nl">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">local_test_step</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">input</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nl">url</span><span class="p">:</span> <span class="s1">'http://feeds.arstechnica.com/arstechnica/index/'</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//...</span>
+</code></pre>
+
+<p>Let&rsquo;s get ready to test.  For this module, our requirements are pretty simple - we just need to add some sample data to the step&rsquo;s inputs.  Our default test step is called <code class="prettyprint">local_test_step</code>, the input we&rsquo;re targeting is <code class="prettyprint">url</code>. We’re using the <a href="https://arstechnica.com">Ars Technica</a> feed in this example.</p>
+
+<aside class="success">
+What you&rsquo;re looking at here in the fixture is the raw serialization data that drives a Dexter App.  When you&rsquo;re using the `step` and `dexter` objects inside your module, you&rsquo;re actually interacting with some friendly wrappers around this raw information.  While you should never work with this data directly in your modules, as the wrappers will hide any changes we might make to the underlying data structure, it can be useful to see what it looks like here.
+</aside>
+
+<div></div>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter run
+...
+</code></pre>
+
+<p>If everything worked, you should see a list of the most recent stories on Ars Technica in your console!</p>
+
+<h2 id="phase-6-preparing-for-deployment">Phase 6: Preparing for deployment</h2>
+
+<blockquote>
+<p>meta.json</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Feed URL"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">  
+    </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Article URL"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"title"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Article title"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"summary"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Article summary"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"author"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Author"</span><span class="w">        
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">  
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>The only special requirement a Dexter module has outside of run/complete/fail is the explicit input and output definitions in <code class="prettyprint">meta.json</code>.  We need to identify each input we&rsquo;re expecting and define each output property we&rsquo;ll return.  This metadata is used to allow the Dexter App Editor to wire up our module with other modules based on the user&rsquo;s requirements.</p>
+
+<p>Our inputs and outputs are pretty straightforward.  We&rsquo;re just accepting a single input - an URL string - and outputting 4 different strings that we extract from the feed (URL / Title / Summary / Author).</p>
+
+<h2 id="phase-7-push-version-0-0-1">Phase 7: Push version 0.0.1!</h2>
+<pre class="highlight shell"><code><span class="gp">$ </span>git commit -am <span class="s1">'First working version'</span>
+<span class="gp">$ </span>dexter push
+</code></pre>
+
+<p>That&rsquo;s it, you&rsquo;ve got a working RSS parser module!  Execute <code class="prettyprint">dexter push</code>, and, once the process completes, you should be able to open the App Editor and see your module.  Congrats, you&rsquo;re now a Dexter developer!</p>
+
+<h2 id="phase-8-your-first-update-—-add-an-optional-filter">Phase 8: Your First Update — Add an optional filter</h2>
+<pre class="highlight javascript"><code><span class="c1">//..includes</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'url'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
+            <span class="nx">filters</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'filter'</span><span class="p">),</span>
+            <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="c1">//...</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">filters</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">response</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">filterItems</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="nx">filters</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="nx">self</span><span class="p">.</span><span class="nx">complete</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+        <span class="c1">//...</span>
+    <span class="p">},</span>
+    <span class="c1">//..fetchUrl</span>
+    <span class="c1">//..fetchItems</span>
+    <span class="na">filterItems</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="nx">terms</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">[],</span>
+            <span class="nx">lcTerms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="p">;</span>
+        <span class="c1">//We don't care about case sensitivity</span>
+        <span class="nx">terms</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">term</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">lcTerms</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">term</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">());</span>
+        <span class="p">});</span>
+        <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//Check against ANY of the item's properties.</span>
+            <span class="nx">_</span><span class="p">.</span><span class="nx">forIn</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+                <span class="c1">//See if any of our terms hit</span>
+                <span class="nx">_</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">lcTerms</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">term</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span><span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">lcTerm</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="nx">response</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">item</span><span class="p">);</span>
+                        <span class="nx">match</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+                    <span class="p">}</span>
+                <span class="p">});</span>
+                <span class="c1">//Don't continue if we managed to match on a property</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">match</span><span class="p">)</span> <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">});</span>
+        <span class="p">});</span>
+        <span class="k">return</span> <span class="nx">response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Updating a Dexter module is easy. For example, let’s add a feature to our module that lets you optionally apply a text filter to the feed items and only return those that match.</p>
+
+<p>The code is pretty straighforward.  We&rsquo;ll add a new input - filter - and get them all.  Then we&rsquo;ll add a new function that looks for the filters in a list of our response objects and only returns the ones that match.  Finally, if we even <em>have</em> a filter, we&rsquo;ll apply our filter function to our discovered items and only return matches.</p>
+
+<p>Note that we&rsquo;re taking advantage of the Dexter collection object that carries our filter values.  It&rsquo;s got a built-in lodash _.each function that lets you easily iterate through its contents.  You also could call filters.toArray() to work with a native array if you&rsquo;d prefer.</p>
+
+<div></div>
+
+<blockquote>
+<p>fixture/default.js</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="c1">//...</span>
+<span class="nl">data</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nl">local_test_step</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nl">input</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nl">url</span><span class="p">:</span> <span class="s1">'http://feeds.arstechnica.com/arstechnica/index/'</span><span class="p">,</span>
+            <span class="nx">filter</span><span class="err">:</span> <span class="p">[</span><span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'samsung'</span><span class="p">,</span> <span class="s1">'htc'</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Then we update our fixture with a filter variable, providing an array of data to make sure our list functionality works.  Go ahead and <code class="prettyprint">dexter run</code> to make sure it works!  You might get empty data this time if no items have the word &ldquo;apple&rdquo; in it.</p>
+
+<div></div>
+
+<blockquote>
+<p>meta.json</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="p">{</span>
+    <span class="s2">"inputs"</span><span class="err">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"filter"</span><span class="p">,</span>
+            <span class="s2">"title"</span><span class="p">:</span><span class="s2">"Text filter"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span><span class="s2">"string"</span>
+        <span class="p">}</span>
+        <span class="c1">//...</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>We&rsquo;ll also want to add our new input to the meta.json so it shows up in the App Editor.</p>
+
+<div></div>
+
+<blockquote>
+<p>package.json</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="err">//...</span><span class="w">
+    </span><span class="err">version:</span><span class="w"> </span><span class="err">'0.1.0',</span><span class="w">
+    </span><span class="err">//...</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Finally, we&rsquo;ll bump the version by a minor step since we added functionality.</p>
+
+<p>That&rsquo;s it!  Just <code class="prettyprint">git commit -am &#39;Added a filter&#39;</code>, <code class="prettyprint">dexter push</code>, and we now have a filterable RSS feed parser!</p>
 
           <h1 id="module-api">Module API</h1>
 
 <p>Modules in Dexter are the building blocks you&rsquo;ll use to assemble your Apps. They&rsquo;re expressions of the principal of doing one thing and doing it well: each is designed to have a single, clear task that works independently of the rest of your code. It&rsquo;s the job of the App to decide how these behaviors interact - the modules themselves only care about what kind of input they get and emitting consistent output.</p>
 
 <aside class="success">
-Modules are just specialized Node.js libraries with a bit of special sauce in the form of extra metadata, baked-in tests, and an SDK to help speed development. Most can be used independently of Dexter, and can be incorporated into any other Node.js or [Browserified](http://browserify.org/) application.
+Modules are just specialized Node.js libraries with a bit of special sauce in the form of extra metadata, baked-in tests, and an SDK to help speed development.
 </aside>
 
 <h2 id="anatomy-of-a-module">Anatomy of a module</h2>
@@ -943,7 +936,7 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
 </span></code></pre>
 
 <ul>
-<li><strong>package.json</strong>: This is a regular <a href="https://docs.npmjs.com/files/package.json">Node.js package definition</a>. This lets you use a Dexter module just like you would any other Node.js package - you can npm install &ndash;save to your hearts content, add your module to a public or private NPM server, and otherwise distribute it outside of Dexter.</li>
+<li><strong>package.json</strong>: This is a regular <a href="https://docs.npmjs.com/files/package.json">Node.js package definition</a>. This lets you use a Dexter module just like you would any other Node.js package.</li>
 </ul>
 
 <div></div>
@@ -956,17 +949,14 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
     </span><span class="nt">"icon"</span><span class="p">:</span><span class="w"> </span><span class="s2">"heart"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> 
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Page URL"</span><span class="p">,</span><span class="w"> 
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> 
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Page URL"</span><span class="w">
     </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w"> 
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"term"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Search term"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> 
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Search term"</span><span class="w">
     </span><span class="p">}],</span><span class="w">
     </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> 
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"links"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found links"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w"> 
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found links"</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -977,19 +967,18 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
 <ul>
 <li><strong>title (string, required)</strong>: The user-friendly title of your module</li>
 <li><strong>icon (string, optional)</strong>: A <a href="http://fortawesome.github.io/Font-Awesome/cheatsheet/">FontAwesome icon</a> that will show up alongside your module in the App editor.</li>
-<li><strong>inputs (array, optional)</strong>: Definitions for any inputs your module accepts. Each item in the array should have 3 properties:
+<li><strong>inputs (array, optional)</strong>: Definitions for any inputs your module accepts. Each item in the array should have 2 or 3 properties:
 
 <ul>
 <li><em>id (string)</em>: The input&rsquo;s code-friendly key (ex: first_name)</li>
 <li><em>title (string)</em>: The input&rsquo;s user-friendly name (ex: First Name)</li>
-<li><em>type (string)</em>: A basic type (string, integer, array)</li>
+<li><em>selector_type (string, optional)</em>: The default configuration setting for the input: either <strong>literal</strong> (a plain-text string should be used), <strong>map</strong> (it should be wired up to the output of another module), or <strong>user</strong> (it should be entered by the user of the app).  The default is <strong>map</strong>.</li>
 </ul></li>
-<li><strong>outputs (array, optional)</strong>: Definitions for any outputs your module generates. Just like inputs, each object in the array has 3 properties:
+<li><strong>outputs (array, optional)</strong>: Definitions for any outputs your module generates.
 
 <ul>
 <li><em>id (string)</em>: The input&rsquo;s code-friendly key (ex: first_name)</li>
 <li><em>title (string)</em>: The input&rsquo;s user-friendly name (ex: First Name)</li>
-<li><em>type (string)</em>: A basic type (string, integer, array)</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1027,11 +1016,11 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
 
 <p><code class="prettyprint">{ getData: fn, run: fn }</code></p>
 
-<p>&hellip;once it gets inside the Dexter App, it ends up looking like:</p>
+<p>Once it gets inside the Dexter App, it ends up looking like:</p>
 
 <p><code class="prettyprint">{ getData: fn, run: fn, log: fn, complete: fn, fail: fn, log: fn }</code></p>
 
-<p>This implicit wrapping process lets you focus on the details of your module, and even run your module outside of Dexter without worrying about managing Dexter&rsquo;s dependencies!</p>
+<p>This wrapping process lets you focus on the details of your module — and even run your module outside of Dexter — without worrying about managing Dexter’s dependencies.</p>
 
 <aside class="warning">
 If your module exports properties named complete, fail, log, or run, your module will not work!
@@ -1039,115 +1028,41 @@ If your module exports properties named complete, fail, log, or run, your module
 
 <h2 id="inputs">Inputs</h2>
 
-<blockquote>
-<p>Code</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">dump</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'--------'</span><span class="p">);</span>
-    <span class="p">},</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">inputs</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">inputs</span><span class="p">(),</span>
-            <span class="nx">singleExisting</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'singleExisting'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">singleMissing</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'singleMissing'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">singleMissingDefaulted</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'singleMissingDefaulted'</span><span class="p">,</span> <span class="s1">'singleDefault'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-
-            <span class="nx">multipleExisting</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleExisting'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">(),</span>
-            <span class="nx">multipleMissing</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleMissing'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">(),</span>
-            <span class="nx">multipleMissingDefaulted</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleMissingDefaulted'</span><span class="p">,</span> <span class="s1">'multipleDefault'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">(),</span>
-
-            <span class="nx">multipleExistingZero</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleExisting'</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
-            <span class="nx">multipleExistingFirst</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleExisting'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
-            <span class="nx">multipleMissingZero</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleMissing'</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
-            <span class="nx">multipleMissingFirst</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'multipleMissing'</span><span class="p">).</span><span class="nx">first</span><span class="p">();</span>
-
-        <span class="k">this</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="nx">inputs</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="nx">singleExisting</span><span class="p">,</span> <span class="nx">singleMissing</span><span class="p">,</span> <span class="nx">singleMissingDefaulted</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="nx">multipleExisting</span><span class="p">,</span> <span class="nx">multipleMissing</span><span class="p">,</span> <span class="nx">multipleMissingDefaulted</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">dump</span><span class="p">(</span><span class="nx">multipleExistingZero</span><span class="p">,</span> <span class="nx">multipleExistingFirst</span><span class="p">,</span> <span class="nx">multipleMissingZero</span><span class="p">,</span> <span class="nx">multipleMissingFirst</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</code></pre>
-
-<blockquote>
-<p>Result</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="p">{</span> <span class="nl">singleExisting</span><span class="p">:</span> <span class="s1">'Foo'</span><span class="p">,</span> <span class="nx">multipleExisting</span><span class="err">:</span> <span class="p">[</span><span class="s1">'Bar'</span><span class="p">,</span> <span class="s1">'Baz'</span><span class="p">]</span> <span class="p">}</span>
-<span class="s1">'-------'</span>
-<span class="p">{</span> <span class="s1">'Foo'</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s1">'singleDefault'</span> <span class="p">}</span>
-<span class="s1">'-------'</span>
-<span class="p">{</span> <span class="p">[</span><span class="s1">'Bar'</span><span class="p">,</span> <span class="s1">'Baz'</span><span class="p">],</span> <span class="p">[],</span> <span class="p">[</span><span class="s1">'multipleDefault'</span><span class="p">]</span> <span class="p">}</span>
-<span class="s1">'-------'</span>
-<span class="p">{</span> <span class="s1">'Bar'</span><span class="p">,</span> <span class="s1">'Bar'</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">null</span> <span class="p">}</span>
-</code></pre>
-
-<p>The real power of Dexter lies in its ability to mix and match outputs from a variety of sources in order to provide input data for a given module. Well designed modules must therefore be able to accommodate as broad a spectrum of inputs as possible.</p>
-
-<p>All module inputs are, under the hood, wrapped up in a single object <code class="prettyprint">{}</code>. The input object&rsquo;s properties are explicitly defined in the module&rsquo;s meta.json file, and each defined property is always present in the compiled input <code class="prettyprint">{ input1: null, input2: null}</code>. When an App is configured, its creator maps different data sources to each of your module&rsquo;s inputs <code class="prettyprint">input1 = output1, input2 = output2, {output 1: 1}, {output 2: 2}</code>. When the app is executed, those mappings are evaluated, and the results bound to the input object <code class="prettyprint">{input1: 1, input2: 2}</code>.</p>
-
-<p>The real fun begins when input data is mapped from sources that have multiple outputs <code class="prettyprint">[{output1: 1}, {output1: 2}], {output2: 3}</code>.  Dexter&rsquo;s input system accommodates data sources with multiple outputs, so all available outputs get aggregated into our input object <code class="prettyprint">{ input1: [1,2], input2: [3] }</code>. It&rsquo;s also possible that some configured mappings will produce no data at all <code class="prettyprint">{ input1: null, input2: 3 }</code>.</p>
-
-<p>It&rsquo;s your job as a module creator to figure good rules for dealing with this variety of possible input data. Is a particular input critical enough to warrant killing an App if it&rsquo;s missing?  How do you deal with misaligned amounts of input?  Which inputs can you only deal with 1 of, and which are safe to handle as arrays?</p>
-
-<p>Dexter provides some tools to help you execute your decisions.  Inputs can either be accessed directly by extracting them via <code class="prettyprint">step.inputs()</code>, or by wrapping individual inputs in a Dexter <a href="#data-collections">data collection</a> by calling <code class="prettyprint">step.input(key)</code>. You can then verify that you have the data you need through any combination of assertions (assertion errors will cause the app to abort), explicit failures (calling <code class="prettyprint">this.fail(...)</code> lets you give specific reasons for the error), or by providing sane defaults (calls to <code class="prettyprint">input(key, default)</code> with a good fallback default value).</p>
+<p>As mentioned above, the meta.json file defines a collection of inputs expected by a module. To retrieve an input, you can use the <code class="prettyprint">step.input(&lt;input_id&gt;)</code> from the run method. Calling step.input returns data wrapped up by a DexterCollection. For inputs that are expected to have a single value, we provide a convenience method <code class="prettyprint">DexterCollection.first()</code> that will return the first item in the collection. Conversely, <code class="prettyprint">DexterCollection.each(callback)</code> allows easy iteration over the collection. DexterCollections can also be inspected via standard array accessors.</p>
 
 <h2 id="outputs">Outputs</h2>
-
-<blockquote>
-<p>Module 1: User fetcher</p>
-</blockquote>
 <pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">({</span> <span class="na">email</span><span class="p">:</span> <span class="s1">'joe@example.com'</span><span class="p">,</span> <span class="na">name</span><span class="p">:</span> <span class="s1">'Joe'</span> <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+  <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+     <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">({</span>
+        <span class="na">message</span><span class="p">:</span> <span class="s2">"This is the first"</span> 
+     <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 
-<blockquote>
-<p>Module 2: Link fetcher</p>
-</blockquote>
+<p>As mentioned above, the meta.json file defines a collection of outputs your module plans to expose. Your module should provide its outputs to Dexter by calling <code class="prettyprint">this.complete(&lt;object|array&gt;)</code> from the scope of the run method. </p>
+
+<div></div>
 <pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">([</span>
-            <span class="p">{</span> <span class="na">url</span><span class="p">:</span> <span class="s1">'http://rundexter.com'</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="s1">'Dexter'</span> <span class="p">},</span>
-            <span class="p">{</span> <span class="na">url</span><span class="p">:</span> <span class="s1">'http://reddit.com'</span><span class="p">,</span> <span class="na">title</span><span class="p">:</span> <span class="s1">'Why my project is late'</span> <span class="p">}</span>
-        <span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+ <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">([{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="s2">"This is the first message"</span>
+    <span class="p">},{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="s2">"This is the second message"</span>
+    <span class="p">}]);</span>
+ <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 
-<blockquote>
-<p>Module 3: Message</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="c1">//Imports are:</span>
-<span class="c1">// to = dexter.step('module_1').output('email');</span>
-<span class="c1">// urls = dexter.step('module_2').output('url');</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">to</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'to'</span><span class="p">),</span>
-            <span class="nx">urls</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">to</span><span class="p">.</span><span class="nx">toArray</span><span class="p">(),</span> <span class="nx">urls</span><span class="p">.</span><span class="nx">toArray</span><span class="p">());</span>
-        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-<span class="c1">//In the log:</span>
-<span class="c1">// ['joe@example.com'] ['http://rundexter.com', 'http://reddit.com']</span>
-</code></pre>
+<p>If appropriate, returning a collection of objects is also acceptable, downstream modules are expected to handle arrays of data just like your modules!</p>
 
-<p>In keeping with the theme of doing one thing and doing it well, Dexter assumes all modules will output a single kind of object that reflects its purpose. Does the module get Slack history?  Then the output should look like <code class="prettyprint">{ user, text, link }</code>. Does it get a list of stock prices?  The output should look like <code class="prettyprint">{ symbol, name, price, change }</code>. You describe what that object looks like in your <code class="prettyprint">meta.json</code> file, then ensure that those properties exist in the object(s) you export via <code class="prettyprint">this.complete()</code>.</p>
-
-<p>That doesn&rsquo;t mean you&rsquo;re restricted to returning a single object. If your module didn&rsquo;t produce any output, just return nothing. If it produced multiple data points, return a collection of your output objects. So long as each object has properties that are recognizable from your <code class="prettyprint">meta.json:outputs</code> definitions, Dexter will be able to parse the outputs and pass them along as needed.</p>
-
-<p>What you <em>don&rsquo;t</em> want to do is to define and return complex object properties. Dexter&rsquo;s power lies in the ability to map the output from one module to the input of another, and to let the App developer decide how to make those associations meaningful. In order for you output to be understood by the widest variety of other modules, each object property should be both of a basic type (string/numeric good, binary/object bad) and well named (email/url good, o_fsk_n50/aws_9009939923f_useast1 bad).</p>
-
-<p>That doesn&rsquo;t mean you <em>can&rsquo;t</em> output complex objects. For instance, if you&rsquo;re building a suite modules that perform image manipulations, you <em>should</em> have a standard base64-encoded image binary type and support it throughout the suite. Or, if you&rsquo;re doing an AWS automation App, you should have IAM objects as a basic type that your modules understand.</p>
+<div></div>
 
 <p>You can read more about outputs under <a href="#basemodule-complete-data">BaseModule::complete</a>.</p>
 
 <h2 id="data-collections">Data collections</h2>
 
-<p>Calls to <code class="prettyprint">step.input</code> and <code class="prettyprint">step.output</code> return data wrapped up by a Dexter collection, which makes managing an uncertain amount of data easier.</p>
+<p>Calls to <code class="prettyprint">step.input</code> and <code class="prettyprint">step.output</code> return data wrapped up by a DexterCollection, which makes managing an uncertain amount of data easier.</p>
 
 <table><thead>
 <tr>
@@ -1216,7 +1131,7 @@ If your module exports properties named complete, fail, log, or run, your module
 Dexter calls this function automatically when it&rsquo;s your module&rsquo;s turn to run in the App.  It should *not* be called again - you&rsquo;ll create a difficult-to-debug recursion.
 </aside>
 
-<h3 id="basemodule-c-data">BaseModule.c(data)</h3>
+<h3 id="basemodule-complete-data">BaseModule.complete(data)</h3>
 
 <blockquote>
 <p>No output</p>
@@ -1255,14 +1170,14 @@ Dexter calls this function automatically when it&rsquo;s your module&rsquo;s tur
 
 <p>When your module has successfully finished its job, it needs to call <code class="prettyprint">complete()</code> to let Dexter know it&rsquo;s safe to continue the current App.</p>
 
-<p>If you have any useful information you want to make available to other modules, you&rsquo;ll want to return it here. Dexter assumes that you&rsquo;re returning an object of some kind, and that the object only has properties that match those you&rsquo;ve defined in your <code class="prettyprint">[meta.json:output](#anatomy-of-a-module)</code>. Your app can also generate multiple outputs by returning an array of such objects - as long as each object&rsquo;s properties are correctly configured, Dexter will still know how get and share the data with other modules.</p>
+<p>If you have any useful information you want to make available to other modules, you&rsquo;ll want to return it here. Dexter assumes that you&rsquo;re returning an object or array, and that the object only has properties that match those you&rsquo;ve defined in your <code class="prettyprint">[meta.json:output](#anatomy-of-a-module)</code>. If you return a collection, each object&rsquo;s properties are correctly configured, Dexter will still know how get and share the data with other modules.</p>
 
 <aside class="warning">
-Note that you should only call `complete` once, and after you do, the wrapper running the function will quickly shut down, making any code your run afterwards a bit of a gamble. Calling `return this.complete()` as shown in the code samples is one way to guarantee that you only make one call and don&rsquo;t cause a race condition afterwards, though you can use careful code flow to do the same if you&rsquo;d prefer.
+Note that you should only call `complete` once, and after you do, the process will exit. Calling `return this.complete()` as shown in the code samples is one way to guarantee that you only make one call and don&rsquo;t cause a race condition afterwards, though you can use careful code flow to do the same.
 </aside>
 
 <aside class="success">
-<p>Your response object properties can technically be *anything* - strings, arrays, objects - pretty much any non-binary, non-stream, non-executable, serializable value is fair game!</p>
+<p>Your response object properties can be any serializiable value.</p>
 <p>Keep in mind, however, that a lot of Dexter&rsquo;s power comes from the ability of unrelated modules to be able to communicate with one another. If you output a property that&rsquo;s an object, array, or other complex type, other modules will need to know how to handle that *specific* type in order to work with your module. Returning only basic values like strings or numbers allows your module to be m uch more flexible and useful in the Dexter ecosystem.</p>
 </aside>
 
@@ -1309,7 +1224,7 @@ Note that you should only call `complete` once, and after you do, the wrapper ru
 <p>Every call to <code class="prettyprint">fail()</code> automatically gets logged, and if you pass an error as the first argument, any available call stack will be logged as well.</p>
 
 <aside class="warning">
-Note that you should only call `fail()` once, and after you do, the wrapper running the function will quickly shut down, making any code your run afterwards a bit of a gamble. Calling `return this.fail()` as shown in the code samples is one way to guarantee that you only make one call and don&rsquo;t cause a race condition afterwards, though you can use careful code flow to do the same if you&rsquo;d prefer.
+Note that you should only call `fail()` once, and after you do, the process will exit. Calling `return this.fail()` as shown in the code samples is one way to guarantee that you only make one call and don&rsquo;t cause a race condition afterwards, though you can use careful code flow to do the same.
 </aside>
 
 <h3 id="basemodule-log-details">BaseModule.log(details)</h3>
@@ -1335,11 +1250,11 @@ Note that you should only call `fail()` once, and after you do, the wrapper runn
 <span class="c1">//where the foo object is an interactive console object and 42 is a colored number</span>
 </code></pre>
 
-<p>A logger is a programmer&rsquo;s best friend, and the Dexter logger gives you a  lot of power. Every time you write a log, Dexter saves all the explicit data you provide alongside a snapshot of the App at that particular point in time. You can then recall and play back your logs for a particular run of an App and watch the App&rsquo;s context progress as the logs come in.</p>
+<p>The Dexter logger gives you a lot of flexibility. Every time you write a log, Dexter saves all the explicit data you provide alongside a snapshot of the App at that particular point in time. You can then recall and play back your logs for a particular run of an App and watch the App&rsquo;s context progress as the logs come in.</p>
 
 <p>In its most basic form, you can pass a simple <code class="prettyprint">msg</code> string into the logger. Note that this is the exact same as calling <code class="prettyprint">log({ message: msg })</code>.</p>
 
-<p>If you&rsquo;ve got some specific information you want to keep track of, you can pass it along as well. Our log playback tools will give some special treatment to any <code class="prettyprint">message</code> property you send along (it&rsquo;ll show it in front of the rest of the logged data in the Dexter console), but it&rsquo;s optional if you don&rsquo;t want it.  Remember that you can an entire copy of the data in the <code class="prettyprint">dexter</code> object for free - there&rsquo;s no need to duplicate its information in your log data.</p>
+<p>If you&rsquo;ve got some specific information you want to keep track of, you can pass it along as well. Our log playback tools will give some special treatment to any <code class="prettyprint">message</code> property you send along (it&rsquo;ll show it in front of the rest of the logged data in the Dexter console), but it&rsquo;s optional if you don&rsquo;t want it.  Remember that a serialized copy of the App is included for free with each log message — there&rsquo;s no need to duplicate its information in your log data.</p>
 
 <p>The <code class="prettyprint">message</code> property gets additional special treatment by allowing you to format your log message in a way that takes advantage of the modern browser console. You can actually embed specific data in your log message by referencing its key after a colon, allowing you to easily see that data in the browser console. This is useful if you want to be able to monitor specific logged variables at a glance in the console.</p>
 
@@ -1365,13 +1280,8 @@ Note that you should only call `fail()` once, and after you do, the wrapper runn
 
 <p>Calling replay will rerun the current module with the exact same inputs it was originally given. By using the App&rsquo;s global state management tools, your module can keep running until it finishes what it set out to do.</p>
 
-<p>Some other scenarios where replay might be useful:
-* Waiting for an API endpoint to become available
-* Waiting for slowly updated data to change
-* Waiting for scarce resources to free up</p>
-
 <aside class="warning">
-There is currently a 50-step limit built into Dexter. That&rsquo;s more than enough for most Apps, *unless* you&rsquo;re relying heavily on replay to accomplish your goals. If you think you&rsquo;ll need to replay enough times to worry about that limit, you might want to consider another strategy, like queue and fetch combined with timers.
+There is currently a 50-step limit built into Dexter. That&rsquo;s more than enough for most Apps, *unless* you&rsquo;re relying heavily on replay to accomplish your goals. Please <a href="mailto:support@rundexter.com">contact us</a> if you would like to increase your limit.
 </aside>
 
 <h2 id="app-data">App data</h2>
@@ -1424,8 +1334,6 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 </code></pre>
 
 <p>Fetch any private App variables that have been registered.</p>
-
-<p>Right now we&rsquo;re in the process of giving you as a module developer a way to communicate to App developers which keys your module requires. For now, just test for the keys&rsquo; presence and return an informative message indicating the requirement.</p>
 
 <h3 id="dexter-user-key-default">dexter.user(key, default)</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">user</span><span class="p">(</span><span class="s1">'email'</span><span class="p">));</span>
@@ -1493,36 +1401,6 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 </tr>
 </tbody></table>
 
-<h3 id="dexter-url-key-default">dexter.url(key, default)</h3>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">dexterUrl</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="s1">'home'</span><span class="p">);</span>
-</code></pre>
-
-<p>URLs used to access internal Dexter resources. These are better used through the actual helper functions and modules rather than directly by your modules.</p>
-
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>home</td>
-<td>string</td>
-<td>Dexter&rsquo;s homepage</td>
-</tr>
-<tr>
-<td>logger</td>
-<td>string</td>
-<td>An endpoint used to track in-App logs</td>
-</tr>
-<tr>
-<td>reporter</td>
-<td>string</td>
-<td>If this workflow is being run on a timer, the App calls back to the reporter to let it know it&rsquo;s done.</td>
-</tr>
-</tbody></table>
-
 <h3 id="dexter-global-key-default">dexter.global(key, default)</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">cacheKey</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_cache'</span><span class="p">,</span>
     <span class="nx">cache</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">global</span><span class="p">(</span><span class="nx">cacheKey</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
@@ -1533,9 +1411,7 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="nx">cache</span> <span class="p">});</span>
 </code></pre>
 
-<p>Fetch globally stored information assigned during the use of this app. We&rsquo;re not placing any restrictions on how you use this, so you should do so both carefully and sparingly.</p>
-
-<p>Available keys and values are determined by individual modules and will vary from App to App.</p>
+<p>Fetch globally stored information assigned during the use of this app.</p>
 
 <h3 id="dexter-globals">dexter.globals()</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">globalKeys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">dexter</span><span class="p">.</span><span class="nx">globals</span><span class="p">()),</span>
@@ -1557,17 +1433,7 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="nx">cache</span> <span class="p">});</span>
 </code></pre>
 
-<p>An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. We&rsquo;re not placing any restrictions on how you use this, so you should do so both carefully and sparingly.</p>
-
-<p>Any serializable data can be assigned to a global (string, numeric, object, array, etc.). Unless you have a good reason not to, it&rsquo;s a good practice to namespace your global variables for your particular module. </p>
-
-<h3 id="dexter-step-id">dexter.step(id)</h3>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">linkedStep</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="s1">'linked-step'</span><span class="p">,</span> <span class="kc">null</span><span class="p">),</span>
-    <span class="nx">data</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="p">(</span><span class="nx">linkedStep</span><span class="p">)</span> <span class="p">?</span> <span class="nx">linkedStep</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'data'</span><span class="p">)</span> <span class="p">:</span> <span class="kc">null</span><span class="p">);</span>
-<span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">({</span> <span class="na">data</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">process</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">});</span>
-</code></pre>
-
-<p>Get a specific step from the workflow. There shouldn&rsquo;t be any real reason to use this, but if you do, it outputs either an <code class="prettyprint">[AppStep](#step)</code> or <code class="prettyprint">null</code>;</p>
+<p>An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. Any serializable data can be assigned to a global. </p>
 
 <h2 id="step">Step</h2>
 
@@ -1711,10 +1577,6 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 </tr>
 </tbody></table>
 
-<aside class="warning">
-Note that for trigger steps, these values will always return the default, as triggers have no modules.
-</aside>
-
 <h3 id="step-input-key-default">step.input(key, default)</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'default@example.com'</span><span class="p">).</span><span class="nx">first</span><span class="p">(),</span>
     <span class="nx">messages</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">input</span><span class="p">(</span><span class="s1">'message'</span><span class="p">),</span>
@@ -1741,15 +1603,6 @@ Note that for trigger steps, these values will always return the default, as tri
 
 <p>Get the raw input object. This will be a single object with all the input properties defined in your <code class="prettyprint">meta.json:inputs</code> section and the raw values as parsed by Dexter.</p>
 
-<h3 id="step-output-key-default">step.output(key, default)</h3>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">trigger</span><span class="p">().</span><span class="nx">output</span><span class="p">(</span><span class="s1">'url'</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">output</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span> <span class="nx">output</span><span class="p">.</span><span class="nx">toArray</span><span class="p">())</span>
-<span class="c1">//outputs: [{ url: 'http://google.com' }, { url: 'http://yahoo.com' }]</span>
-<span class="c1">//log: 2 ['http://google.com', 'http://yahoo.com']</span>
-</code></pre>
-
-<p>Extract a single property&rsquo;s worth of output data from a step. This isn&rsquo;t often used inside of a module, but <em>is</em> often used inside a switch statement to compare information. Like inputs, this returns a <a href="#data-collections">Dexter collection</a></p>
-
 <h3 id="step-outputs">step.outputs()</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">outputs</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">outputs</span><span class="p">(),</span>
     <span class="nx">outputKeys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">outputs</span><span class="p">),</span>
@@ -1764,11 +1617,25 @@ Note that for trigger steps, these values will always return the default, as tri
 
 <p>Get the raw output object. This will be a single object with all the output properties emitted by the module, which should match the outputs defined in that module&rsquo;s <code class="prettyprint">meta.json:outputs</code> section.</p>
 
-          <h1 id="miscellaneous">Miscellaneous</h1>
+          <h1 id="faq-amp-other-helpful-info">FAQ &amp; Other Helpful Info</h1>
 
-<h2 id="debugging-your-app-when-it-is-live">Debugging your app when it is live</h2>
+<p>This section is very much a work in progress. We&rsquo;ll be adding to it as key questions become brought to our attention. If you have questions regarding anything that is not listed here, please visit our <a href="http://community.rundexter.com" target="_blank">community forums</a>, or connect with us on <a href="http://rundexter.slack.com" target="_blank">Slack</a>.</p>
 
-<p>Modules send messages to the Dexter logging component and those messages will appear in your developer console when your app is executing. In chrome, you should open up developer tools to view the messages; in firefox, you can use firebug or the native tools. </p>
+<h2 id="how-do-i-debug-my-app-when-it’s-live">How do I debug my app when it’s live?</h2>
+
+<p>Modules send messages to the Dexter logging component and those messages will appear in your browser’s developer console when your app is executing. In chrome, you should open up developer tools to view the messages; in firefox, you can use firebug or the native tools.</p>
+
+<h2 id="what-do-the-configuration-icons-mean">What do the configuration icons mean?</h2>
+
+<p>You’ll notice some iconography and radio buttons just below the input titles on the right sidebar of your configuration panel. Each one is a different input method: </p>
+
+<ul>
+<li><strong>User Defined</strong> - If this is selected, a user will define the input when they go to use the app. This happens during their configuration<br></li>
+<li><strong>Mapping</strong> - If this is selected, the input will be whatever output you grab, drag, and drop from the output options, to the step below.</li>
+<li><strong>Literal</strong> - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a &ldquo;=&rdquo; the field can take raw javascript.</li>
+</ul>
+
+<p>Each of these is useful depending on how your app is being used. In the SMS example we walked through to begin your Dexter experience, we set the Phone Number input to be user defined. If we went with literal instead, the number that would be used would be the one you typed in, meaning all links from the bookmarklet would be texted to that number.</p>
 
       </div>
       <div class="dark-box">

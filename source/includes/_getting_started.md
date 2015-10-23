@@ -10,7 +10,7 @@ The walkthrough gives you the basic instructions as you click through, but here'
 
 1. **Create a New App** - Dexter is both for builders and consumers. We start with the building. Click the new app button on the top right of your screen. <img src="/images/screenshots/01-rounded.png" class="image-shadow">  
 
-1. **Name Your App** - The tutorial autopopulates the title and description field with the details of the app we're going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends a bookmarklet that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  
+1. **Name Your App** - The tutorial autopopulates the title and description field with the details of the app we're going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  
 
 1. **Place Your First Trigger** - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app's starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user's bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/03-rounded.png" class="image-shadow">  
 
@@ -23,7 +23,7 @@ The walkthrough gives you the basic instructions as you click through, but here'
   There are a few details we're leaving out and for the uber curious, here they are: 
   1. You’ll notice some radio buttons just below the input titles on the right sidebar. Here is where you can choose from an array of input methods: 
     	  <p>**User Defined** - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.</p>
-    	  <p>**Mapping** - If this is selected, the input will be whatever output you grab, drag, and drop to the step. /p> 
+    	  <p>**Mapping** - If this is selected, the input will be whatever output you grab, drag, and drop to the step. </p> 
           <p>**Literal** - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a "=" the field can take raw javascript.</p>
   1. The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you'll get to toggle where the source data is coming from. 
   

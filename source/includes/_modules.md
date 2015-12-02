@@ -419,7 +419,18 @@ this.complete({ data: cache });
 ```
 
 An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. Any serializable data can be assigned to a global. 
-    
+
+### dexter.provider(name)
+```javascript
+var token = dexter.provider('github').token(),
+    GitHubApi = require('github'),
+    github = new GitHubApi({ version: '3.0.0' });
+github.authenticate({
+    type: 'oauth',
+    token: token
+});
+this.log('Authenticated', dexter.provider('github').username);
+```
 
 ## Step
 
@@ -442,6 +453,33 @@ log.save();
 ```
 
 Fetch configuration information about this module at its current spot in the workflow.
+
+## Provider
+
+When you ask for provider information, this is the object that's returned.
+
+### provider.clone()
+```javascript
+var providerClone = dexter.provider('github').clone();
+```
+
+Make a deep copy of the provider information.
+
+### provider.token()
+```javascript
+var token = dexter.provider('myapi').token(),
+    lib = require('myapi'),
+    data = lib.query('/anurl', { token: token });
+```
+
+Get the access token for the user
+
+### provier.data(key, default)
+```javascript
+var username = dexter.provider('github').data('username');
+```
+
+Get pre-cached data from the user's provider information.  See the individual provider documentation for details.
 
 Key|Type|Description
 ---------|--------|-----------

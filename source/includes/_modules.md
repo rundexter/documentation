@@ -432,6 +432,8 @@ github.authenticate({
 this.log('Authenticated', dexter.provider('github').username);
 ```
 
+If your module has identified a need for providers in [meta.json](#anatomy-of-a-module), Dexter will give you the basic information you need to integrate with that provider on behalf of the App's user.  You'll have access to the user's token, and some providers might have additional information like the user's ID or username.  Take a look at the [provider settings](#providers) for details.
+
 ## Step
 
 This is the first parameter passed to your module's `run()` function, and probably the most important. It contains both the configuration of your module for the current App as well as the data that's been assigned to it.
@@ -453,33 +455,6 @@ log.save();
 ```
 
 Fetch configuration information about this module at its current spot in the workflow.
-
-## Provider
-
-When you ask for provider information, this is the object that's returned.
-
-### provider.clone()
-```javascript
-var providerClone = dexter.provider('github').clone();
-```
-
-Make a deep copy of the provider information.
-
-### provider.token()
-```javascript
-var token = dexter.provider('myapi').token(),
-    lib = require('myapi'),
-    data = lib.query('/anurl', { token: token });
-```
-
-Get the access token for the user
-
-### provier.data(key, default)
-```javascript
-var username = dexter.provider('github').data('username');
-```
-
-Get pre-cached data from the user's provider information.  See the individual provider documentation for details.
 
 Key|Type|Description
 ---------|--------|-----------
@@ -576,3 +551,49 @@ console.log(types);
 ```
 
 Get the raw output object. This will be a single object with all the output properties emitted by the module, which should match the outputs defined in that module's `meta.json:outputs` section.
+
+## Providers
+
+Dexter currently supports the following API service providers:
+
+* [asana](https://github.com/rundexter/documentation/source/providers/Asana.md)
+* [bitbucket](https://github.com/rundexter/documentation/source/providers/BitBucket.md)
+* [facebook](https://github.com/rundexter/documentation/source/providers/Facebook.md)
+* [flickr](https://github.com/rundexter/documentation/source/providers/Flickr.md)
+* [foursquare](https://github.com/rundexter/documentation/source/providers/Foursquare.md)
+* [github](https://github.com/rundexter/documentation/source/providers/GitHub.md)
+* [google](https://github.com/rundexter/documentation/source/providers/Google.md)
+* [instagram](https://github.com/rundexter/documentation/source/providers/Instagram.md)
+* [runkeeper](https://github.com/rundexter/documentation/source/providers/RunKeeper.md)
+* [slack](https://github.com/rundexter/documentation/source/providers/Slack.md)
+* [spotify](https://github.com/rundexter/documentation/source/providers/Spotify.md)
+* [twitter](https://github.com/rundexter/documentation/source/providers/Twitter.md)
+[](https://github.com/rundexter/documentation/source/providers/.md)
+[](https://github.com/rundexter/documentation/source/providers/.md)
+[](https://github.com/rundexter/documentation/source/providers/.md)
+
+
+When you ask for provider information via [dexter.provider(name)](#dexter-provider-name), you're given a Provider object with the following methods:
+
+### provider.clone()
+```javascript
+var providerClone = dexter.provider('github').clone();
+```
+
+Make a deep copy of the provider information.
+
+### provider.token()
+```javascript
+var token = dexter.provider('myapi').token(),
+    lib = require('myapi'),
+    data = lib.query('/some/endpoink', { token: token });
+```
+
+Get the access token for the App's user
+
+### provier.data(key, default)
+```javascript
+var username = dexter.provider('github').data('username');
+```
+
+Get pre-cached data from the user's provider information.  See the individual provider documentation for details.

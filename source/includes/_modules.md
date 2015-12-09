@@ -321,14 +321,6 @@ This is the 2nd parameter passed into your module's `run()` function, and repres
 
 It's also the accessor you use to map inputs and add switch cases when wiring up your App - more on that in the App UI section!
 
-### dexter.clone()
-```javascript
-var d2 = dexter.clone();
-d2.setGlobal('test', 1);
-assert.notEqual(d2.global('test'), dexter.global('test'));
-```
-Make a deep copy of the entire Dexter structure. This is mainly useful if you need to pass the structure off to a subprocess and need to ensure that it doesn't make any changes.
-
 ### dexter.instance(key, default)
 ```javascript
 var url = 'http://mylogger.example.com/?msg=Hello&from='
@@ -429,21 +421,14 @@ github.authenticate({
     type: 'oauth',
     token: token
 });
-this.log('Authenticated', dexter.provider('github').username);
+this.log('Authenticated', dexter.provider('github').data('username');
 ```
 
-If your module has identified a need for providers in [meta.json](#anatomy-of-a-module), Dexter will give you the basic information you need to integrate with that provider on behalf of the App's user.  You'll have access to the user's token, and some providers might have additional information like the user's ID or username.  Take a look at the [provider settings](#providers) for details.
+If your module has identified a need for providers in [meta.json](#anatomy-of-a-module), Dexter will give you the basic information you need to integrate with that provider on behalf of the App's user.  You'll have access to the user's token (or tokens, for OAuth1), and some providers might have additional information like the user's ID or username.  Take a look at the [provider settings](#providers) for details.
 
 ## Step
 
 This is the first parameter passed to your module's `run()` function, and probably the most important. It contains both the configuration of your module for the current App as well as the data that's been assigned to it.
-
-### step.clone()
-```javascript
-var stepClone = step.clone();
-```
-
-Make a deep copy of the entire step.
 
 ### step.config(key, default)
 ```javascript
@@ -562,7 +547,6 @@ Dexter currently supports the following API service providers:
 * [evernote](https://github.com/rundexter/documentation/source/providers/Evernote.md)
 * [facebook](https://github.com/rundexter/documentation/source/providers/Facebook.md)
 * [flickr](https://github.com/rundexter/documentation/source/providers/Flickr.md)
-* [foursquare](https://github.com/rundexter/documentation/source/providers/Foursquare.md)
 * [github](https://github.com/rundexter/documentation/source/providers/GitHub.md)
 * [google](https://github.com/rundexter/documentation/source/providers/Google.md)
 * [instagram](https://github.com/rundexter/documentation/source/providers/Instagram.md)
@@ -574,19 +558,9 @@ Dexter currently supports the following API service providers:
 * [trello](https://github.com/rundexter/documentation/source/providers/Trello.md)
 * [tumblr](https://github.com/rundexter/documentation/source/providers/Tumblr.md)
 * [twitter](https://github.com/rundexter/documentation/source/providers/Twitter.md)
-[](https://github.com/rundexter/documentation/source/providers/.md)
-[](https://github.com/rundexter/documentation/source/providers/.md)
-[](https://github.com/rundexter/documentation/source/providers/.md)
 
 
 When you ask for provider information via [dexter.provider(name)](#dexter-provider-name), you're given a Provider object with the following methods:
-
-### provider.clone()
-```javascript
-var providerClone = dexter.provider('github').clone();
-```
-
-Make a deep copy of the provider information.
 
 ### provider.token()
 ```javascript
@@ -595,7 +569,17 @@ var token = dexter.provider('myapi').token(),
     data = lib.query('/some/endpoink', { token: token });
 ```
 
-Get the access token for the App's user
+Get the access token for the App's user.  For OAuth2 services, this will be the access_token (a string), while for OAuth1 services, it'll be an object:
+<block class="highlight javascript">
+ <code>
+ {<br>
+    request_token: "...",<br>
+    request_token_secret: "...",<br>
+    access_token: "...",<br>
+    access_token_secret: "..."<br>
+ }
+ </code>
+</block>
 
 ### provier.data(key, default)
 ```javascript

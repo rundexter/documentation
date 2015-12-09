@@ -4,8 +4,5 @@
 * [NodeJS module](https://github.com/slackhq/node-slack-client)
 
 # Basic data
-* id
-* username
-* first_name
-* last_name
-* image
+
+None (yet)

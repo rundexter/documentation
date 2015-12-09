@@ -424,7 +424,7 @@ github.authenticate({
 this.log('Authenticated', dexter.provider('github').data('username');
 ```
 
-If your module has identified a need for providers in [meta.json](#anatomy-of-a-module), Dexter will give you the basic information you need to integrate with that provider on behalf of the App's user.  You'll have access to the user's token (or tokens, for OAuth1), and some providers might have additional information like the user's ID or username.  Take a look at the [provider settings](#providers) for details.
+If your module has identified a need for providers in [meta.json](#anatomy-of-a-module), Dexter will give you the basic information you need to integrate with that provider on behalf of the App's user.  Take a look at the [provider settings](#providers) for details.
 
 ## Step
 
@@ -566,17 +566,36 @@ When you ask for provider information via [dexter.provider(name)](#dexter-provid
 ```javascript
 var token = dexter.provider('myapi').token(),
     lib = require('myapi'),
-    data = lib.query('/some/endpoink', { token: token });
+    data = lib.query('/some/endpoink', { token: token.access_token, client: token.client_id });
 ```
 
-Get the access token for the App's user.  For OAuth2 services, this will be the access_token (a string), while for OAuth1 services, it'll be an object:
+Get the access token for the App's user.
+
+<aside class="warning">
+If you're testing using the built-in Dexter key/secret (i.e. you're not using your own), you <strong>will not</strong> be given the client/customer secret.
+</aside>
+
+For OAuth2 providers you'll get:
+
+<block class="highlight javascript">
+  <code>
+  {<br>
+    access_token: "...",<br>
+    client_id: "..."<br>
+    <em>client_secret: "..."</em> //Not included with global apps!<br>
+  }
+  </code>
+</block>
+
+OAuth1 providers get:
+
 <block class="highlight javascript">
  <code>
  {<br>
-    request_token: "...",<br>
-    request_token_secret: "...",<br>
     access_token: "...",<br>
-    access_token_secret: "..."<br>
+    access_token_secret: "...",<br>
+    consumer_key: "...",<br>
+    <em>consumer_secret: "..."</em> //Not included with global apps!<br>
  }
  </code>
 </block>

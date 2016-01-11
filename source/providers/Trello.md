@@ -2,7 +2,7 @@
 
 * [APIs](https://developers.trello.com/)
 * [NodeJS module](https://www.npmjs.com/package/node-trello)
-* Dexter credentials unavailable
+* Dexter credentials available
 
 # Credentials
 * access_token

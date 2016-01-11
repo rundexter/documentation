@@ -321,14 +321,6 @@ This is the 2nd parameter passed into your module's `run()` function, and repres
 
 It's also the accessor you use to map inputs and add switch cases when wiring up your App - more on that in the App UI section!
 
-### dexter.clone()
-```javascript
-var d2 = dexter.clone();
-d2.setGlobal('test', 1);
-assert.notEqual(d2.global('test'), dexter.global('test'));
-```
-Make a deep copy of the entire Dexter structure. This is mainly useful if you need to pass the structure off to a subprocess and need to ensure that it doesn't make any changes.
-
 ### dexter.instance(key, default)
 ```javascript
 var url = 'http://mylogger.example.com/?msg=Hello&from='
@@ -419,18 +411,24 @@ this.complete({ data: cache });
 ```
 
 An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. Any serializable data can be assigned to a global. 
-    
+
+### dexter.provider(name)
+```javascript
+var credentials = dexter.provider('github').credentials(),
+    GitHubApi = require('github'),
+    github = new GitHubApi({ version: '3.0.0' });
+github.authenticate({
+    type: 'oauth',
+    token: credentials.token
+});
+this.log('Authenticated', dexter.provider('github').data('username');
+```
+
+If your module has identified a need for providers in [meta.json](#anatomy-of-a-module), Dexter will give you the basic information you need to integrate with that provider on behalf of the App's user.  Take a look at the [provider settings](#providers) for details.
 
 ## Step
 
 This is the first parameter passed to your module's `run()` function, and probably the most important. It contains both the configuration of your module for the current App as well as the data that's been assigned to it.
-
-### step.clone()
-```javascript
-var stepClone = step.clone();
-```
-
-Make a deep copy of the entire step.
 
 ### step.config(key, default)
 ```javascript
@@ -538,3 +536,73 @@ console.log(types);
 ```
 
 Get the raw output object. This will be a single object with all the output properties emitted by the module, which should match the outputs defined in that module's `meta.json:outputs` section.
+
+## Providers
+
+Dexter currently supports the following API service providers:
+
+* [asana](https://github.com/rundexter/documentation/source/providers/Asana.md)
+* [bitbucket](https://github.com/rundexter/documentation/source/providers/BitBucket.md)
+* [bitly](https://github.com/rundexter/documentation/source/providers/Bitly.md)
+* [evernote](https://github.com/rundexter/documentation/source/providers/Evernote.md)
+* [facebook](https://github.com/rundexter/documentation/source/providers/Facebook.md)
+* [flickr](https://github.com/rundexter/documentation/source/providers/Flickr.md)
+* [github](https://github.com/rundexter/documentation/source/providers/GitHub.md)
+* [google](https://github.com/rundexter/documentation/source/providers/Google.md)
+* [instagram](https://github.com/rundexter/documentation/source/providers/Instagram.md)
+* [linkedin](https://github.com/rundexter/documentation/source/providers/LinkedIn.md)
+* [mailchimp](https://github.com/rundexter/documentation/source/providers/Mailchimp.md)
+* [runkeeper](https://github.com/rundexter/documentation/source/providers/RunKeeper.md)
+* [slack](https://github.com/rundexter/documentation/source/providers/Slack.md)
+* [spotify](https://github.com/rundexter/documentation/source/providers/Spotify.md)
+* [trello](https://github.com/rundexter/documentation/source/providers/Trello.md)
+* [tumblr](https://github.com/rundexter/documentation/source/providers/Tumblr.md)
+* [twitter](https://github.com/rundexter/documentation/source/providers/Twitter.md)
+
+
+When you ask for provider information via [dexter.provider(name)](#dexter-provider-name), you're given a Provider object with the following methods:
+
+### provider.token()
+```javascript
+var token = dexter.provider('myapi').token(),
+    lib = require('myapi'),
+    data = lib.query('/some/endpoink', { token: token.access_token, client: token.client_id });
+```
+
+Get the access token for the App's user.
+
+<aside class="warning">
+If you're testing using the built-in Dexter key/secret (i.e. you're not using your own), you <strong>will not</strong> be given the client/customer secret.
+</aside>
+
+For OAuth2 providers you'll get:
+
+<block class="highlight javascript">
+  <code>
+  {<br>
+    access_token: "...",<br>
+    client_id: "..."<br>
+    <em>client_secret: "..."</em> //Not included with global apps!<br>
+  }
+  </code>
+</block>
+
+OAuth1 providers get:
+
+<block class="highlight javascript">
+ <code>
+ {<br>
+    access_token: "...",<br>
+    access_token_secret: "...",<br>
+    consumer_key: "...",<br>
+    <em>consumer_secret: "..."</em> //Not included with global apps!<br>
+ }
+ </code>
+</block>
+
+### provier.data(key, default)
+```javascript
+var username = dexter.provider('github').data('username');
+```
+
+Get pre-cached data from the user's provider information.  See the individual provider documentation for details.

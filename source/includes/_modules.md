@@ -414,12 +414,12 @@ An App-wide data store for the entire instance of the app. This is the ONLY plac
 
 ### dexter.provider(name)
 ```javascript
-var token = dexter.provider('github').token(),
+var credentials = dexter.provider('github').credentials(),
     GitHubApi = require('github'),
     github = new GitHubApi({ version: '3.0.0' });
 github.authenticate({
     type: 'oauth',
-    token: token
+    token: credentials.token
 });
 this.log('Authenticated', dexter.provider('github').data('username');
 ```

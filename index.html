@@ -1292,14 +1292,6 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 
 <p>It&rsquo;s also the accessor you use to map inputs and add switch cases when wiring up your App - more on that in the App UI section!</p>
 
-<h3 id="dexter-clone">dexter.clone()</h3>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">d2</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-<span class="nx">d2</span><span class="p">.</span><span class="nx">setGlobal</span><span class="p">(</span><span class="s1">'test'</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="nx">assert</span><span class="p">.</span><span class="nx">notEqual</span><span class="p">(</span><span class="nx">d2</span><span class="p">.</span><span class="nx">global</span><span class="p">(</span><span class="s1">'test'</span><span class="p">),</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">global</span><span class="p">(</span><span class="s1">'test'</span><span class="p">));</span>
-</code></pre>
-
-<p>Make a deep copy of the entire Dexter structure. This is mainly useful if you need to pass the structure off to a subprocess and need to ensure that it doesn&rsquo;t make any changes.</p>
-
 <h3 id="dexter-instance-key-default">dexter.instance(key, default)</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">'http://mylogger.example.com/?msg=Hello&amp;from='</span>
     <span class="o">+</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">instance</span><span class="p">(</span><span class="s1">'instance_id'</span><span class="p">,</span> <span class="s1">'(unknown)'</span><span class="p">);</span>
@@ -1435,15 +1427,22 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 
 <p>An App-wide data store for the entire instance of the app. This is the ONLY place you can store information explicitly between steps and modules. Any serializable data can be assigned to a global. </p>
 
+<h3 id="dexter-provider-name">dexter.provider(name)</h3>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">'github'</span><span class="p">).</span><span class="nx">credentials</span><span class="p">(),</span>
+    <span class="nx">GitHubApi</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'github'</span><span class="p">),</span>
+    <span class="nx">github</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GitHubApi</span><span class="p">({</span> <span class="na">version</span><span class="p">:</span> <span class="s1">'3.0.0'</span> <span class="p">});</span>
+<span class="nx">github</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="s1">'oauth'</span><span class="p">,</span>
+    <span class="na">token</span><span class="p">:</span> <span class="nx">credentials</span><span class="p">.</span><span class="nx">token</span>
+<span class="p">});</span>
+<span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Authenticated'</span><span class="p">,</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">'github'</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">'username'</span><span class="p">);</span>
+</code></pre>
+
+<p>If your module has identified a need for providers in <a href="#anatomy-of-a-module">meta.json</a>, Dexter will give you the basic information you need to integrate with that provider on behalf of the App&rsquo;s user.  Take a look at the <a href="#providers">provider settings</a> for details.</p>
+
 <h2 id="step">Step</h2>
 
 <p>This is the first parameter passed to your module&rsquo;s <code class="prettyprint">run()</code> function, and probably the most important. It contains both the configuration of your module for the current App as well as the data that&rsquo;s been assigned to it.</p>
-
-<h3 id="step-clone">step.clone()</h3>
-<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">stepClone</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-</code></pre>
-
-<p>Make a deep copy of the entire step.</p>
 
 <h3 id="step-config-key-default">step.config(key, default)</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">stepId</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="s1">'id'</span><span class="p">),</span>
@@ -1616,6 +1615,75 @@ There is currently a 50-step limit built into Dexter. That&rsquo;s more than eno
 </code></pre>
 
 <p>Get the raw output object. This will be a single object with all the output properties emitted by the module, which should match the outputs defined in that module&rsquo;s <code class="prettyprint">meta.json:outputs</code> section.</p>
+
+<h2 id="providers">Providers</h2>
+
+<p>Dexter currently supports the following API service providers:</p>
+
+<ul>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Asana.md">asana</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/BitBucket.md">bitbucket</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Bitly.md">bitly</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Evernote.md">evernote</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Facebook.md">facebook</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Flickr.md">flickr</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/GitHub.md">github</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Google.md">google</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Instagram.md">instagram</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/LinkedIn.md">linkedin</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Mailchimp.md">mailchimp</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/RunKeeper.md">runkeeper</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Slack.md">slack</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Spotify.md">spotify</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Trello.md">trello</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Tumblr.md">tumblr</a></li>
+<li><a href="https://github.com/rundexter/documentation/source/providers/Twitter.md">twitter</a></li>
+</ul>
+
+<p>When you ask for provider information via <a href="#dexter-provider-name">dexter.provider(name)</a>, you&rsquo;re given a Provider object with the following methods:</p>
+
+<h3 id="provider-token">provider.token()</h3>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">'myapi'</span><span class="p">).</span><span class="nx">token</span><span class="p">(),</span>
+    <span class="nx">lib</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'myapi'</span><span class="p">),</span>
+    <span class="nx">data</span> <span class="o">=</span> <span class="nx">lib</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s1">'/some/endpoink'</span><span class="p">,</span> <span class="p">{</span> <span class="na">token</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">access_token</span><span class="p">,</span> <span class="na">client</span><span class="p">:</span> <span class="nx">token</span><span class="p">.</span><span class="nx">client_id</span> <span class="p">});</span>
+</code></pre>
+
+<p>Get the access token for the App&rsquo;s user.</p>
+
+<aside class="warning">
+If you&rsquo;re testing using the built-in Dexter key/secret (i.e. you&rsquo;re not using your own), you <strong>will not</strong> be given the client/customer secret.
+</aside>
+
+<p>For OAuth2 providers you&rsquo;ll get:</p>
+
+<p><block class="highlight javascript">
+  <code>
+  {<br>
+    access_token: &quot;...&quot;,<br>
+    client_id: &quot;...&quot;<br>
+    <em>client_secret: &quot;...&quot;</em> //Not included with global apps!<br>
+  }
+  </code>
+</block></p>
+
+<p>OAuth1 providers get:</p>
+
+<p><block class="highlight javascript">
+ <code>
+ {<br>
+    access_token: &quot;...&quot;,<br>
+    access_token_secret: &quot;...&quot;,<br>
+    consumer_key: &quot;...&quot;,<br>
+    <em>consumer_secret: &quot;...&quot;</em> //Not included with global apps!<br>
+ }
+ </code>
+</block></p>
+
+<h3 id="provier-data-key-default">provier.data(key, default)</h3>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">'github'</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">'username'</span><span class="p">);</span>
+</code></pre>
+
+<p>Get pre-cached data from the user&rsquo;s provider information.  See the individual provider documentation for details.</p>
 
           <h1 id="faq-amp-other-helpful-info">FAQ &amp; Other Helpful Info</h1>
 

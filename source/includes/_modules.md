@@ -54,6 +54,9 @@ module.exports = {
     "outputs": [{ 
         "id": "links",
         "title": "Found links"
+    }],
+    "providers": [{
+        "name": "github"
     }]
 }
 ```
@@ -68,6 +71,8 @@ module.exports = {
     * **outputs (array, optional)**: Definitions for any outputs your module generates.
         * *id (string)*: The input's code-friendly key (ex: first_name)
         * *title (string)*: The input's user-friendly name (ex: First Name)
+    * **providers (array, optional)**: A list of Dexter OAuth providers that your module relies on
+        * *name (string)*: The lower-case name of the [provider](#providers) that you're using
 
 ## The runtime wrapper
 ```javascript
@@ -600,7 +605,7 @@ OAuth1 providers get:
  </code>
 </block>
 
-### provier.data(key, default)
+### provider.data(key, default)
 ```javascript
 var username = dexter.provider('github').data('username');
 ```

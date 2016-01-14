@@ -957,6 +957,9 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
     </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w"> 
         </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"links"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found links"</span><span class="w">
+    </span><span class="p">}],</span><span class="w">
+    </span><span class="nt">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github"</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -979,6 +982,11 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
 <ul>
 <li><em>id (string)</em>: The input&rsquo;s code-friendly key (ex: first_name)</li>
 <li><em>title (string)</em>: The input&rsquo;s user-friendly name (ex: First Name)</li>
+</ul></li>
+<li><strong>providers (array, optional)</strong>: A list of Dexter OAuth providers that your module relies on
+
+<ul>
+<li><em>name (string)</em>: The lower-case name of the <a href="#providers">provider</a> that you&rsquo;re using</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1679,7 +1687,7 @@ If you&rsquo;re testing using the built-in Dexter key/secret (i.e. you&rsquo;re 
  </code>
 </block></p>
 
-<h3 id="provier-data-key-default">provier.data(key, default)</h3>
+<h3 id="provider-data-key-default">provider.data(key, default)</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">dexter</span><span class="p">.</span><span class="nx">provider</span><span class="p">(</span><span class="s1">'github'</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">'username'</span><span class="p">);</span>
 </code></pre>
 

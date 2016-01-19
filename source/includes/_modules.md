@@ -56,7 +56,8 @@ module.exports = {
         "title": "Found links"
     }],
     "providers": [{
-        "name": "github"
+        "name": "github",
+        "scopes": "public_repo,user:email,read:org"
     }]
 }
 ```
@@ -73,6 +74,7 @@ module.exports = {
         * *title (string)*: The input's user-friendly name (ex: First Name)
     * **providers (array, optional)**: A list of Dexter OAuth providers that your module relies on
         * *name (string)*: The lower-case name of the [provider](#providers) that you're using
+        * *scopes (string)*: Provider scopes required by the module
 
 ## The runtime wrapper
 ```javascript

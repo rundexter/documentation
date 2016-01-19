@@ -611,3 +611,102 @@ var username = dexter.provider('github').data('username');
 ```
 
 Get pre-cached data from the user's provider information.  See the individual provider documentation for details.
+
+## Testing modules
+
+You don't have to repeatedly deploy your module to Dexter in order to make sure it works.   The Dexter SDK comes with a simple test framework that allows you to set up sample data sets (fixtures) that describe situations your module might have to deal with.
+
+For example, you could make one fixture describing a single input value and another with multiple inputs.  You could also have a third with no or broken data to see how your module deals with error states.  Later, as you collect feeback on your module, you could add fixtures for other use cases you might not have considered during your initial development - or ask other users to add  them for you!
+
+### Structure of a fixture
+```javascript
+module.exports = {
+    data: {
+        local_test_step: {
+            input: {
+                foo: 'bar',
+                hello: [ 'world' ]
+            }
+        }
+    },
+    user: {
+        providers: {
+            dexter: {
+                credentials: {
+                    access_token: '123abc'
+                }
+            }
+        }
+    }
+};
+```
+
+If you used the SDK to create your module, you've already got one fixture set up in your environment called "default" (in fixtures/default.js).  It contains a mockup of the data in a Dexter App that can pertain to your module.  Most modules only care about 2 sections: "data" and "user".
+
+The `user` object is primarily important in providing test credentials to applications that rely on [providers](#providers).  `user.providers.[provider].credentials` should hold either a valid access_token for OAuth2 providers or the access_token, access_token_secret, consumer_key, and consumer_key_secret for OAuth1 providers (see the individual provider documentation for details).
+
+The `data` object defines the data coming into your module via `data.local_test_step.input`.  This input object can have a key for each of the inputs you identify in your [meta.json](#anatomy-of-a-module).  For example, an emailer might have:
+
+<block class="highlight javascript">
+  <code>
+  input: {<br>
+    &nbsp;&nbsp;to: [ "foo@bar.com", "bar@baz.com" ],<br>
+    &nbsp;&nbsp;from: "hello@world.com",<br>
+    &nbsp;&nbsp;body: "Hello there!"<br>
+  }
+  </code>
+</block>
+
+### Private data in fixtures
+
+> default.js
+
+```javascript
+var env = require('./env')
+module.exports = _.merge({
+    user: {
+        providers: {
+            dexter: {
+                credentials: {
+                    //See env.js
+                },
+                data: {
+                    username: 'foo'
+                }
+            }
+        }
+    }
+}, env);
+```
+
+> env.js
+
+```javascript
+module.exports = {
+    user: {
+        providers: {
+            dexter: {
+                credentials: {
+                    access_token: 'abc123'
+                }
+            }
+        }
+    }
+};
+```
+
+It's a good idea to put your fixtures in version control - that way other Dexter users can use and expand on the tests you've created.  However, it's **never** a good idea to put real user data into version control, particularly in a public ecosystem!
+
+The Dexter SDK provides a secure data isolation strategy out of the box.  Your default fixture automatically extends itself with data found in `fixtures/env.js` - a file which, by default, is *not* added to your git repository.  That means you can safely use it to store your personal test data: emails, access tokens, phone numbers, etc.  You can then re-use this data in all your other fixtures just by using the same `_.merge` command found in `fixtures/default.js`.
+
+### Using multiple fixtures
+
+All you need to do to add new fixtures to your module is to copy `fixtures/default.js` to a new file and change the new file's contents.  For example, let's say we wanted to test what happens in our mailer module when no "from" email is provided.  We would just
+
+<block class="highlight shell">
+  <code>
+  cp fixtures/default.js fixtures/no_from.js<br>
+  # Set data.local_test_step.inputs.from = ''<br>
+  dexter run no_from
+  </code>
+</block>

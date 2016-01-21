@@ -959,7 +959,8 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
         </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Found links"</span><span class="w">
     </span><span class="p">}],</span><span class="w">
     </span><span class="nt">"providers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github"</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"github"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"scopes"</span><span class="p">:</span><span class="w"> </span><span class="s2">"public_repo,user:email,read:org"</span><span class="w">
     </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -987,6 +988,7 @@ Modules are just specialized Node.js libraries with a bit of special sauce in th
 
 <ul>
 <li><em>name (string)</em>: The lower-case name of the <a href="#providers">provider</a> that you&rsquo;re using</li>
+<li><em>scopes (string)</em>: Provider scopes required by the module</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1692,6 +1694,104 @@ If you&rsquo;re testing using the built-in Dexter key/secret (i.e. you&rsquo;re 
 </code></pre>
 
 <p>Get pre-cached data from the user&rsquo;s provider information.  See the individual provider documentation for details.</p>
+
+<h2 id="testing-modules">Testing modules</h2>
+
+<p>You don&rsquo;t have to repeatedly deploy your module to Dexter in order to make sure it works.   The Dexter SDK comes with a simple test framework that allows you to set up sample data sets (fixtures) that describe situations your module might have to deal with.</p>
+
+<p>For example, you could make one fixture describing a single input value and another with multiple inputs.  You could also have a third with no or broken data to see how your module deals with error states.  Later, as you collect feeback on your module, you could add fixtures for other use cases you might not have considered during your initial development - or ask other users to add  them for you!</p>
+
+<h3 id="structure-of-a-fixture">Structure of a fixture</h3>
+<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">local_test_step</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">input</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">foo</span><span class="p">:</span> <span class="s1">'bar'</span><span class="p">,</span>
+                <span class="na">hello</span><span class="p">:</span> <span class="p">[</span> <span class="s1">'world'</span> <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">providers</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">dexter</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">credentials</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">access_token</span><span class="p">:</span> <span class="s1">'123abc'</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>If you used the SDK to create your module, you&rsquo;ve already got one fixture set up in your environment called &ldquo;default&rdquo; (in fixtures/default.js).  It contains a mockup of the data in a Dexter App that can pertain to your module.  Most modules only care about 2 sections: &ldquo;data&rdquo; and &ldquo;user&rdquo;.</p>
+
+<p>The <code class="prettyprint">user</code> object is primarily important in providing test credentials to applications that rely on <a href="#providers">providers</a>.  <code class="prettyprint">user.providers.[provider].credentials</code> should hold either a valid access_token for OAuth2 providers or the access_token, access_token_secret, consumer_key, and consumer_key_secret for OAuth1 providers (see the individual provider documentation for details).</p>
+
+<p>The <code class="prettyprint">data</code> object defines the data coming into your module via <code class="prettyprint">data.local_test_step.input</code>.  This input object can have a key for each of the inputs you identify in your <a href="#anatomy-of-a-module">meta.json</a>.  For example, an emailer might have:</p>
+
+<p><block class="highlight javascript">
+  <code>
+  input: {<br>
+    &nbsp;&nbsp;to: [ &quot;foo@bar.com&quot;, &quot;bar@baz.com&quot; ],<br>
+    &nbsp;&nbsp;from: &quot;hello@world.com&quot;,<br>
+    &nbsp;&nbsp;body: &quot;Hello there!&quot;<br>
+  }
+  </code>
+</block></p>
+
+<h3 id="private-data-in-fixtures">Private data in fixtures</h3>
+
+<blockquote>
+<p>default.js</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">env</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./env'</span><span class="p">)</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">_</span><span class="p">.</span><span class="nx">merge</span><span class="p">({</span>
+    <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">providers</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">dexter</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">credentials</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="c1">//See env.js</span>
+                <span class="p">},</span>
+                <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">username</span><span class="p">:</span> <span class="s1">'foo'</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="nx">env</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>env.js</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">providers</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">dexter</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">credentials</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">access_token</span><span class="p">:</span> <span class="s1">'abc123'</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>It&rsquo;s a good idea to put your fixtures in version control - that way other Dexter users can use and expand on the tests you&rsquo;ve created.  However, it&rsquo;s <strong>never</strong> a good idea to put real user data into version control, particularly in a public ecosystem!</p>
+
+<p>The Dexter SDK provides a secure data isolation strategy out of the box.  Your default fixture automatically extends itself with data found in <code class="prettyprint">fixtures/env.js</code> - a file which, by default, is <em>not</em> added to your git repository.  That means you can safely use it to store your personal test data: emails, access tokens, phone numbers, etc.  You can then re-use this data in all your other fixtures just by using the same <code class="prettyprint">_.merge</code> command found in <code class="prettyprint">fixtures/default.js</code>.</p>
+
+<h3 id="using-multiple-fixtures">Using multiple fixtures</h3>
+
+<p>All you need to do to add new fixtures to your module is to copy <code class="prettyprint">fixtures/default.js</code> to a new file and change the new file&rsquo;s contents.  For example, let&rsquo;s say we wanted to test what happens in our mailer module when no &ldquo;from&rdquo; email is provided.  We would just</p>
+
+<p><block class="highlight shell">
+  <code>
+  cp fixtures/default.js fixtures/no_from.js<br>
+  # Set data.local_test_step.inputs.from = &#39;&#39;<br>
+  dexter run no_from
+  </code>
+</block></p>
 
           <h1 id="faq-amp-other-helpful-info">FAQ &amp; Other Helpful Info</h1>
 

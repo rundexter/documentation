@@ -1246,27 +1246,16 @@ Note that you should only call `fail()` once, and after you do, the process will
 </code></pre>
 
 <blockquote>
-<p>Detailed log</p>
+<p>Log with data details</p>
 </blockquote>
-<pre class="highlight javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="s1">'Back from foo'</span><span class="p">,</span> <span class="na">foo</span><span class="p">:</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">results</span><span class="p">()</span> <span class="p">});</span>
+<pre class="highlight javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Back from foo'</span><span class="p">,</span> <span class="p">{</span> <span class="na">message</span><span class="p">:</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="na">foo</span><span class="p">:</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">results</span><span class="p">()</span> <span class="p">});</span>
 </code></pre>
 
-<blockquote>
-<p>Formatted log</p>
-</blockquote>
-<pre class="highlight javascript"><code><span class="k">this</span><span class="p">.</span><span class="nx">log</span><span class="p">({</span> <span class="na">message</span><span class="p">:</span> <span class="s1">'Found foo :foo and bar :bar'</span><span class="p">,</span> <span class="na">foo</span><span class="p">:</span> <span class="nx">foo</span><span class="p">.</span><span class="nx">results</span><span class="p">(),</span> <span class="na">bar</span><span class="p">:</span> <span class="mi">42</span> <span class="p">});</span>
-<span class="c1">//Shows up in the console as:</span>
-<span class="c1">// 'Found foo **Object(...)** and bar 42'</span>
-<span class="c1">//where the foo object is an interactive console object and 42 is a colored number</span>
-</code></pre>
+<p>The Dexter logger is a powerful tool that lets you send messages from your app straight to your browser&rsquo;s javascript console.  At its simplest, the logger lets you send text to your console from any point in your module via <code class="prettyprint">this.log(&#39;Hello!&#39;)</code>.  Even this basic usage gives you a wealth of debugging data - when you see the log inside your browser console, that &ldquo;Hello&rdquo; is followed by the time the log was run and a complete copy of the application&rsquo;s data at the point your log was made, including input/output data, the current step, user data, and more!</p>
 
-<p>The Dexter logger gives you a lot of flexibility. Every time you write a log, Dexter saves all the explicit data you provide alongside a snapshot of the App at that particular point in time. You can then recall and play back your logs for a particular run of an App and watch the App&rsquo;s context progress as the logs come in.</p>
+<p>If you&rsquo;ve got some specific information you want to keep track of, you can pass it along as well. Just pass an object containing all the additional information you&rsquo;d like to capture into the logger&rsquo;s second parameter, like <code class="prettyprint">this.log(&#39;Hello!&#39;, { who: &#39;World&#39; })</code>.  Remember that a serialized copy of the App is included for free with each log message — there&rsquo;s no need to duplicate its information in your log data.</p>
 
-<p>In its most basic form, you can pass a simple <code class="prettyprint">msg</code> string into the logger. Note that this is the exact same as calling <code class="prettyprint">log({ message: msg })</code>.</p>
-
-<p>If you&rsquo;ve got some specific information you want to keep track of, you can pass it along as well. Our log playback tools will give some special treatment to any <code class="prettyprint">message</code> property you send along (it&rsquo;ll show it in front of the rest of the logged data in the Dexter console), but it&rsquo;s optional if you don&rsquo;t want it.  Remember that a serialized copy of the App is included for free with each log message — there&rsquo;s no need to duplicate its information in your log data.</p>
-
-<p>The <code class="prettyprint">message</code> property gets additional special treatment by allowing you to format your log message in a way that takes advantage of the modern browser console. You can actually embed specific data in your log message by referencing its key after a colon, allowing you to easily see that data in the browser console. This is useful if you want to be able to monitor specific logged variables at a glance in the console.</p>
+<p>The best part about the logger is that it&rsquo;s output is persistent.  If your app encounters an error, you can replay the logs from its last run by calling <code class="prettyprint">dexter.instance()</code> in your browser&rsquo;s console in either the App editor or on the App&rsquo;s homepage.  You can also see your recent history by calling <code class="prettyprint">dexter.recent()</code>, then dig into a specific historical instance by calling <code class="prettyprint">dexter.instance(instance_id)</code>.</p>
 
 <h3 id="basemodule-replay">BaseModule.replay()</h3>
 <pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">lastIndexKey</span> <span class="o">=</span> <span class="nx">step</span><span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_lastIndex'</span><span class="p">,</span>

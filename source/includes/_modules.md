@@ -272,28 +272,17 @@ Note that you should only call `fail()` once, and after you do, the process will
 this.log('Querying Foo...');
 ```
 
-> Detailed log
+> Log with data details
 
 ```javascript
-this.log({ message: 'Back from foo', foo: foo.results() });
+this.log('Back from foo', { message: "bar", foo: foo.results() });
 ```
 
-> Formatted log
+The Dexter logger is a powerful tool that lets you send messages from your app straight to your browser's javascript console.  At its simplest, the logger lets you send text to your console from any point in your module via `this.log('Hello!')`.  Even this basic usage gives you a wealth of debugging data - when you see the log inside your browser console, that "Hello" is followed by the time the log was run and a complete copy of the application's data at the point your log was made, including input/output data, the current step, user data, and more!
 
-```javascript
-this.log({ message: 'Found foo :foo and bar :bar', foo: foo.results(), bar: 42 });
-//Shows up in the console as:
-// 'Found foo **Object(...)** and bar 42'
-//where the foo object is an interactive console object and 42 is a colored number
-```
+If you've got some specific information you want to keep track of, you can pass it along as well. Just pass an object containing all the additional information you'd like to capture into the logger's second parameter, like `this.log('Hello!', { who: 'World' })`.  Remember that a serialized copy of the App is included for free with each log message — there's no need to duplicate its information in your log data.
 
-The Dexter logger gives you a lot of flexibility. Every time you write a log, Dexter saves all the explicit data you provide alongside a snapshot of the App at that particular point in time. You can then recall and play back your logs for a particular run of an App and watch the App's context progress as the logs come in.
-
-In its most basic form, you can pass a simple `msg` string into the logger. Note that this is the exact same as calling `log({ message: msg })`.
-
-If you've got some specific information you want to keep track of, you can pass it along as well. Our log playback tools will give some special treatment to any `message` property you send along (it'll show it in front of the rest of the logged data in the Dexter console), but it's optional if you don't want it.  Remember that a serialized copy of the App is included for free with each log message — there's no need to duplicate its information in your log data.
-
-The `message` property gets additional special treatment by allowing you to format your log message in a way that takes advantage of the modern browser console. You can actually embed specific data in your log message by referencing its key after a colon, allowing you to easily see that data in the browser console. This is useful if you want to be able to monitor specific logged variables at a glance in the console.
+The best part about the logger is that it's output is persistent.  If your app encounters an error, you can replay the logs from its last run by calling `dexter.instance()` in your browser's console in either the App editor or on the App's homepage.  You can also see your recent history by calling `dexter.recent()`, then dig into a specific historical instance by calling `dexter.instance(instance_id)`.
 
 ### BaseModule.replay()
 ```javascript

@@ -1,4 +1,4 @@
-# Tutorial
+# SDK Tutorial: Module Building
 
 ## Goal
 Let's look at how to create a non-trivial module for Dexter.  The goal of this module will be to consume an RSS feed and to apply an optional text filter against the content.  In the process, we'll take advantage of some third-party tools, figure out how to deal with variable inputs, and learn how to deal with errors.  Let's get started!
@@ -7,7 +7,7 @@ Let's look at how to create a non-trivial module for Dexter.  The goal of this m
 Before we get started, you should make sure the following things are true:
 
 1. You've signed up at <a href="https://rundexter.com" target="_blank">https://rundexter.com</a>
-1. You've installed the [sdk](#sdk-overview)
+1. You've installed the [SDK](#setting-up-your-environment)
 1. You've successfully added a key to your environment
 1. You've got a *basic* understanding of [Node.js](http://nodeguide.com/beginner.html)
 1. You're ready to build cool things!
@@ -163,7 +163,7 @@ Last, we will wire up our remote request and feed parsing functions to our Modul
 We'll follow the same rules for the result of fetchItem - if we hit an error when processing the page, we'll fail.  Otherwise, all that's left to do is to extract the basic properties we want our module to return and
 send them along to `complete()`.  Mission accomplished!
 
-## Phase 5: Testing
+## Phase 5: Local Testing
 > fixtures/default.js
 
 ```javascript
@@ -233,7 +233,13 @@ $ dexter push
 
 That's it, you've got a working RSS parser module!  Execute `dexter push`, and, once the process completes, you should be able to open the App Editor and see your module.  Congrats, you're now a Dexter developer!
 
-## Phase 8: Your First Update — Add an optional filter
+## Phase 8: Testing in the App Editor
+
+As you start playing around with your new module within the App Editor itself, it's often useful to inspect the flow and look at how data is getting passed around. To do this, **open the JavaScript console** in the browser you are testing in&mdash;pretty much all the steps of a Dexter app's execution gets logged there.
+
+In each step that executes, an object gets logged to the console; the `data` object found here will give you insight into the current state of the world and data that is being passed around. Each module's Step ID is represented here, and you can look at the actual input and output values for each step.
+
+## Phase 9: Your First Update — Add an optional filter
 ```javascript
 //..includes
 module.exports = {

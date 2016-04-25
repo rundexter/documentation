@@ -4,10 +4,11 @@ title: Welcome to Dexter
 search: false
 
 includes:
-  - quickstart
+  - intro
   - getting_started
-  - sdk 
+  - sdk
   - tutorial
   - modules
-  - misc 
+  - sdk_reference
+  - misc
 ---

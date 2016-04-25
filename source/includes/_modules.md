@@ -1,4 +1,4 @@
-# Module API 
+# Module API Reference
 
 Modules in Dexter are the building blocks you'll use to assemble your Apps. They're expressions of the principal of doing one thing and doing it well: each is designed to have a single, clear task that works independently of the rest of your code. It's the job of the App to decide how these behaviors interact - the modules themselves only care about what kind of input they get and emitting consistent output.
 
@@ -605,7 +605,7 @@ Get pre-cached data from the user's provider information.  See the individual pr
 
 ## Testing modules
 
-You don't have to repeatedly deploy your module to Dexter in order to make sure it works.   The Dexter SDK comes with a simple test framework that allows you to set up sample data sets (fixtures) that describe situations your module might have to deal with.
+You don't have to repeatedly deploy your module to Dexter in order to make sure it works: test your module with `dexter run`. The Dexter SDK comes with a simple test framework that allows you to set up sample data sets (fixtures) that describe situations your module might have to deal with.
 
 For example, you could make one fixture describing a single input value and another with multiple inputs.  You could also have a third with no or broken data to see how your module deals with error states.  Later, as you collect feeback on your module, you could add fixtures for other use cases you might not have considered during your initial development - or ask other users to add  them for you!
 

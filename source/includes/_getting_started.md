@@ -2,18 +2,18 @@
 
 Our guided [walkthrough tutorial](https://rundexter.com/app/?tutorial=build) is the best way to get acquianted with Dexter, but here's some more info in case you get stuck, confused, or just want to know more:
 
-1. **Create a New App** - Dexter is both for builders and consumers. We start with the building. Click the new app button on the top right of your screen. <img src="/images/screenshots/01-rounded.png" class="image-shadow">  
+1. **Create a New App** - Click the new app button on the top right of your screen. <img src="/images/screenshots/step-1.png" class="image-shadow">  
 
-1. **Name Your App** - The tutorial autopopulates the title and description field with the details of the app we're going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  
+1. **Name Your App** - The tutorial autopopulates the title and description field with the details of the app we're going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/step-2.png" class="image-shadow">  
 
-1. **Place Your First Trigger** - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app's starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user's bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/03-rounded.png" class="image-shadow">  
+1. **Place Your First Trigger** - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app's starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user's bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/step-3.png" class="image-shadow">  
 
-1. **Place Your First Module** - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/04-rounded.png" class="image-shadow">  
+1. **Place Your First Module** - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/step-4.png" class="image-shadow">  
 
 1. **Connect The Data** - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. 
-  <img src="/images/screenshots/05-rounded.png" class="image-shadow">  
+  <img src="/images/screenshots/step-5.png" class="image-shadow">  
   Each module has outputs and inputs. In this case the bookmarklet module outputs the URL of the page you're on. The Dexter SMS module accepts a phone number and a message as input. In order to tell the Dexter app that we want to send the URL from the bookmarklet step to the dexter sms step, we connect them. And that's it you're done! 
-  <img src="/images/screenshots/07-rounded-v2.png" class="image-shadow">  
+  <img src="/images/screenshots/step-6.png" class="image-shadow">  
   A few more notes about this screen and connecting your data:
   1. On the right sidebar, you'll see a list of all the inputs to the module. There are actually different ways to specify where each input should come from, and you can select each one by using the drop-downs. These ways are:
     <p>**Prompt the user** - If this is selected, when a user begins to use your app, they will be prompted for this input value. For example, you may prompt the user for the email address input in an email module if your app intends to email each user individually.</p>
@@ -23,7 +23,7 @@ Our guided [walkthrough tutorial](https://rundexter.com/app/?tutorial=build) is 
   
 1. **Use Your App** - Click the Use App button on the main nav and you'll get taken to your share page. This page is publically accessible and anyone can use your app, but you're the only one with the rights to edit it. Let's test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! 
   
-    <img src="/images/screenshots/11-rounded.png" class="image-shadow">  
+    <img src="/images/screenshots/step-7.png" class="image-shadow">  
 
 Congratulations on building your first app! You’ve just scratched the surface of what can be built on Dexter. Keep reading for information to help you build a more robust product. 
 

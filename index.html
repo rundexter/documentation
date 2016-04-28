@@ -91,94 +91,39 @@
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="quickstart">Quickstart</h1>
+          <h1 id="welcome">Welcome!</h1>
 
-<p>Before getting started, you’ll need Node.js and git installed.<br/></p>
+<p>We&rsquo;re thrilled that you&rsquo;re here to learn more about the Dexter platform&mdash;we make it easy for people to connect services across the web and build apps that automate your digital life. If you haven&rsquo;t completed our <a href="https://rundexter.com/app/?tutorial=build">walkthrough tutorial</a> and built a fully-functioning app yet, please do that first before continuing. Otherwise, dive in below for a more <a href="#">in-depth explanation</a> of the walkthrough and <a href="#what-is-a-dexter-app">overview of the platform</a>.</p>
 
-<p><strong>For OSX:</strong> <a href="https://nodejs.org/dist/v4.2.1/node-v4.2.1.pkg">Node.js</a> | <a href="https://git-scm.com/download/mac">Git</a> </p>
+<p>Developers, if you&rsquo;re here to learn more about modules and how to create &amp; deploy them to Dexter, you can jump right to the <a href="#sdk-overview">SDK Overview</a> and <a href="#tutorial">Module Building Tutorial</a>.</p>
 
-<p><strong>For Linux:</strong> <a href="https://nodejs.org/en/download/">Node.js</a> | <a href="https://git-scm.com/download/linux">Git</a> </p>
+<p>If you&rsquo;re looking for help using Dexter apps (as opposed to building them), you can get in touch with us (<a href="mailto:info@rundexter.com">email</a> or <a href="http://rundexter.slack.com" target="_blank">Slack</a>) or the creator of the app directly.</p>
 
-<p><strong>For Windows:</strong> You’ll need to use a Linux virtual machine and follow the links above. <a href="https://www.virtualbox.org/manual/ch01.html#intro-installing" target="_blank">Here’s a guide</a> on how to go about that.</p>
+          <h1 id="detailed-walkthrough">Detailed Walkthrough</h1>
 
-<p><strong>Step 1</strong><br>
-<block class="highlight shell">
- <code>
-  <span class="gp">$ </span>npm install -g rundexter
- </code>
-</block></p>
-
-<p><strong>Step 2a</strong> <br/>
-<block class="highlight shell">
- <code>
-  #If you don’t have a key, or are unsure, run this<br>
-  #warning: if prompted to overwrite, choose “no.”<br/>
-  <span class="gp">$ </span>ssh-keygen -f ~/.ssh/id_rsa -N &quot;&quot;
- </code>
-</block></p>
-
-<p><strong>Step 2b</strong> <br/>
-<block class="highlight shell">
- <code>
-  <span class="gp">$ </span>dexter login [username or email]
- </code>
-</block></p>
-
-<p><strong>Step 3</strong><br/>
-<block class="highlight shell">
- <code>
-  <span class="gp">$ </span>dexter create “my first module”
- </code>
-</block></p>
-
-<p><strong>Step 4</strong><br/>
-<block class="highlight shell">
- <code>
-  <span class="gp">$ </span>git commit -am “my first edit”
- </code>
-</block></p>
-
-<p><strong>Step 5</strong><br/>
-<block class="highlight shell">
- <code>
-  <span class="gp">$ </span>dexter push
- </code>
-</block></p>
-
-<p><strong>Step 6</strong><br/>
-    Congrats! You’ve created your first module. It’s in <code class="prettyprint">./my-first-module</code> Check out <code class="prettyprint">meta.json</code> and <code class="prettyprint">index.js</code> to get started. For anything else, let&rsquo;s get started, shall we?</p>
-
-          <h1 id="getting-started">Getting Started</h1>
-
-<p>Dexter is a platform that makes it easy for developers to connect third-party APIs and build apps that automate your digital life. Everyday we use a handful of tools that do one thing and do it well, whether that’s ordering lunch or messaging the office a meme. However, more complex tasks require a combination of different solutions. Dexter is here to simplify connecting these services. With Dexter, you can connect the web the way you want.</p>
-
-<p>To get started, take the walkthrough that is presented automatically on your first login, or by clicking your name on the right side of the navigation bar and choosing walkthrough from the subsequent drop down. </p>
-
-<h2 id="detailed-walkthrough">Detailed Walkthrough</h2>
-
-<p>The walkthrough gives you the basic instructions as you click through, but here&rsquo;s some more info in case you get stuck, confused, or just want to know more: </p>
+<p>Our guided <a href="https://rundexter.com/app/?tutorial=build">walkthrough tutorial</a> is the best way to get acquianted with Dexter, but here&rsquo;s some more info in case you get stuck, confused, or just want to know more:</p>
 
 <ol>
-<li><p><strong>Create a New App</strong> - Dexter is both for builders and consumers. We start with the building. Click the new app button on the top right of your screen. <img src="/images/screenshots/01-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/02-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Place Your First Trigger</strong> - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app&rsquo;s starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user&rsquo;s bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/03-rounded.png" class="image-shadow">  </p></li>
-<li><p><strong>Place Your First Module</strong> - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/04-rounded.png" class="image-shadow">  </p></li>
+<li><p><strong>Create a New App</strong> - Click the new app button on the top right of your screen. <img src="/images/screenshots/step-1.png" class="image-shadow">  </p></li>
+<li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/step-2.png" class="image-shadow">  </p></li>
+<li><p><strong>Place Your First Trigger</strong> - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app&rsquo;s starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user&rsquo;s bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/step-3.png" class="image-shadow">  </p></li>
+<li><p><strong>Place Your First Module</strong> - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/step-4.png" class="image-shadow">  </p></li>
 <li><p><strong>Connect The Data</strong> - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. 
-<img src="/images/screenshots/05-rounded.png" class="image-shadow"><br>
+<img src="/images/screenshots/step-5.png" class="image-shadow"><br>
 Each module has outputs and inputs. In this case the bookmarklet module outputs the URL of the page you&rsquo;re on. The Dexter SMS module accepts a phone number and a message as input. In order to tell the Dexter app that we want to send the URL from the bookmarklet step to the dexter sms step, we connect them. And that&rsquo;s it you&rsquo;re done! 
-<img src="/images/screenshots/07-rounded-v2.png" class="image-shadow"><br>
-There are a few details we&rsquo;re leaving out and for the uber curious, here they are: </p>
+<img src="/images/screenshots/step-6.png" class="image-shadow"><br>
+A few more notes about this screen and connecting your data:</p>
 
 <ol>
-<li>You’ll notice some radio buttons just below the input titles on the right sidebar. Here is where you can choose from an array of input methods: 
-  <p><strong>User Defined</strong> - If this is selected, a user will define the input when they go to use the app. This happens during their configuration steps.</p>
-  <p><strong>Mapping</strong> - If this is selected, the input will be whatever output you grab, drag, and drop to the step. </p> 
-  <p><strong>Literal</strong> - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a &ldquo;=&rdquo; the field can take raw JavaScript.</p></li>
-<li>The left panel shows all the data you can grab. In this simplistic example we only have the data from the bookmarklet available, but as you add more steps to your apps you&rsquo;ll get to toggle where the source data is coming from. </li>
+<li>On the right sidebar, you&rsquo;ll see a list of all the inputs to the module. There are actually different ways to specify where each input should come from, and you can select each one by using the drop-downs. These ways are:
+<p><strong>Prompt the user</strong> - If this is selected, when a user begins to use your app, they will be prompted for this input value. For example, you may prompt the user for the email address input in an email module if your app intends to email each user individually.</p>
+<p><strong>Use the visual mapping tool</strong> - The input will be whatever output you grab, drag, and drop to the step. </p>
+<p><strong>Enter the value in manually</strong> - The input will be whatever you type into the provided field. NOTE: If you lead your input with a <code class="prettyprint">=</code> the field can take raw JavaScript.</p></li>
+<li>The left panel shows all the data you can grab from upstream modules. In this simplistic tutorial we only have the data from the one bookmarklet module available, but as you add more steps and modules to your app, you can select data from any of these steps and use that as your input.</li>
 </ol></li>
 <li><p><strong>Use Your App</strong> - Click the Use App button on the main nav and you&rsquo;ll get taken to your share page. This page is publically accessible and anyone can use your app, but you&rsquo;re the only one with the rights to edit it. Let&rsquo;s test it out. </br></br>Click the “Use this App” button. This will take us through the configuration mode of our app. Remember how we set the Phone Number to be user provided when building the application? Well, as a result, the wizard prompts us for the phone number here. Go ahead and enter your phone number and hit “Finish.” Once that’s done, you’ll see some new usage instructions for your app. Drag the button to your bookmarklet bar and give it a click. You should get a text message with a link to the page that you’re on! </p>
 
-<p><img src="/images/screenshots/11-rounded.png" class="image-shadow">  </p></li>
+<p><img src="/images/screenshots/step-7.png" class="image-shadow">  </p></li>
 </ol>
 
 <p>Congratulations on building your first app! You’ve just scratched the surface of what can be built on Dexter. Keep reading for information to help you build a more robust product. </p>
@@ -187,7 +132,7 @@ There are a few details we&rsquo;re leaving out and for the uber curious, here t
 
 <p><img src="/images/illustrations/illustrated-editor.png" class="image-shadow"></p>
 
-<p>A Dexter app is a collection of JavaScript modules arranged and connected in a meaningful way within the Dexter Editor. When we drag a module onto the canvas, we say that we are instantiating that module, or forming a <em>Step</em> in our application.</p>
+<p>A Dexter app is a collection of single-purpose modules arranged and connected in a meaningful way within the Dexter Editor. When we drag a module onto the canvas, we say that we are instantiating that module, or forming a <em>Step</em> in our application.</p>
 
 <p><img src="/images/illustrations/module-v-step.png"></p>
 
@@ -197,29 +142,39 @@ There are a few details we&rsquo;re leaving out and for the uber curious, here t
 
 <p><img src="/images/illustrations/stream-illustration.png" class="image-shadow"></p>
 
-<p>One step stands out from the rest. This step is called the <strong>Trigger step</strong>. Triggers allow events outside of Dexter communicate with your app, and kick off a <em>Stream</em>. In its simplest form it is a URL that any external app can access via a <code class="prettyprint">POST</code> request with arbitrary data that initiates the request. Dexter has some common triggers built-in (and we will add more regularly). Still, for any custom needs, you can always use the webhook trigger to pass in any type of data that you like. </p>
+<p>One step stands out from the rest. This step is called the <strong>Trigger Step</strong>. Triggers allow events outside of Dexter (e.g., an RSS feed gets updated or a timer goes off) to communicate with your app, and kick off a <em>Stream</em>. Dexter has some common triggers built-in, and we will add more regularly. A single app can have multiple Triggers kick off different streams.</p>
+
+<aside class="notice">
+For any custom needs outside Dexter&rsquo;s existing common Triggers, you can always use the Webhook Trigger to pass in any type of data that you like&mdash;it is simply a Dexter URL that any external app can access via a <tt>POST</tt> request with arbitrary data that initiates the request.
+</aside>
 
 <h2 id="streams">Streams</h2>
 
-<p>A stream begins with a trigger step and is followed by one or more process steps. A stream does not have any formal termination point, but an execution of any given stream will complete when there are no more steps left. An app can have multiple streams, where each Stream is started by its own Trigger.</p>
+<p>A Stream begins with a Trigger Step and is followed by one or more process steps. Each step will start only when the immediate prior step finishes and completes successfully. A stream does not have any formal termination point, but an execution of any given stream will complete when there are no more steps left. An app can have multiple streams, where each Stream is started by its own Trigger.</p>
+
+<aside class="notice">
+Every step in a stream can reference and get data from <strong>all</strong> upstream steps, not just the immediate prior step. You can see all available upstream steps on the left hand side of the configure screen. For example, you can use the output from your Trigger Step as an input to the last step in your Stream.
+</aside>
 
 <h2 id="module-types">Module Types</h2>
 
 <p>There are three types of modules in Dexter:</p>
 
 <ol>
-<li><p><strong>Core modules</strong> <br/>
-There are some cases where the simplistic behavior of modules present a challenge to building a fully featured app. Core modules provide some special abilities that help you enhance basic modules . Dexter will continually expand its Core Module offering, but for now here is what is available (updated 10/20):  </p>
+<li><p><strong>System Modules</strong> <br/>
+There are some cases where the simplistic behavior of modules present a challenge to building a fully featured app. System Modules provide some special abilities that help you enhance basic modules. Dexter will continually expand its Systen Module offering, but for now here is what is available:  </p>
 
 <p><strong><em>Queue</em></strong> - Sometimes while building a Dexter app you want to collect information that you’re not ready to act on yet. For example — Let’s say you want to store a bunch of URLs from the Bookmarklet Trigger, but you don’t want to do anything with them until a Timer Trigger is activated later. The Queue step lets you stash that data for later use. The Queue step takes a single parameter, <code class="prettyprint">class_name</code>, which is the name that you’ll reference in your Fetch step when you are ready to use it.  </p>
 
 <p><strong><em>Fetch</em></strong> - The fetch module is queues partner, it takes one parameter, <code class="prettyprint">class_name</code>, which tells Dexter which queued up data you want to retrieve. After a fetch step is executed all downstream steps will have access to the steps upstream of a queue with matching names. </p>
 
-<p><strong><em>Switch</em></strong> - Sometimes in the course of building an app you want to execute steps conditionally. The switch step enables this by allowing you to specify up to 5 different conditions and branching a stream at a given point. </p></li>
-<li><p><strong>Dexter modules</strong> <br/>
-These are the Dexter-blessed, built-in tools of the Dexter app ecosystem. They&rsquo;re available to every power user and developer in Dexter, and cover a broad range of behaviors.</p></li>
+<p><strong><em>Switch</em></strong> - Sometimes in the course of building an app you want to execute steps conditionally. The switch step enables this by allowing you to specify up to 5 different conditions and branching a stream at a given point. </p>
+
+<p><strong><em>Wait For Input</em></strong> - Wait for additional user input from the trigger.</p></li>
+<li><p><strong>Standard Modules</strong> <br/>
+These are standard modules that are built and maintained by the Dexter developer community. </p></li>
 <li><p><strong>User modules</strong> <br/>
-User modules are modules you&rsquo;ve made for your own apps. You build them with the same tools we&rsquo;ve used to build the vast library of Dexter modules, and you can use them the same in the App editor. The only difference between User modules and Dexter modules lies in distribution: only <em>you</em> can use your user modules.</p></li>
+User modules are modules you&rsquo;ve made for your own apps. You build them with the <a href="#sdk-tutorial-module-building">same tools</a> we&rsquo;ve used to build the vast library of Dexter modules, and you can use them the same in the App editor. The only difference between User modules and Dexter modules lies in distribution: only <em>you</em> can use your user modules.</p></li>
 </ol>
 
 <h2 id="authentication-amp-authorization">Authentication &amp; Authorization</h2>
@@ -230,7 +185,25 @@ User modules are modules you&rsquo;ve made for your own apps. You build them wit
 
 <p>The API keys can be generated/regenerated from every User’s account page. </p>
 
-          <h1 id="sdk-overview">SDK Overview</h1>
+<h2 id="code-in-the-app-editor-advanced">Code in the App Editor (Advanced)</h2>
+
+<p>Sometimes, you want to write a little custom Javascript to sanitize or otherwise deal with the inputs with a module. You can always do this by selecting the <em>Enter the value in manually</em> input option and prepending any Javascript you write with <code class="prettyprint">=</code>. For example, if you want the input of a module to be a random number between 0 and 9, you can enter <code class="prettyprint">=Math.floor(Math.random()*10)</code> as your input. We expose the <code class="prettyprint">dexter</code> object to you to help you reference in-app variables or module outputs (see the <a href="#dexter">Module API reference</a> for more details).</p>
+
+<p>One common task you might want to do in the App Editor is reference upstream output data. Use <code class="prettyprint">dexter</code>&rsquo;s <code class="prettyprint">step</code> function to specify the Step ID (found in the Properties explorer in the main editor view), and <code class="prettyprint">output</code> to specify the output field. As a conrete example, to reference the output of the &ldquo;channel ID&rdquo; for a Slack slash command module, you can use:</p>
+
+<p><block class="highlight javascript">
+ <code>
+ =dexter.step(&#39;slackslash&#39;).output(&#39;channel_id&#39;).first()
+ </code>
+</block></p>
+
+<p>(we use <code class="prettyprint">.first()</code> because all output is by default a collection of data)</p>
+
+<h3 id="code-view">Code View</h3>
+
+<p>Sometimes though, you want to write <em>a lot</em> of custom Javascript into your app, and the tiny input box just won&rsquo;t cut it. This is where Dexter&rsquo;s built-in Code View comes in handy. You can write longer custom functions that you can use as the input to a module. Any code you write in Code View is global to your app and can be used in any modules. You reference your custom functions by calling <code class="prettyprint">=app.myCustomFunction()</code> as the input to a module.</p>
+
+          <h1 id="sdk-installation-amp-overview">SDK Installation &amp; Overview</h1>
 
 <p>Dexter is a completely open system. Our modules are constructed from open tools, and all our module code is open source. Even the Dexter runtime is open to you.  Anyone can build and contribute new modules via our client tools.  Are we missing some functionality you need?  Create a completely new module and upload it to Dexter for your use.  Is one of our modules <em>almost</em>, but not exactly what you&rsquo;re looking for?  Fork the module, update its functionality, and upload it as your own.</p>
 
@@ -238,7 +211,7 @@ User modules are modules you&rsquo;ve made for your own apps. You build them wit
 
 <h2 id="how-it-works">How it works</h2>
 
-<p>The Dexter SDK lets you create your own module, which is just a slightly enhanced Node.js library: it only requires a dedicated Dexter entry point and explicit documentation of inputs and outputs.  Otherwise you can follow your normal Node.js development process.</p>
+<p>The Dexter SDK along with the <code class="prettyprint">dexter</code> command-line tool lets you create your own module, which is just a slightly enhanced Node.js library: it only requires a dedicated Dexter entry point and explicit documentation of inputs and outputs.  Otherwise you can follow your normal Node.js development process.</p>
 
 <p>When you&rsquo;re done, you push your code into Dexter using our git server. You can send the code to Dexter via</p>
 
@@ -252,6 +225,8 @@ User modules are modules you&rsquo;ve made for your own apps. You build them wit
 </code></pre>
 
 <p>To get started you need to have a working installation of <a href="https://nodejs.org" target="_blank">Node.js</a>. We have certified the Dexter client tools for use in recent versions up to <code class="prettyprint">4.1.2</code>, however, the modules need to be executable in AWS Lambda’s <a href="http://docs.aws.amazon.com/lambda/latest/dg/current-supported-versions.html" target="_blank">current Node.js infrastructure</a>.</p>
+
+<p>When you&rsquo;re working with a compatible version of Node, use <code class="prettyprint">npm install rundexter -g</code> to install the client.</p>
 
 <h2 id="log-in">Log in</h2>
 <pre class="highlight shell"><code><span class="gp">$ </span>dexter login <span class="o">{</span> your email <span class="o">}</span>
@@ -280,287 +255,7 @@ You might already have one. They’re probably in ~/.ssh/ and called id_rsa and 
 
 <p>In order to be able to push your code to us, you’ll have to register your SSH key with us. We’ll use your default key if you have one, or you can give us a specific key instead. You can also register more than one key (on this machine or multiple machines) if you’d like.</p>
 
-<h1 id="sdk-reference">SDK Reference</h1>
-
-<h2 id="authentication">Authentication</h2>
-
-<h3 id="dexter-login">dexter login</h3>
-
-<blockquote>
-<p>Example</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter login code@rundexter.com
-Password: <span class="k">****</span>
-Add your public key <span class="k">for </span>GIT access? <span class="o">(</span>yes<span class="o">)</span> no
-If you change your mind, you can always add it later
-dexter add_key &lt;keyname&gt;<span class="o">(</span>optional<span class="o">)</span> Add an SSH key to the system
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>email_required</td>
-<td>true</td>
-<td>Your email</td>
-</tr>
-</tbody></table>
-
-<p>Log into your Dexter account using your email and password.</p>
-
-<h3 id="dexter-add_key">dexter add_key</h3>
-
-<blockquote>
-<p>Example: Default key</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="c">#You can pass a path to a specific key here if you'd like</span>
-<span class="gp">$ </span>dexter add_key
-Your key is now available on dexter!
-<span class="c">#Make sure we got it</span>
-<span class="gp">$ </span>dexter list_keys
-</code></pre>
-
-<blockquote>
-<p>Example: Custom key</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter add_key ~/dexter.rsa.pub
-Your key is now available on dexter!
-Make sure your .ssh/config is <span class="nb">set </span>to use this key <span class="k">for </span>git.rundexter.com
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>path</td>
-<td>false</td>
-<td>Path to the key file</td>
-</tr>
-</tbody></table>
-
-<p>Add a public ssh key file to the system. This file will be used to authenticate your access to the Dexter deployment servers when you publish code.</p>
-
-<p>If left out, Dexter will first look for a file in <code class="prettyprint">~/.ssh/id_rsa.pub</code>, then in <code class="prettyprint">~/.ssh/id_dsa.pub</code>.</p>
-
-<h3 id="dexter-remove_key">dexter remove_key</h3>
-
-<blockquote>
-<p>Example: Single match</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter remove_key 3792y+
-Matching keys removed: 1
-</code></pre>
-
-<blockquote>
-<p>Example: Multiple matches (error)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter remove_key AAA
-Request failed: More than one key was found that matches this query - please be more specific
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>pattern</td>
-<td>true</td>
-<td>A string pattern found in the key you want to delete</td>
-</tr>
-</tbody></table>
-
-<p>Remove a key from Dexter. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the <code class="prettyprint">dexter list_keys</code> to view your keys.</p>
-
-<h3 id="dexter-list_keys">dexter list_keys</h3>
-
-<blockquote>
-<p>Example</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter list_keys
-ssh-rsa AAA.........82Fregr<span class="o">=</span> dexter@rundexter.com
-
-ssh-dsa AAA.........38eeer2<span class="o">=</span> dexter@rundexter.com
-</code></pre>
-
-<p>Show all the keys you&rsquo;ve registered with rundexter.com</p>
-
-<h2 id="module-operations">Module Operations</h2>
-
-<h3 id="dexter-init">dexter init</h3>
-
-<blockquote>
-<p>Example (this folder)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter init
-Initializing Dexter remote <span class="k">in</span> /home/dexter/projects/my-dexter-module
-Your dexter remote is ready
-<span class="gp">$ </span>git remote -v
-dexter  git@git.rundexter.com:/my-dexter-module <span class="o">(</span>fetch<span class="o">)</span>
-dexter  git@git.rundexter.com:/my-dexter-module <span class="o">(</span>push<span class="o">)</span>
-</code></pre>
-
-<blockquote>
-<p>Example (another folder)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter init /srv/app/dexter/module
-Initializing Dexter remote <span class="k">in</span> /srv/app/dexter/module
-Your dexter remote is ready
-<span class="gp">$ </span>git remote -v
-dexter  git@git.rundexter.com:/server-dexter-module <span class="o">(</span>fetch<span class="o">)</span>
-dexter  git@git.rundexter.com:/server-dexter-module <span class="o">(</span>push<span class="o">)</span>
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>path</td>
-<td>false</td>
-<td>The path to the git instance</td>
-</tr>
-</tbody></table>
-
-<p>Set up an existing git repository for use with the dexter command-line tool. So long as the target directory <em>looks</em> like a dexter module (i.e. it has valid package and meta json files), init will create a remote named &ldquo;dexter&rdquo; for you.</p>
-
-<p>This gets called automatically when you <code class="prettyprint">dexter create</code> a module, but is useful if you want to enable an existing module to work with Dexter.  In that case, you need to add a <code class="prettyprint">meta.json</code> file before you can run <code class="prettyprint">dexter init</code>.</p>
-
-<h3 id="dexter-create">dexter create</h3>
-
-<blockquote>
-<p>Example</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter create foobar
-Initializing project as Dexter DocGuy <span class="o">(</span>code@rundexter.com<span class="o">)</span>
-Created repo <span class="k">in</span> /home/dexter/foobar
-lodash@3.10.1 node_modules/lodash
-Added .gitignore
-Added README.md
-Added fixtures/default.js
-Added fixtures/env.example.js
-Added form/README.md
-Added form/checkout.form
-Added form/run.form
-Added form/settings.form
-Added index.js
-Added meta.json
-Added package.json
-Created initial commit <span class="o">[</span>Oid 5e0536cebca0811079d4f3ec87f940839854cca4]
-Initializing Dexter remote <span class="k">in</span> /home/dexter/foobar
-Your dexter remote is ready
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The name of the new Dexter module</td>
-</tr>
-</tbody></table>
-
-<p>Create a skeleton for a new Dexter module. The following things happen:</p>
-
-<p>1. A local git repository is created for the module with some scaffolding code added as a first commit</p>
-
-<p>2. The dexter remote is configured</p>
-
-<p>Note that your code won&rsquo;t show up in the Dexter App Editor until you <code class="prettyprint">dexter push</code>.</p>
-
-<h3 id="dexter-run">dexter run</h3>
-
-<blockquote>
-<p>Example (default)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="c"># runs fixtures/default.js</span>
-<span class="gp">$ </span>dexter run
-<span class="o">{</span>
-    <span class="s2">"foo"</span>: <span class="s2">"bar"</span>
-<span class="o">}</span>
-</code></pre>
-
-<blockquote>
-<p>Example (custom)</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="c"># runs fixtures/barWithBaz.js</span>
-<span class="gp">$ </span>dexter run barWithBaz
-<span class="o">{</span>
-    <span class="s2">"bar"</span>: <span class="s2">"baz"</span>
-<span class="o">}</span>
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The name of the fixture to run</td>
-</tr>
-</tbody></table>
-
-<p>Execute the function using a built-in fixture. Every Dexter module is created with a default fixture which is used if you don&rsquo;t explicitly identify which fixture to run.</p>
-
-<h3 id="dexter-push">dexter push</h3>
-
-<blockquote>
-<p>Example</p>
-</blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>dexter push
-Adding your module to Dexter...
-Counting objects: 13, <span class="k">done</span>.
-Delta compression using up to 4 threads.
-Compressing objects: 100% <span class="o">(</span>11/11<span class="o">)</span>, <span class="k">done</span>.
-Writing objects: 100% <span class="o">(</span>13/13<span class="o">)</span>, 3.21 KiB | 0 bytes/s, <span class="k">done</span>.
-Total 13 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
-<span class="gp">---&gt; </span>Processing push
-<span class="gp">---&gt; </span>Sending to your environment
-<span class="gp">---&gt; </span>Push processed!
-<span class="gp">---&gt; </span>Success! Your module is now available <span class="k">in </span>the Dexter Editor!
-To git@git.beta.rundexter.com:/foobar
- <span class="k">*</span> <span class="o">[</span>new branch]      master -&gt; master
-</code></pre>
-
-<p>Push your module to Dexter. This will update your code on our servers and deploy it for use by your Dexter App Editor.</p>
-
-<aside class="notice">You must first commit any changes in your working directory using “git commit” before you can push to Dexter.</aside>
-
-<p>Deployment is tied to your module’s version number. For example, let’s say you do the following:</p>
-
-<p>1. Create a module foobar at version 0.1</p>
-
-<p>2. Add foobar to an App called Hello World.</p>
-
-<p>3. Update foobar by with a new &ldquo;baz&rdquo; function and bump the version to 0.2</p>
-
-<p>4. Add foobar to an App called Welcome Universe.</p>
-
-<p>When this process is complete, &ldquo;Hello World&rdquo; will still be using foobar 0.1, and &ldquo;Welcome Universe&rdquo; will be using 0.2. You would have to explicitly update &ldquo;Hello World&rdquo; in order for it to start using foobar 0.2.</p>
-
-          <h1 id="tutorial">Tutorial</h1>
+          <h1 id="sdk-tutorial-module-building">SDK Tutorial: Module Building</h1>
 
 <h2 id="goal">Goal</h2>
 
@@ -572,7 +267,7 @@ To git@git.beta.rundexter.com:/foobar
 
 <ol>
 <li>You&rsquo;ve signed up at <a href="https://rundexter.com" target="_blank">https://rundexter.com</a></li>
-<li>You&rsquo;ve installed the <a href="#sdk-overview">sdk</a></li>
+<li>You&rsquo;ve installed the <a href="#setting-up-your-environment">SDK</a></li>
 <li>You&rsquo;ve successfully added a key to your environment</li>
 <li>You&rsquo;ve got a <em>basic</em> understanding of <a href="http://nodeguide.com/beginner.html">Node.js</a></li>
 <li>You&rsquo;re ready to build cool things!</li>
@@ -724,7 +419,7 @@ To git@git.beta.rundexter.com:/foobar
 <p>We&rsquo;ll follow the same rules for the result of fetchItem - if we hit an error when processing the page, we&rsquo;ll fail.  Otherwise, all that&rsquo;s left to do is to extract the basic properties we want our module to return and
 send them along to <code class="prettyprint">complete()</code>.  Mission accomplished!</p>
 
-<h2 id="phase-5-testing">Phase 5: Testing</h2>
+<h2 id="phase-5-local-testing">Phase 5: Local Testing</h2>
 
 <blockquote>
 <p>fixtures/default.js</p>
@@ -794,7 +489,13 @@ What you&rsquo;re looking at here in the fixture is the raw serialization data t
 
 <p>That&rsquo;s it, you&rsquo;ve got a working RSS parser module!  Execute <code class="prettyprint">dexter push</code>, and, once the process completes, you should be able to open the App Editor and see your module.  Congrats, you&rsquo;re now a Dexter developer!</p>
 
-<h2 id="phase-8-your-first-update-—-add-an-optional-filter">Phase 8: Your First Update — Add an optional filter</h2>
+<h2 id="phase-8-testing-in-the-app-editor">Phase 8: Testing in the App Editor</h2>
+
+<p>As you start playing around with your new module within the App Editor itself, it&rsquo;s often useful to inspect the flow and look at how data is getting passed around. To do this, <strong>open the JavaScript console</strong> in the browser you are testing in&mdash;pretty much all the steps of a Dexter app&rsquo;s execution gets logged there.</p>
+
+<p>In each step that executes, an object gets logged to the console; the <code class="prettyprint">data</code> object found here will give you insight into the current state of the world and data that is being passed around. Each module&rsquo;s Step ID is represented here, and you can look at the actual input and output values for each step.</p>
+
+<h2 id="phase-9-your-first-update-—-add-an-optional-filter">Phase 9: Your First Update — Add an optional filter</h2>
 <pre class="highlight javascript"><code><span class="c1">//..includes</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
     <span class="na">run</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
@@ -897,7 +598,7 @@ What you&rsquo;re looking at here in the fixture is the raw serialization data t
 
 <p>That&rsquo;s it!  Just <code class="prettyprint">git commit -am &#39;Added a filter&#39;</code>, <code class="prettyprint">dexter push</code>, and we now have a filterable RSS feed parser!</p>
 
-          <h1 id="module-api">Module API</h1>
+          <h1 id="module-api-reference">Module API Reference</h1>
 
 <p>Modules in Dexter are the building blocks you&rsquo;ll use to assemble your Apps. They&rsquo;re expressions of the principal of doing one thing and doing it well: each is designed to have a single, clear task that works independently of the rest of your code. It&rsquo;s the job of the App to decide how these behaviors interact - the modules themselves only care about what kind of input they get and emitting consistent output.</p>
 
@@ -1686,7 +1387,7 @@ If you&rsquo;re testing using the built-in Dexter key/secret (i.e. you&rsquo;re 
 
 <h2 id="testing-modules">Testing modules</h2>
 
-<p>You don&rsquo;t have to repeatedly deploy your module to Dexter in order to make sure it works.   The Dexter SDK comes with a simple test framework that allows you to set up sample data sets (fixtures) that describe situations your module might have to deal with.</p>
+<p>You don&rsquo;t have to repeatedly deploy your module to Dexter in order to make sure it works: test your module with <code class="prettyprint">dexter run</code>. The Dexter SDK comes with a simple test framework that allows you to set up sample data sets (fixtures) that describe situations your module might have to deal with.</p>
 
 <p>For example, you could make one fixture describing a single input value and another with multiple inputs.  You could also have a third with no or broken data to see how your module deals with error states.  Later, as you collect feeback on your module, you could add fixtures for other use cases you might not have considered during your initial development - or ask other users to add  them for you!</p>
 
@@ -1782,25 +1483,313 @@ If you&rsquo;re testing using the built-in Dexter key/secret (i.e. you&rsquo;re 
   </code>
 </block></p>
 
+          <h1 id="sdk-reference">SDK Reference</h1>
+
+<h2 id="authentication">Authentication</h2>
+
+<h3 id="dexter-login">dexter login</h3>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter login code@rundexter.com
+Password: <span class="k">****</span>
+Add your public key <span class="k">for </span>GIT access? <span class="o">(</span>yes<span class="o">)</span> no
+If you change your mind, you can always add it later
+dexter add_key &lt;keyname&gt;<span class="o">(</span>optional<span class="o">)</span> Add an SSH key to the system
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>email_required</td>
+<td>true</td>
+<td>Your email</td>
+</tr>
+</tbody></table>
+
+<p>Log into your Dexter account using your email and password.</p>
+
+<h3 id="dexter-add_key">dexter add_key</h3>
+
+<blockquote>
+<p>Example: Default key</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c">#You can pass a path to a specific key here if you'd like</span>
+<span class="gp">$ </span>dexter add_key
+Your key is now available on dexter!
+<span class="c">#Make sure we got it</span>
+<span class="gp">$ </span>dexter list_keys
+</code></pre>
+
+<blockquote>
+<p>Example: Custom key</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter add_key ~/dexter.rsa.pub
+Your key is now available on dexter!
+Make sure your .ssh/config is <span class="nb">set </span>to use this key <span class="k">for </span>git.rundexter.com
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>path</td>
+<td>false</td>
+<td>Path to the key file</td>
+</tr>
+</tbody></table>
+
+<p>Add a public ssh key file to the system. This file will be used to authenticate your access to the Dexter deployment servers when you publish code.</p>
+
+<p>If left out, Dexter will first look for a file in <code class="prettyprint">~/.ssh/id_rsa.pub</code>, then in <code class="prettyprint">~/.ssh/id_dsa.pub</code>.</p>
+
+<h3 id="dexter-remove_key">dexter remove_key</h3>
+
+<blockquote>
+<p>Example: Single match</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter remove_key 3792y+
+Matching keys removed: 1
+</code></pre>
+
+<blockquote>
+<p>Example: Multiple matches (error)</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter remove_key AAA
+Request failed: More than one key was found that matches this query - please be more specific
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pattern</td>
+<td>true</td>
+<td>A string pattern found in the key you want to delete</td>
+</tr>
+</tbody></table>
+
+<p>Remove a key from Dexter. The provided pattern can exist anywhere in the key, or it can be the entire key. Use the <code class="prettyprint">dexter list_keys</code> to view your keys.</p>
+
+<h3 id="dexter-list_keys">dexter list_keys</h3>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter list_keys
+ssh-rsa AAA.........82Fregr<span class="o">=</span> dexter@rundexter.com
+
+ssh-dsa AAA.........38eeer2<span class="o">=</span> dexter@rundexter.com
+</code></pre>
+
+<p>Show all the keys you&rsquo;ve registered with rundexter.com</p>
+
+<h2 id="module-operations">Module Operations</h2>
+
+<h3 id="dexter-init">dexter init</h3>
+
+<blockquote>
+<p>Example (this folder)</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter init
+Initializing Dexter remote <span class="k">in</span> /home/dexter/projects/my-dexter-module
+Your dexter remote is ready
+<span class="gp">$ </span>git remote -v
+dexter  git@git.rundexter.com:/my-dexter-module <span class="o">(</span>fetch<span class="o">)</span>
+dexter  git@git.rundexter.com:/my-dexter-module <span class="o">(</span>push<span class="o">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example (another folder)</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter init /srv/app/dexter/module
+Initializing Dexter remote <span class="k">in</span> /srv/app/dexter/module
+Your dexter remote is ready
+<span class="gp">$ </span>git remote -v
+dexter  git@git.rundexter.com:/server-dexter-module <span class="o">(</span>fetch<span class="o">)</span>
+dexter  git@git.rundexter.com:/server-dexter-module <span class="o">(</span>push<span class="o">)</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>path</td>
+<td>false</td>
+<td>The path to the git instance</td>
+</tr>
+</tbody></table>
+
+<p>Set up an existing git repository for use with the dexter command-line tool. So long as the target directory <em>looks</em> like a dexter module (i.e. it has valid package and meta json files), init will create a remote named &ldquo;dexter&rdquo; for you.</p>
+
+<p>This gets called automatically when you <code class="prettyprint">dexter create</code> a module, but is useful if you want to enable an existing module to work with Dexter.  In that case, you need to add a <code class="prettyprint">meta.json</code> file before you can run <code class="prettyprint">dexter init</code>.</p>
+
+<h3 id="dexter-create">dexter create</h3>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter create foobar
+Initializing project as Dexter DocGuy <span class="o">(</span>code@rundexter.com<span class="o">)</span>
+Created repo <span class="k">in</span> /home/dexter/foobar
+lodash@3.10.1 node_modules/lodash
+Added .gitignore
+Added README.md
+Added fixtures/default.js
+Added fixtures/env.example.js
+Added form/README.md
+Added form/checkout.form
+Added form/run.form
+Added form/settings.form
+Added index.js
+Added meta.json
+Added package.json
+Created initial commit <span class="o">[</span>Oid 5e0536cebca0811079d4f3ec87f940839854cca4]
+Initializing Dexter remote <span class="k">in</span> /home/dexter/foobar
+Your dexter remote is ready
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>true</td>
+<td>The name of the new Dexter module</td>
+</tr>
+</tbody></table>
+
+<p>Create a skeleton for a new Dexter module. The following things happen:</p>
+
+<p>1. A local git repository is created for the module with some scaffolding code added as a first commit</p>
+
+<p>2. The dexter remote is configured</p>
+
+<p>Note that your code won&rsquo;t show up in the Dexter App Editor until you <code class="prettyprint">dexter push</code>.</p>
+
+<h3 id="dexter-run">dexter run</h3>
+
+<blockquote>
+<p>Example (default)</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># runs fixtures/default.js</span>
+<span class="gp">$ </span>dexter run
+<span class="o">{</span>
+    <span class="s2">"foo"</span>: <span class="s2">"bar"</span>
+<span class="o">}</span>
+</code></pre>
+
+<blockquote>
+<p>Example (custom)</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># runs fixtures/barWithBaz.js</span>
+<span class="gp">$ </span>dexter run barWithBaz
+<span class="o">{</span>
+    <span class="s2">"bar"</span>: <span class="s2">"baz"</span>
+<span class="o">}</span>
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>true</td>
+<td>The name of the fixture to run</td>
+</tr>
+</tbody></table>
+
+<p>Execute the function using a built-in fixture. Every Dexter module is created with a default fixture which is used if you don&rsquo;t explicitly identify which fixture to run.</p>
+
+<h3 id="dexter-push">dexter push</h3>
+
+<blockquote>
+<p>Example</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="gp">$ </span>dexter push
+Adding your module to Dexter...
+Counting objects: 13, <span class="k">done</span>.
+Delta compression using up to 4 threads.
+Compressing objects: 100% <span class="o">(</span>11/11<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: 100% <span class="o">(</span>13/13<span class="o">)</span>, 3.21 KiB | 0 bytes/s, <span class="k">done</span>.
+Total 13 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
+<span class="gp">---&gt; </span>Processing push
+<span class="gp">---&gt; </span>Sending to your environment
+<span class="gp">---&gt; </span>Push processed!
+<span class="gp">---&gt; </span>Success! Your module is now available <span class="k">in </span>the Dexter Editor!
+To git@git.beta.rundexter.com:/foobar
+ <span class="k">*</span> <span class="o">[</span>new branch]      master -&gt; master
+</code></pre>
+
+<p>Push your module to Dexter. This will update your code on our servers and deploy it for use by your Dexter App Editor.</p>
+
+<aside class="notice">You must first commit any changes in your working directory using “git commit” before you can push to Dexter.</aside>
+
+<p>Deployment is tied to your module’s version number. For example, let’s say you do the following:</p>
+
+<p>1. Create a module foobar at version 0.1</p>
+
+<p>2. Add foobar to an App called Hello World.</p>
+
+<p>3. Update foobar by with a new &ldquo;baz&rdquo; function and bump the version to 0.2</p>
+
+<p>4. Add foobar to an App called Welcome Universe.</p>
+
+<p>When this process is complete, &ldquo;Hello World&rdquo; will still be using foobar 0.1, and &ldquo;Welcome Universe&rdquo; will be using 0.2. You would have to explicitly update &ldquo;Hello World&rdquo; in order for it to start using foobar 0.2.</p>
+
           <h1 id="faq-amp-other-helpful-info">FAQ &amp; Other Helpful Info</h1>
 
 <p>This section is very much a work in progress. We&rsquo;ll be adding to it as key questions become brought to our attention. If you have questions regarding anything that is not listed here, please visit our <a href="http://community.rundexter.com" target="_blank">community forums</a>, or connect with us on <a href="http://rundexter.slack.com" target="_blank">Slack</a>.</p>
 
-<h2 id="how-do-i-debug-my-app-when-it’s-live">How do I debug my app when it’s live?</h2>
+<h2 id="what-is-dexter">What is Dexter?</h2>
 
-<p>Modules send messages to the Dexter logging component and those messages will appear in your browser’s developer console when your app is executing. In chrome, you should open up developer tools to view the messages; in firefox, you can use firebug or the native tools.</p>
+<p>Dexter is a platform that makes it easy for people to connect servicess across the web and build useful apps. The documentation you&rsquo;re reading now is meant for these <strong>builders</strong>. If you have questions about using a Dexter app, please get in touch with the creator of the app. We&rsquo;re also available on <a href="http://rundexter.slack.com" target="_blank">Slack</a> for support.</p>
 
-<h2 id="what-do-the-configuration-icons-mean">What do the configuration icons mean?</h2>
+<h2 id="how-do-i-debug-my-dexter-app-when-it’s-live">How do I debug my Dexter app when it’s live?</h2>
+
+<p>Modules send messages to the Dexter logging component and those messages will appear in your browser’s developer console when your app is executing. In Chrome, you should open up developer tools to view the messages; in Firefox, you can use Firebug or the native tools.</p>
+
+<h2 id="what-does-quot-prompt-the-user-quot-quot-user-the-visual-mapping-tool-quot-and-quot-enter-the-value-in-manually-quot-mean">What does &ldquo;Prompt the user&rdquo;, &ldquo;User the visual mapping tool&rdquo;, and &ldquo;Enter the value in manually&rdquo; mean?</h2>
 
 <p>You’ll notice some iconography and radio buttons just below the input titles on the right sidebar of your configuration panel. Each one is a different input method: </p>
 
 <ul>
-<li><strong>User Defined</strong> - If this is selected, a user will define the input when they go to use the app. This happens during their configuration<br></li>
-<li><strong>Mapping</strong> - If this is selected, the input will be whatever output you grab, drag, and drop from the output options, to the step below.</li>
-<li><strong>Literal</strong> - If this is selected, the input will be whatever you type into the provided field that will appear below the dropdown. NOTE: If you lead your input with a &ldquo;=&rdquo; the field can take raw javascript.</li>
+<li><strong>Prompt the user</strong> - If this is selected, a user will define the input when they go to use the app. This happens during their configuration<br></li>
+<li><strong>Use the visual mapping tool</strong> - If this is selected, the input will be whatever output you grab, drag, and drop from the output options, to the step below.</li>
+<li><strong>Enter the value in manually</strong> - If this is selected, the input will be whatever you type into the provided field that appears below the dropdown. NOTE: If you lead your input with a <code class="prettyprint">=</code> the field can take raw Javascript.</li>
 </ul>
 
 <p>Each of these is useful depending on how your app is being used. In the SMS example we walked through to begin your Dexter experience, we set the Phone Number input to be user defined. If we went with literal instead, the number that would be used would be the one you typed in, meaning all links from the bookmarklet would be texted to that number.</p>
+
+<h2 id="what-does-it-mean-when-the-properties-explorer-says-quot-new-version-click-to-update-quot">What does it mean when the Properties explorer says &ldquo;New Version - Click to Update&rdquo;?</h2>
+
+<p>Sometimes module developers will need to update their module&mdash;to add features, fix a bug, etc. A new version alert is triggered whenever a new module is deployed and the version number (in package.json&mdash;see the <a href="http://localhost:4567/#module-api-reference">Module API reference</a>) is incremented by the developer.</p>
 
       </div>
       <div class="dark-box">

@@ -106,7 +106,7 @@
 <ol>
 <li><p><strong>Create a New App</strong> - Click the new app button on the top right of your screen. <img src="/images/screenshots/step-1.png" class="image-shadow">  </p></li>
 <li><p><strong>Name Your App</strong> - The tutorial autopopulates the title and description field with the details of the app we&rsquo;re going to build: a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a> that sends the current url to your mobile phone via text message so that you can take it with you on the road! <img src="/images/screenshots/step-2.png" class="image-shadow">  </p></li>
-<li><p><strong>Place Your First Trigger</strong> - Triggers are actions performed in the outside world that tell Dexter to run the app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app&rsquo;s starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user&rsquo;s bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/step-3.png" class="image-shadow">  </p></li>
+<li><p><strong>Place Your First Trigger</strong> - Triggers are actions performed in the outside world that tell Dexter to run parts of your app. The way we notify the workflow about a trigger is to drag it onto the light gray bar at the top of the canvas. That’s our trigger bar. Think of it as the app&rsquo;s starting line. In this tutorial, our trigger is a <a href="http://www.google.com/search?q=define:bookmarklet" target="_blank">bookmarklet</a>. When clicked in a user&rsquo;s bookmark bar, it will send the current URL to their mobile device in an SMS. <img src="/images/screenshots/step-3.png" class="image-shadow"></p></li>
 <li><p><strong>Place Your First Module</strong> - A module does the heavy lifting. It takes the data from the previous step(s) – in this case the bookmarklet – and acts on it. For our first app we want to send ourselves a text message. How is that done? First, we drag the Dexter SMS module onto the canvas. Next, drag the orange outlet on the bookmarklet to the input of the Dexter SMS step. <img src="/images/screenshots/step-4.png" class="image-shadow">  </p></li>
 <li><p><strong>Connect The Data</strong> - The last step is telling Dexter how the data moves in between steps. To do this, we click the configure button and bring up the configure panel. 
 <img src="/images/screenshots/step-5.png" class="image-shadow"><br>
@@ -1780,7 +1780,7 @@ Failed pushing data: There<span class="se">\'</span>s already a published versio
 This version has been published.
 </code></pre>
 
-<p>Publish the latest development version so that all Dexter users may add it to their Apps.  After publishing for the first time, your module will appear in Dexter&rsquo;s module index, and the indexs&rsquo; information will be updated each time you publish.  Also, note that publishing freezes your module&rsquo;s version (the one in package.json) - you&rsquo;ll have to change that version before you&rsquo;ll be allowed to <code class="prettyprint">dexter push</code> again.</p>
+<p>Publish the latest development version so that all Dexter users may add it to their Apps.  After publishing for the first time, your module will appear in Dexter&rsquo;s module index, and the index&rsquo;s information will be updated each time you publish.  Also, note that publishing freezes your module&rsquo;s version (the one in package.json) - you&rsquo;ll have to change that version before you&rsquo;ll be allowed to <code class="prettyprint">dexter push</code> again.</p>
 
 <p>After publishing, users who are already using an older version of your module will see an &ldquo;Update Now&rdquo; link when viewing a step using the module.  Until they click this link, they&rsquo;ll continue to use the version of the module that was published when they created the app.</p>
 
@@ -1812,7 +1812,7 @@ This version has been published.
 
 <h2 id="what-does-it-mean-when-the-properties-explorer-says-quot-new-version-click-to-update-quot">What does it mean when the Properties explorer says &ldquo;New Version - Click to Update&rdquo;?</h2>
 
-<p>Sometimes module developers will need to update their module&mdash;to add features, fix a bug, etc. A new version alert is triggered whenever a new module is deployed and the version number (in package.json&mdash;see the <a href="http://localhost:4567/#module-api-reference">Module API reference</a>) is incremented by the developer.</p>
+<p>Sometimes module developers will need to update their module&mdash;to add features, fix a bug, etc. A new version alert is triggered whenever a new module is deployed and the version number (in package.json&mdash;see the <a href="#module-api-reference">Module API reference</a>) is incremented by the developer.</p>
 
       </div>
       <div class="dark-box">

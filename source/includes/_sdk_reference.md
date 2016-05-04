@@ -195,18 +195,39 @@ To git@git.beta.rundexter.com:/foobar
  * [new branch]      master -> master
 ```
 
-Push your module to Dexter. This will update your code on our servers and deploy it for use by your Dexter App Editor.
+Push a development version of your module to Dexter. This will update your code on our servers and deploy it for your own personal in the Dexter App Editor.  Note that no one else will see or be able to use the module until you `dexter publish`.
 
 <aside class="notice">You must first commit any changes in your working directory using “git commit” before you can push to Dexter.</aside>
+<aside class="notice">You must use a version # that differs from any existing published versions of your module.</aside>
 
-Deployment is tied to your module’s version number. For example, let’s say you do the following:
+If this is your first time pushing a module, or your first time since you've last published, you'll generate a new development version of your module in Dexter.  Any future pushes will simply change this development version, which means that any apps that use the development version will instantly reflect your changes.  Note that you can freely change the version # of a development module - only when you `dexter publish` does the version # become meaninful.
 
-    1. Create a module foobar at version 0.1
-    
-    2. Add foobar to an App called Hello World.
-    
-    3. Update foobar by with a new "baz" function and bump the version to 0.2
+### dexter publish
+> Example
 
-    4. Add foobar to an App called Welcome Universe.
+```shell
+$ dexter publish
+This version has been published.
+$ dexter publish
+Request failed: No development version found
+$ echo '//...' >> index.js && git commit -am 'Dummy commit' && dexter push
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 296 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+>>>>>  Push validated
+>>>>>  Publishing module to Dexter, please wait...
+ERROR: Error sending module to Dexter: Unexpected exit code from publisher: 1
+Failed pushing data: There\'s already a published version for module version 0.0.1.
+$ sed -i -e 's/0.0.1/0.0.2/' package.json && git commit -am 'Version bump' && dexter push
+...
+$ dexter publish
+This version has been published.
+```
 
-When this process is complete, "Hello World" will still be using foobar 0.1, and "Welcome Universe" will be using 0.2. You would have to explicitly update "Hello World" in order for it to start using foobar 0.2.
+Publish the latest development version so that all Dexter users may add it to their Apps.  After publishing for the first time, your module will appear in Dexter's module index, and the indexs' information will be updated each time you publish.  Also, note that publishing freezes your module's version (the one in package.json) - you'll have to change that version before you'll be allowed to `dexter push` again.
+
+After publishing, users who are already using an older version of your module will see an "Update Now" link when viewing a step using the module.  Until they click this link, they'll continue to use the version of the module that was published when they created the app.
+
+There is currently no way to un-publish a module.

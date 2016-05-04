@@ -10,7 +10,7 @@ Before we get started, you should make sure the following things are true:
 1. You've installed the [SDK](#setting-up-your-environment)
 1. You've successfully added a key to your environment
 1. You've got a *basic* understanding of [Node.js](http://nodeguide.com/beginner.html)
-1. You're ready to build cool things!
+1. You're ready to build!
 
 If any of the above steps were troublesome, check out our <a href="http://community.rundexter.com" target="_blank">community forums</a>. There are answers to many frequently asked questions there! If you're still having trouble, you can chat with members of the community in real time by clicking the "Join us on Slack" button in the footer of our website. 
 

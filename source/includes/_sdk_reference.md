@@ -226,7 +226,7 @@ $ dexter publish
 This version has been published.
 ```
 
-Publish the latest development version so that all Dexter users may add it to their Apps.  After publishing for the first time, your module will appear in Dexter's module index, and the indexs' information will be updated each time you publish.  Also, note that publishing freezes your module's version (the one in package.json) - you'll have to change that version before you'll be allowed to `dexter push` again.
+Publish the latest development version so that all Dexter users may add it to their Apps.  After publishing for the first time, your module will appear in Dexter's module index, and the index's information will be updated each time you publish.  Also, note that publishing freezes your module's version (the one in package.json) - you'll have to change that version before you'll be allowed to `dexter push` again.
 
 After publishing, users who are already using an older version of your module will see an "Update Now" link when viewing a step using the module.  Until they click this link, they'll continue to use the version of the module that was published when they created the app.
 

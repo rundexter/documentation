@@ -21,4 +21,4 @@ Each of these is useful depending on how your app is being used. In the SMS exam
 
 ## What does it mean when the Properties explorer says "New Version - Click to Update"?
 
-Sometimes module developers will need to update their module&mdash;to add features, fix a bug, etc. A new version alert is triggered whenever a new module is deployed and the version number (in package.json&mdash;see the [Module API reference](http://localhost:4567/#module-api-reference)) is incremented by the developer.
+Sometimes module developers will need to update their module&mdash;to add features, fix a bug, etc. A new version alert is triggered whenever a new module is deployed and the version number (in package.json&mdash;see the [Module API reference](#module-api-reference)) is incremented by the developer.
